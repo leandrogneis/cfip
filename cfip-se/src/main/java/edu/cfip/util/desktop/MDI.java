@@ -24,7 +24,9 @@ public class MDI extends JFrame {
 		getContentPane().add(barraSessao,BorderLayout.NORTH);
 		getContentPane().add(areaTrabalho, BorderLayout.CENTER);
 		setJMenuBar(barraMenu);
-		setTitle("CFIP - Controle Financeiro Pessoal");
+		setTitle("MDI -Multiple Document Interface");
+		
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(new Rectangle(870, 630));
 		setLocationRelativeTo(null);
@@ -38,7 +40,5 @@ public class MDI extends JFrame {
 	public void setSessao(Sessao sessao) {
 		this.sessao = sessao;
 	}
-	public static void main(String[] args) {
-		new MDI().setVisible(true);
-	}
+	
 }
