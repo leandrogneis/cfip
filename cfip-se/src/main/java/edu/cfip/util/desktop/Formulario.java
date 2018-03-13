@@ -6,11 +6,15 @@ import java.awt.GridBagLayout;
 import java.awt.LayoutManager;
 import java.beans.PropertyVetoException;
 
+import javax.swing.JDialog;
 import javax.swing.JInternalFrame;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
+import javax.swing.WindowConstants;
 import javax.swing.border.EtchedBorder;
 
 import edu.cfip.util.desktop.ss.SSCabecalho;
+import edu.cfip.util.desktop.ss.SSMensagem;
 import edu.cfip.util.desktop.ss.SSRodape;
 import edu.cfip.util.desktop.ss.util.Imagem;
 //http://download.eclipse.org/windowbuilder/WB/integration/4.7/
@@ -41,6 +45,12 @@ public class Formulario extends JPanel {
 	public void setMdi(MDI mdi) {
 		this.mdi = mdi;
 	}
+	public JPanel getConteudo() {
+		return conteudo;
+	}
+	public SSRodape getRodape() {
+		return rodape;
+	}
 	public void setConteudoLayout(LayoutManager layout) {
 		conteudo.setLayout(layout);
 	}
@@ -69,6 +79,54 @@ public class Formulario extends JPanel {
 		mdi.getAreaTrabalho().add(internal);
 		mdi.getAreaTrabalho().getDesktopManager().activateFrame(internal);
 	}
+	public Object exibirDialogo(){
+		return exibirDialogo(this);
+	}
+	public Object exibirDialogo(Formulario form){
+		JDialog dialog = new JDialog(mdi);
+		dialog.setResizable(false);
+		dialog.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+		//dialog.setModal(true);
+        dialog.setContentPane(form);
+        dialog.pack();
+        dialog.setLocationRelativeTo(this);
+        dialog.setVisible(true);        
+        //dialog.dispose();
+        return  null;
+	}
+	private void removerFormulario() {
+		JInternalFrame iframe = (JInternalFrame) SwingUtilities.getAncestorOfClass(JInternalFrame.class, this);
+		mdi.getAreaTrabalho().remove(iframe);
+		mdi.getAreaTrabalho().repaint();
+	}
+	private void removerDialogo() {
+		JDialog dialog = (JDialog) SwingUtilities.getAncestorOfClass(JDialog.class, this);
+		dialog.dispose();
+		dialog.setVisible(false);
+	}
+	public void fechar(Object resposta) {
+		if(resposta!=null){
+			//dono.respostaDialogo = resposta;
+			retornar();
+		}else{
+			SSMensagem.avisa("Selecione um item da lista");
+		}
+	}
+	public void fechar() {
+		boolean resposta = SSMensagem.pergunta("Deseja cancelar esta operação");
+		if (resposta) {
+			retornar();
+		}
+	}
+	public void retornar() {
+		if(isDialogo(this))
+			removerDialogo();
+		else
+			removerFormulario();
+	}
+	public boolean isDialogo(Formulario form){
+		return SwingUtilities.getAncestorOfClass(JDialog.class, form) !=null;
+	}
 	private void centralizar(JInternalFrame componente) {
 		Dimension dim = mdi.getSize();
 		int x = dim.width / 2 - componente.getSize().width / 2;
@@ -77,7 +135,5 @@ public class Formulario extends JPanel {
 		componente.setLocation(x, y);
 		componente.setVisible(true);
 	}
-	public JPanel getConteudo() {
-		return conteudo;
-	}
+	
 }
