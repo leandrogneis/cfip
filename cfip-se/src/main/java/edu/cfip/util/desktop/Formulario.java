@@ -3,10 +3,12 @@ package edu.cfip.util.desktop;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridBagLayout;
+import java.awt.LayoutManager;
 import java.beans.PropertyVetoException;
 
 import javax.swing.JInternalFrame;
 import javax.swing.JPanel;
+import javax.swing.border.EtchedBorder;
 
 import edu.cfip.util.desktop.ss.SSCabecalho;
 import edu.cfip.util.desktop.ss.SSRodape;
@@ -21,13 +23,12 @@ public class Formulario extends JPanel {
 		init();
 	}
 	private void init() {
-		this.setLayout(new BorderLayout());
-
-		this.setTitulo("Informe um titulo");
-		this.setDescricao("Informe uma descrição");
-
-		this.add(cabecalho, BorderLayout.NORTH);
 		this.conteudo.setLayout(new GridBagLayout());
+		this.setLayout(new BorderLayout());
+		this.conteudo.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
+		this.setTitulo("Informe um titulo");
+		this.setDescricao("Informe uma descriÃ§Ã£o");
+		this.add(cabecalho, BorderLayout.NORTH);
 		this.add(conteudo, BorderLayout.CENTER);
 		this.add(rodape, BorderLayout.SOUTH);
 	}
@@ -40,14 +41,20 @@ public class Formulario extends JPanel {
 	public void setMdi(MDI mdi) {
 		this.mdi = mdi;
 	}
-	public void exibir() {
-		this.exibir(this);
+	public void setConteudoLayout(LayoutManager layout) {
+		conteudo.setLayout(layout);
 	}
-	public void exibir(Formulario frm) {
+	public void exibir() {
+		this.exibir("Sistema");
+	}
+	public void exibir(String titulo) {
+		this.exibir(this,titulo);
+	}
+	public void exibir(Formulario frm,String titulo) {
 		if (frm != this) {
 			frm.setMdi(this.mdi);
 		}
-		JInternalFrame internal = new JInternalFrame("CFIP - Controle Financeiro Pessoal");
+		JInternalFrame internal = new JInternalFrame(titulo);
 		internal.setVisible(true);
 		internal.setResizable(true);
 		internal.setFrameIcon(Imagem.png("cfip", "janela"));
