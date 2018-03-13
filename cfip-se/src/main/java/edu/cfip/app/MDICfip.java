@@ -1,5 +1,7 @@
 package edu.cfip.app;
 
+import edu.cfip.form.exemplo.FormExemplo;
+import edu.cfip.util.desktop.Formulario;
 import edu.cfip.util.desktop.MDI;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
@@ -29,6 +31,8 @@ public class MDICfip extends MDI {
 		new MDICfip().setVisible(true);
 	}
 	private void abrirFormulario() {
-		
+		Formulario form= new FormExemplo();
+		form.setMdi(this);
+		form.exibir();
 	}
 }

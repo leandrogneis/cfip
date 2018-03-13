@@ -77,4 +77,7 @@ public class Formulario extends JPanel {
 		componente.setLocation(x, y);
 		componente.setVisible(true);
 	}
+	public JPanel getConteudo() {
+		return conteudo;
+	}
 }
