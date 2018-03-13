@@ -40,5 +40,7 @@ public class MDI extends JFrame {
 	public void setSessao(Sessao sessao) {
 		this.sessao = sessao;
 	}
-	
+	public JMenuBar getBarraMenu() {
+		return barraMenu;
+	}
 }
