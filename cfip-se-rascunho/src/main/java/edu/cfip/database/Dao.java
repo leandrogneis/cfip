@@ -19,7 +19,7 @@ public class Dao {
 	public static void main(String[] args) {
 		Dao d = new Dao();
 		Conta c = new Conta();
-		c.setNome("TESTE");
+		c.setNome("TESTE 2");
 		d.incluir(c);
 		System.out.println("Salvou");
 	}
