@@ -55,24 +55,22 @@ public class Formulario extends JPanel {
 		conteudo.setLayout(layout);
 	}
 	public void exibir() {
-		this.exibir("Sistema");
+		this.exibir(this);
 	}
-	public void exibir(String titulo) {
-		this.exibir(this,titulo);
-	}
-	public void exibir(Formulario frm,String titulo) {
-		if (frm != this) {
+	
+	public void exibir(Formulario frm) {
+		/*if (frm != this) {
 			frm.setMdi(this.mdi);
-		}
-		JInternalFrame internal = new JInternalFrame(titulo);
+		}*/
+		JInternalFrame internal = new JInternalFrame("CFIP - Formulário");
 		internal.setVisible(true);
 		internal.setResizable(true);
-		internal.setFrameIcon(Imagem.png("cfip", "janela"));
+		//internal.setFrameIcon(Imagem.png("cfip", "janela"));
 		internal.setContentPane(frm);
 		try {
 			internal.setSelected(true);
 			internal.pack();
-			centralizar(internal);
+			//centralizar(internal);
 		} catch (PropertyVetoException e) {
 			e.printStackTrace();
 		}
