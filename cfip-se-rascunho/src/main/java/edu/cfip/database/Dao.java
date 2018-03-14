@@ -19,8 +19,9 @@ public class Dao {
 	public static void main(String[] args) {
 		Dao d = new Dao();
 		Conta c = new Conta();
-		c.setNome("TESTE 2");
+		c.setNome("NOVO");
 		d.incluir(c);
 		System.out.println("Salvou");
+		System.exit(0);
 	}
 }
