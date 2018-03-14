@@ -5,6 +5,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 import edu.cfip.model.Conta;
+import edu.cfip.model.Natureza;
 
 public class Dao {
 	public Dao() {
@@ -18,9 +19,12 @@ public class Dao {
 		EntityManager em=factory.createEntityManager();
 		System.out.println("EntityManager criado");
 		Conta c = new Conta();
-		c.setNome("NOVO");
+		c.setNome("CONTA");
+		Natureza n = new Natureza();
+		n.setNome("NATUREZA");
 		em.getTransaction().begin();
 		em.persist(c);
+		em.persist(n);
 		em.getTransaction().commit();
 		factory.close();
 	}
