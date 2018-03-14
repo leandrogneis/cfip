@@ -70,7 +70,7 @@ public class Formulario extends JPanel {
 		try {
 			internal.setSelected(true);
 			internal.pack();
-			//centralizar(internal);
+			centralizar(internal);
 		} catch (PropertyVetoException e) {
 			e.printStackTrace();
 		}
