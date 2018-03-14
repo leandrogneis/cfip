@@ -1,57 +1,60 @@
 package edu.cfip.app;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import edu.cfip.exemplo.FormExemplo;
+import edu.cfip.util.desktop.Formulario;
+import edu.cfip.util.desktop.MDI;
+import edu.cfip.util.desktop.ss.SSMensagem;
 
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
-import javax.swing.UIManager;
-
-import edu.cfip.form.exemplo.FormExemplo;
-import edu.cfip.util.desktop.Formulario;
-import edu.cfip.util.desktop.MDI;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class MDICfip extends MDI {
 	public MDICfip() {
-		super();
+		
+		JMenu mnFormularios = new JMenu("Formularios");
+		getBarraMenu().add(mnFormularios);
+		
+		JMenuItem mntmInternal = new JMenuItem("Internal");
+		mntmInternal.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				abrirExemplo();
+			}
+		});
+		mnFormularios.add(mntmInternal);
+		
+		JMenuItem mntmDialog = new JMenuItem("Dialog");
+		mntmDialog.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				SSMensagem.informa("Clicado Dialog");
+			}
+		});
+		mnFormularios.add(mntmDialog);
 		setTitle("CFIP - Controle Financeiro Pessoal");
-		
-		JMenu mnForms = new JMenu("Formulários");
-		getBarraMenu().add(mnForms);
-		
-		JMenuItem mnInternal = new JMenuItem("Internal");
-		mnInternal.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				abrirFormulario();
-			}
-		});
-		mnForms.add(mnInternal);
-		
-		JMenuItem mnDialog = new JMenuItem("Dialog");
-		mnDialog.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				abrirDialog();
-			}
-		});
-		mnForms.add(mnDialog);
 	}
 	public static void main(String[] args) {
+		MDICfip mdi = new MDICfip();
+		mdi.setVisible(true);
+	}
+	private void abrirExemplo() {
+		//abrirFormulario(FormExemplo.class);
+		abrirFormulario("edu.cfip.exemplo.FormExemplo");
+	}
+	private void abrirFormulario(Class clazz){
+		abrirFormulario(clazz.getName());
+	}
+	private void abrirFormulario(String formulario){
 		try {
-			String lf = UIManager.getSystemLookAndFeelClassName();
-			UIManager.setLookAndFeel(lf);
-			new MDICfip().setVisible(true);
-		}catch (Exception e) {
-			
+			abrirFormularioReflection(formulario);
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
-	private void abrirFormulario() {
-		Formulario form= new FormExemplo();
+	private void abrirFormularioReflection(String formulario) throws Exception{
+		Formulario form = (Formulario) Class.forName(formulario).newInstance() ;
 		form.setMdi(this);
+		form.onLoad();
 		form.exibir();
-	}
-	private void abrirDialog() {
-		Formulario form= new FormExemplo();
-		form.setMdi(this);
-		form.exibirDialogo();
 	}
 }
