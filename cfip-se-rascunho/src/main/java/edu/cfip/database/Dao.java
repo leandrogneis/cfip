@@ -1,27 +1,27 @@
 package edu.cfip.database;
 
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 import edu.cfip.model.Conta;
 
 public class Dao {
-	private EntityManager em;
 	public Dao() {
-		em=Persistence.createEntityManagerFactory("PU_CFIP").createEntityManager();
-		System.out.println("EntityManager criado");
+		
 	}
 	public void incluir(Object entidade) {
-		em.getTransaction().begin();
-		em.persist(entidade);
-		em.getTransaction().commit();
+		
 	}
 	public static void main(String[] args) {
-		Dao d = new Dao();
+		EntityManagerFactory factory =Persistence.createEntityManagerFactory("PU_CFIP");
+		EntityManager em=factory.createEntityManager();
+		System.out.println("EntityManager criado");
 		Conta c = new Conta();
 		c.setNome("NOVO");
-		d.incluir(c);
-		System.out.println("Salvou");
-		System.exit(0);
+		em.getTransaction().begin();
+		em.persist(c);
+		em.getTransaction().commit();
+		factory.close();
 	}
 }
