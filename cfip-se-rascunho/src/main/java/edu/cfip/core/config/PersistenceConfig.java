@@ -23,7 +23,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @Configuration
 @EnableTransactionManagement
 //@PropertySource(value = { "file:/porgamador/cfip/conf/env.properties" })
-@ComponentScan(value = "com.boxs.cfip.core.dao*")
+@ComponentScan(value = "edu.cfip.core.dao*")
 public class PersistenceConfig {
 	private static final String PERSISTENCE_UNIT = "PU_CFIP";
 	@Autowired
@@ -36,7 +36,7 @@ public class PersistenceConfig {
 		emf.setJpaVendorAdapter(jpaVendorApapter());
 		emf.setJpaProperties(getProperties());
 		emf.setPersistenceUnitName(PERSISTENCE_UNIT);
-		emf.setPackagesToScan("edu.cfip.model");
+		emf.setPackagesToScan("edu.cfip.core.model");
 		return emf;
 	}
 	@Bean
@@ -51,7 +51,7 @@ public class PersistenceConfig {
 		dataSource.setPassword(getValue(Ambiente.DB_PASS));
 		*/
 		dataSource.setDriverClassName("org.hsqldb.jdbcDriver");
-		dataSource.setUrl("jdbc:hsqldb:file:/porgamador/cfip/implementacao/cfipdb");
+		dataSource.setUrl("jdbc:hsqldb:file:/porgamador/cfip/implementacao/db/cfipdb");
 		dataSource.setUsername("sa");
 		dataSource.setPassword("");
 		
