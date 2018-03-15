@@ -1,4 +1,4 @@
-package edu.cfip.model;
+package edu.cfip.core.model.nok;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -14,6 +14,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import edu.cfip.core.model.Conta;
 import edu.cfip.util.desktop.ss.util.Formatador;
 
 @Entity

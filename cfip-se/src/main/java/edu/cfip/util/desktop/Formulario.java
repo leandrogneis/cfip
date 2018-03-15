@@ -32,7 +32,7 @@ public class Formulario extends JPanel {
 		this.setLayout(new BorderLayout());
 		this.conteudo.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		this.setTitulo("Informe um titulo");
-		this.setDescricao("Informe uma descriÁ„o");
+		this.setDescricao("Informe uma descri√ß√£o");
 		
 		this.add(cabecalho, BorderLayout.NORTH);
 		this.add(conteudo, BorderLayout.CENTER);
@@ -60,7 +60,7 @@ public class Formulario extends JPanel {
 		this.exibir(this);
 	}
 	public void exibir(Formulario frm) {
-		JInternalFrame internal = new JInternalFrame("CFIP - Formul·rio");
+		JInternalFrame internal = new JInternalFrame("CFIP - Formul√°rio");
 		internal.setVisible(true);
 		internal.setResizable(true);
 		internal.setContentPane(frm);
@@ -75,7 +75,7 @@ public class Formulario extends JPanel {
 		mdi.getAreaTrabalho().getDesktopManager().activateFrame(internal);
 	}
 	public void cancelar() {
-		boolean resposta = SSMensagem.pergunta("Deseja cancelar esta operaÁ„o");
+		boolean resposta = SSMensagem.pergunta("Deseja cancelar esta opera√ß√£o");
 		if (resposta) {
 			fechar();
 		}

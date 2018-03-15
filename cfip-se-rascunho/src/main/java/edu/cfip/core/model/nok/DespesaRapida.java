@@ -1,4 +1,4 @@
-package edu.cfip.model;
+package edu.cfip.core.model.nok;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,6 +8,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import edu.cfip.core.model.Conta;
 
 @Entity
 @Table(name="despesa_rapida")

@@ -1,4 +1,4 @@
-package edu.cfip.model;
+package edu.cfip.core.model;
 
 import java.io.Serializable;
 
@@ -9,36 +9,28 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Usuario implements Serializable {
+public class Conta implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer id;
+	
 	@Column(nullable=false,length=50)
 	private String nome;
-	@Column(nullable=false,length=80)
-	private String email;
-	@Column(nullable=false,length=80)
-	private String login;
-	@Column(nullable=false,length=50)
-	private String senha;
-	private boolean excluido;
-
-	@Column(length=20)
-	private String telefone;
 	
-	@Column(name="cpf_cnpj", length=20)
-	private String cpfCnpj;
-	public String getCpfCnpj() {
-		return cpfCnpj;
-	}
-	public void setCpfCnpj(String cpfCnpj) {
-		this.cpfCnpj = cpfCnpj;
-	}
-	public String getTelefone() {
-		return telefone;
-	}
-	public void setTelefone(String telefone) {
-		this.telefone = telefone;
+	@Column(nullable=false,length=20)
+	private String sigla;
+	
+	@Column(nullable=false,length=9,precision=2)
+	private Double saldo;
+	
+	@Column(nullable=false)
+	private boolean excluido;
+	
+	@Column(name="usuario_id", nullable=false, length=9)
+	private Integer usuario;
+	
+	public Conta() {
+		saldo=0.0d;
 	}
 	
 	public void setExcluido(boolean excluido) {
@@ -47,37 +39,41 @@ public class Usuario implements Serializable {
 	public boolean isExcluido() {
 		return excluido;
 	}
-	
-	
+
 	public Integer getId() {
 		return id;
 	}
 	public void setId(Integer id) {
 		this.id = id;
 	}
+	
 	public String getNome() {
 		return nome;
 	}
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	public String getEmail() {
-		return email;
+	public String getSigla() {
+		return sigla;
 	}
-	public void setEmail(String email) {
-		this.email = email;
+	public void setSigla(String sigla) {
+		this.sigla = sigla;
 	}
-	public String getSenha() {
-		return senha;
+	public Double getSaldo() {
+		return saldo;
 	}
-	public void setSenha(String senha) {
-		this.senha = senha;
+	public void setSaldo(Double saldo) {
+		this.saldo = saldo;
 	}
-	public String getLogin() {
-		return login;
+	public Integer getUsuario() {
+		return usuario;
 	}
-	public void setLogin(String login) {
-		this.login = login;
+	public void setUsuario(Integer usuario) {
+		this.usuario = usuario;
+	}
+	@Override
+	public String toString() {
+		return "Conta [nome=" + nome + "]";
 	}
 	@Override
 	public int hashCode() {
@@ -94,20 +90,12 @@ public class Usuario implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Usuario other = (Usuario) obj;
+		Conta other = (Conta) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
-	}
-	public Usuario() {
-		login="login";
-		email="email@email.com";
-		nome="Nome Sobrenome";
-		senha="1234";
-				
-	}
-	
+	}	
 }

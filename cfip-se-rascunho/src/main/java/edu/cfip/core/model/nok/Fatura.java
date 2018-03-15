@@ -1,4 +1,4 @@
-package edu.cfip.model;
+package edu.cfip.core.model.nok;
 
 import java.util.Date;
 
