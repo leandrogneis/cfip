@@ -1,14 +1,15 @@
 package edu.cfip.app;
 
-import edu.cfip.exemplo.FormExemplo;
-import edu.cfip.util.desktop.Formulario;
-import edu.cfip.util.desktop.MDI;
-import edu.cfip.util.desktop.ss.SSMensagem;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+
+import edu.cfip.client.FrmConta;
+import edu.porgamdor.util.desktop.Formulario;
+import edu.porgamdor.util.desktop.MDI;
+import edu.porgamdor.util.desktop.ss.SSMensagem;
 
 public class MDICfip extends MDI {
 	public MDICfip() {
@@ -38,7 +39,7 @@ public class MDICfip extends MDI {
 		mdi.setVisible(true);
 	}
 	private void abrirFormulario() {
-		Formulario form = new FormExemplo();
+		Formulario form = new FrmConta();
 		form.setMdi(this);
 		form.exibir();
 	}
