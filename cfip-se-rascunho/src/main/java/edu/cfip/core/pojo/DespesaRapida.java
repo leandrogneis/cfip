@@ -1,4 +1,4 @@
-package edu.cfip.core.model.nok;
+package edu.cfip.core.pojo;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
