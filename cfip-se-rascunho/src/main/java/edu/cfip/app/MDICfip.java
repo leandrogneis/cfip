@@ -5,53 +5,42 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
-import javax.swing.UIManager;
 
-import edu.cfip.form.exemplo.FormExemplo;
-import edu.cfip.util.desktop.Formulario;
-import edu.cfip.util.desktop.MDI;
+import edu.cfip.client.FrmConta;
+import edu.porgamdor.util.desktop.Formulario;
+import edu.porgamdor.util.desktop.MDI;
+import edu.porgamdor.util.desktop.ss.SSMensagem;
 
 public class MDICfip extends MDI {
 	public MDICfip() {
-		super();
-		setTitle("CFIP - Controle Financeiro Pessoal");
 		
-		JMenu mnForms = new JMenu("Formulários");
-		getBarraMenu().add(mnForms);
+		JMenu mnFormularios = new JMenu("Formularios");
+		getBarraMenu().add(mnFormularios);
 		
-		JMenuItem mnInternal = new JMenuItem("Internal");
-		mnInternal.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+		JMenuItem mntmInternal = new JMenuItem("Internal");
+		mntmInternal.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
 				abrirFormulario();
 			}
 		});
-		mnForms.add(mnInternal);
+		mnFormularios.add(mntmInternal);
 		
-		JMenuItem mnDialog = new JMenuItem("Dialog");
-		mnDialog.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				abrirDialog();
+		JMenuItem mntmDialog = new JMenuItem("Dialog");
+		mntmDialog.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				SSMensagem.informa("Clicado Dialog");
 			}
 		});
-		mnForms.add(mnDialog);
+		mnFormularios.add(mntmDialog);
+		setTitle("CFIP - Controle Financeiro Pessoal");
 	}
 	public static void main(String[] args) {
-		try {
-			String lf = UIManager.getSystemLookAndFeelClassName();
-			UIManager.setLookAndFeel(lf);
-			new MDICfip().setVisible(true);
-		}catch (Exception e) {
-			
-		}
+		MDICfip mdi = new MDICfip();
+		mdi.setVisible(true);
 	}
 	private void abrirFormulario() {
-		Formulario form= new FormExemplo();
+		Formulario form = new FrmConta();
 		form.setMdi(this);
 		form.exibir();
-	}
-	private void abrirDialog() {
-		Formulario form= new FormExemplo();
-		form.setMdi(this);
-		form.exibirDialogo();
 	}
 }
