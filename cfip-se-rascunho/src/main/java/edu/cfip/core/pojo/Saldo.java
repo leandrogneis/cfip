@@ -15,7 +15,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import edu.cfip.core.model.Conta;
-import edu.cfip.util.desktop.ss.util.Formatador;
+import edu.porgamdor.util.desktop.ss.util.Formatador;
 
 @Entity
 public class Saldo implements Serializable {

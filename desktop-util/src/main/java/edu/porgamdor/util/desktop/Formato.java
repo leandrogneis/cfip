@@ -1,4 +1,4 @@
-package edu.cfip.util.desktop;
+package edu.porgamdor.util.desktop;
 
 public class Formato {
 	public static String MOEDA = "#,##0.00";

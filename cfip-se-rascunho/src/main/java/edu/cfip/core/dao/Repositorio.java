@@ -7,7 +7,7 @@ import org.apache.log4j.Logger;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import edu.cfip.util.desktop.TipoOperacao;
+import edu.porgamdor.util.desktop.TipoOperacao;
 @Repository
 public class Repositorio {
 	private static Logger LOG = Logger.getLogger(Repositorio.class.getName());

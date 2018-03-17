@@ -1,4 +1,4 @@
-package edu.cfip.util.desktop;
+package edu.porgamdor.util.desktop;
 
 public enum TipoOperacao {
 	INCLUSAO,

@@ -3,7 +3,7 @@ package edu.cfip.client;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 
-import edu.cfip.util.desktop.Formato;
+import edu.porgamdor.util.desktop.Formato;
 import edu.porgamdor.util.desktop.Formulario;
 import edu.porgamdor.util.desktop.ss.SSBotao;
 import edu.porgamdor.util.desktop.ss.SSCampoNumero;
