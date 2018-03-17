@@ -1,6 +1,7 @@
 package edu.cfip.exemplo;
 
 import java.awt.BorderLayout;
+import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -20,6 +21,8 @@ public class FrmConsultaModelo extends Formulario {
 	private SSGrade tabela = new SSGrade();
 	private SSCampoTexto txtFiltro = new SSCampoTexto();
 	private SSBotao cmdBuscar = new SSBotao();
+	private final SSBotao cmdIncluir = new SSBotao();
+	private final SSBotao cmdAlterar = new SSBotao();
 	public FrmConsultaModelo() {
 		//mudar o layout
 		setConteudoLayout(new BorderLayout());
@@ -60,6 +63,15 @@ public class FrmConsultaModelo extends Formulario {
 		scroll.setViewportView(tabela);
 		getConteudo().add(scroll,BorderLayout.CENTER);
 		txtFiltro.setColunas(30);
+		
+		cmdIncluir.setText("Incluir");
+		cmdIncluir.setIcone("novo");
+		
+		getRodape().add(cmdIncluir);
+		cmdAlterar.setText("Alterar");
+		
+		getRodape().add(cmdAlterar);
+		setAlinhamentoRodape(FlowLayout.LEFT);
 	}
 	public JPanel getFiltro() {
 		return filtro;

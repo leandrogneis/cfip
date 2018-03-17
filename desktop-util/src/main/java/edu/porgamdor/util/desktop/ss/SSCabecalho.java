@@ -35,7 +35,7 @@ public class SSCabecalho extends JPanel {
         this.setSize(new Dimension(431, 54));        
         this.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED));
         this.setLayout(gridBagLayout1);
-        lblTitulo.setText("Título do formulário");
+        lblTitulo.setText("Título do Formulário");
         lblTitulo.setFont(new Font("Dialog", 1, 15));
         lblDescricao.setText("Descrição do formulário");
         lblDescricao.setAlignmentY((float) 10.0);        

@@ -1,19 +1,14 @@
 package edu.porgamdor.util.desktop.ss;
 
-import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.SystemColor;
 import java.awt.event.ActionListener;
-
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
-import javax.swing.JLabel;
 import javax.swing.JTextField;
-import javax.swing.UIManager;
 
 import edu.porgamdor.util.desktop.ss.util.Reflexao;
 

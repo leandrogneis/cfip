@@ -45,7 +45,7 @@ public class SSBotao extends JButton {
     public void setIcone(String icone) {
         this.icone = icone;        
         ImageIcon imagem = null;
-        if (icone != null && (!icone.equals("ação"))) {
+        if (icone != null && (!icone.equals("Ação"))) {
             /*URL url = getClass().getResource("imagens/" + icone + ".png");
             if (url != null)
                 imagem = new ImageIcon(url);*/
