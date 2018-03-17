@@ -5,17 +5,22 @@ import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
+import edu.cfip.client.FrmConta;
+import edu.cfip.core.model.Conta;
 import edu.porgamdor.util.desktop.Formato;
 import edu.porgamdor.util.desktop.Formulario;
 import edu.porgamdor.util.desktop.ss.SSBotao;
 import edu.porgamdor.util.desktop.ss.SSCampoTexto;
 import edu.porgamdor.util.desktop.ss.SSGrade;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import edu.porgamdor.util.desktop.ss.SSMensagem;
 
 public class FrmConsultaModelo extends Formulario {
 	private JPanel filtro = new JPanel();
@@ -54,7 +59,7 @@ public class FrmConsultaModelo extends Formulario {
 		tabela.getModeloColuna().setCampo(1, "nome");
 		tabela.getModeloColuna().setCampo(2, "saldo");
 		tabela.getModeloColuna().setFormato(2, Formato.MOEDA);
-		tabela.getModeloColuna().definirPositivoNegativo(2);
+		//tabela.getModeloColuna().definirPositivoNegativo(2);
 		
 		//constraints - grid bag layout
 		GridBagConstraints gbcTxtFiltro = new GridBagConstraints();
@@ -92,6 +97,21 @@ public class FrmConsultaModelo extends Formulario {
 				sair();
 			}
 		});
+		cmdBuscar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				listar();
+			}
+		});
+		cmdIncluir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				incluir();
+			}
+		});
+		cmdAlterar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				alterar();
+			}
+		});
 	}
 	public JPanel getFiltro() {
 		return filtro;
@@ -99,4 +119,29 @@ public class FrmConsultaModelo extends Formulario {
 	private void sair() {
 		super.fechar();
 	}
+	private void listar() {
+		tabela.removeAll();
+		List<Conta> lista = new ArrayList<Conta>();
+		lista.add(new edu.cfip.core.model.Conta("CARTEIRA", "CRT", 800.0));
+		lista.add(new edu.cfip.core.model.Conta("CONTA CORRENTE", "CCR", 123.0));
+		lista.add(new edu.cfip.core.model.Conta("POUPANCA", "PUP", 123.45));
+		tabela.setValue(lista);
+	}
+	private void incluir() {
+		exibirCadastro(null);
+	}
+	private void alterar() {
+		Conta entidade= (Conta) tabela.getLinhaSelecionada();
+		if(entidade==null) {
+			SSMensagem.avisa("Selecione um item da lista");
+			return;
+		}
+		exibirCadastro(entidade);
+	}
+	private void exibirCadastro(Conta entidade) {
+		FrmConta frm = new FrmConta();
+		frm.setMdi(this.getMdi());
+		frm.exibir();
+	}
+	
 }

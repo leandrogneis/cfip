@@ -47,6 +47,9 @@ public class Formulario extends JPanel {
 	public void setMdi(MDI mdi) {
 		this.mdi = mdi;
 	}
+	public MDI getMdi() {
+		return mdi;
+	}
 	public JPanel getConteudo() {
 		return conteudo;
 	}

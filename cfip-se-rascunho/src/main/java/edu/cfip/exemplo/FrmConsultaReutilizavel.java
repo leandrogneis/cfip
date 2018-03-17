@@ -41,7 +41,7 @@ public class FrmConsultaReutilizavel extends FormularioConsulta {
 		getTabela().getModeloColuna().setCampo(1, "nome");
 		getTabela().getModeloColuna().setCampo(2, "saldo");
 		getTabela().getModeloColuna().setFormato(2, Formato.MOEDA);
-		getTabela().getModeloColuna().definirPositivoNegativo(2);
+		//getTabela().getModeloColuna().definirPositivoNegativo(2);
 
 		// constraints - grid bag layout
 		GridBagConstraints gbcTxtFiltro = new GridBagConstraints();
