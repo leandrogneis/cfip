@@ -14,39 +14,35 @@ import edu.porgamdor.util.desktop.Formulario;
 import edu.porgamdor.util.desktop.ss.SSBotao;
 import edu.porgamdor.util.desktop.ss.SSCampoTexto;
 import edu.porgamdor.util.desktop.ss.SSGrade;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class FrmConsultaModelo extends Formulario {
 	private JPanel filtro = new JPanel();
-	private JScrollPane scroll;
+	private JScrollPane scroll = new JScrollPane();
 	private SSGrade tabela = new SSGrade();
+	
 	private SSCampoTexto txtFiltro = new SSCampoTexto();
 	private SSBotao cmdBuscar = new SSBotao();
-	private final SSBotao cmdIncluir = new SSBotao();
-	private final SSBotao cmdAlterar = new SSBotao();
+	
+	private SSBotao cmdIncluir = new SSBotao();
+	private SSBotao cmdAlterar = new SSBotao();
+	private SSBotao cmdFechar = new SSBotao();
+	
 	public FrmConsultaModelo() {
-		//mudar o layout
+		//propriedades
 		setConteudoLayout(new BorderLayout());
+		setAlinhamentoRodape(FlowLayout.LEFT);
+		
 		filtro.setLayout(new GridBagLayout());
-		getConteudo().add(filtro,BorderLayout.NORTH);
-		
-		GridBagConstraints gbc_campoTexto = new GridBagConstraints();
-		gbc_campoTexto.weightx = 1.0;
-		gbc_campoTexto.anchor = GridBagConstraints.NORTHWEST;
-		gbc_campoTexto.insets = new Insets(5, 5, 5, 5);
-		gbc_campoTexto.fill = GridBagConstraints.HORIZONTAL;
-		gbc_campoTexto.gridx = 0;
-		gbc_campoTexto.gridy = 0;
 		txtFiltro.setRotulo("Nome");
-		filtro.add(txtFiltro, gbc_campoTexto);
-		
-		GridBagConstraints gbc_botao = new GridBagConstraints();
-		gbc_botao.anchor = GridBagConstraints.SOUTHWEST;
-		gbc_botao.fill = GridBagConstraints.HORIZONTAL;
-		gbc_botao.insets = new Insets(0, 0, 5, 5);
-		gbc_botao.gridx = 1;
-		gbc_botao.gridy = 0;
+		txtFiltro.setColunas(30);
 		cmdBuscar.setText("Buscar");
-		filtro.add(cmdBuscar, gbc_botao);
+		
+		cmdIncluir.setText("Incluir");
+		cmdIncluir.setIcone("novo");
+		cmdAlterar.setText("Alterar");
+		cmdFechar.setText("Fechar");
 		
 		tabela.getModeloTabela().addColumn("Sigla");
 		tabela.getModeloTabela().addColumn("Nome");
@@ -59,22 +55,48 @@ public class FrmConsultaModelo extends Formulario {
 		tabela.getModeloColuna().setCampo(2, "saldo");
 		tabela.getModeloColuna().setFormato(2, Formato.MOEDA);
 		tabela.getModeloColuna().definirPositivoNegativo(2);
-		scroll = new JScrollPane();
-		scroll.setViewportView(tabela);
-		getConteudo().add(scroll,BorderLayout.CENTER);
-		txtFiltro.setColunas(30);
 		
-		cmdIncluir.setText("Incluir");
-		cmdIncluir.setIcone("novo");
+		//constraints - grid bag layout
+		GridBagConstraints gbcTxtFiltro = new GridBagConstraints();
+		gbcTxtFiltro.weightx = 1.0;
+		gbcTxtFiltro.anchor = GridBagConstraints.NORTHWEST;
+		gbcTxtFiltro.insets = new Insets(5, 5, 5, 5);
+		gbcTxtFiltro.fill = GridBagConstraints.HORIZONTAL;
+		gbcTxtFiltro.gridx = 0;
+		gbcTxtFiltro.gridy = 0;
+		
+		GridBagConstraints gbcCmdBuscar = new GridBagConstraints();
+		gbcCmdBuscar.anchor = GridBagConstraints.SOUTHWEST;
+		gbcCmdBuscar.fill = GridBagConstraints.HORIZONTAL;
+		gbcCmdBuscar.insets = new Insets(0, 0, 5, 5);
+		gbcCmdBuscar.gridx = 1;
+		gbcCmdBuscar.gridy = 0;
+		
+		
+		//adicionando componentes aos seus containers
+		filtro.add(txtFiltro, gbcTxtFiltro);
+		filtro.add(cmdBuscar, gbcCmdBuscar);
+		
+		scroll.setViewportView(tabela);
+		
+		getConteudo().add(filtro,BorderLayout.NORTH);
+		getConteudo().add(scroll,BorderLayout.CENTER);
 		
 		getRodape().add(cmdIncluir);
-		cmdAlterar.setText("Alterar");
-		
 		getRodape().add(cmdAlterar);
-		setAlinhamentoRodape(FlowLayout.LEFT);
+		getRodape().add(cmdFechar);
+		
+		//métodos
+		cmdFechar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				sair();
+			}
+		});
 	}
 	public JPanel getFiltro() {
 		return filtro;
 	}
-	
+	private void sair() {
+		super.fechar();
+	}
 }

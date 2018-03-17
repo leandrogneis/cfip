@@ -1,6 +1,7 @@
 package edu.porgamdor.util.desktop;
 
 import java.awt.BorderLayout;
+import java.awt.FlowLayout;
 import java.awt.GridBagLayout;
 
 import javax.swing.JPanel;
@@ -19,6 +20,7 @@ public class FormularioConsulta extends Formulario {
 		scroll.setViewportView(tabela);
 		getConteudo().add(filtro,BorderLayout.NORTH);
 		getConteudo().add(scroll,BorderLayout.CENTER);
+		setAlinhamentoRodape(FlowLayout.LEFT);
 	}
 	public JPanel getFiltro() {
 		return filtro;
