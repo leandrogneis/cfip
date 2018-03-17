@@ -1,26 +1,44 @@
 package edu.cfip.client;
 
 import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 import java.awt.Insets;
 
+import edu.cfip.util.desktop.Formato;
 import edu.porgamdor.util.desktop.Formulario;
 import edu.porgamdor.util.desktop.ss.SSBotao;
 import edu.porgamdor.util.desktop.ss.SSCampoNumero;
 import edu.porgamdor.util.desktop.ss.SSCampoTexto;
 
 public class FrmConta extends Formulario {
-	private SSCampoTexto txtNome;
+	//inputs
 	private SSCampoNumero txtId = new SSCampoNumero();
+	private SSCampoTexto txtNome = new SSCampoTexto();
 	private SSCampoTexto txtSigla = new SSCampoTexto();
 	private SSCampoNumero txtSaldo = new SSCampoNumero();
-	private SSBotao btCancelar = new SSBotao();
-	private SSBotao btSalvar = new SSBotao();
+	
+	//bototes
+	private SSBotao cmdCancelar = new SSBotao();
+	private SSBotao cmdSalvar = new SSBotao();
+	
 	public FrmConta() {
+		init();
+	}
+	private void init() {
+		//CABECALHO
 		setTitulo("Formulario Conta");
 		setDescricao("Cadastro das contas do sistema");
-		GridBagLayout gridBagLayout = (GridBagLayout) getConteudo().getLayout();
+		
+		//PROPRIEDADES
 		txtId.setRotulo("Código");
+		txtNome.setRotulo("Nome");
+		txtSigla.setRotulo("Sigla");
+		txtSaldo.setRotulo("Saldo");
+		
+		cmdSalvar.setText("Salvar");
+		cmdCancelar.setText("Fechar");
+		txtSaldo.setFormato(Formato.MOEDA);
+		
+		//
 		GridBagConstraints gbc_txtId = new GridBagConstraints();
 		gbc_txtId.anchor = GridBagConstraints.NORTHWEST;
 		gbc_txtId.insets = new Insets(5, 5, 0, 5);
@@ -29,8 +47,7 @@ public class FrmConta extends Formulario {
 		gbc_txtId.gridy = 0;
 		getConteudo().add(txtId, gbc_txtId);
 		
-		txtNome = new SSCampoTexto();
-		txtNome.setRotulo("Nome");
+		//
 		GridBagConstraints gbc_txtNome = new GridBagConstraints();
 		gbc_txtNome.insets = new Insets(5, 5, 0, 5);
 		gbc_txtNome.fill = GridBagConstraints.BOTH;
@@ -38,8 +55,7 @@ public class FrmConta extends Formulario {
 		gbc_txtNome.gridy = 1;
 		getConteudo().add(txtNome, gbc_txtNome);
 		
-		
-		txtSigla.setRotulo("Sigla");
+		//
 		GridBagConstraints gbc_txtSigla = new GridBagConstraints();
 		gbc_txtSigla.insets = new Insets(5, 5, 0, 5);
 		gbc_txtSigla.fill = GridBagConstraints.BOTH;
@@ -47,8 +63,7 @@ public class FrmConta extends Formulario {
 		gbc_txtSigla.gridy = 2;
 		getConteudo().add(txtSigla, gbc_txtSigla);
 		
-		
-		txtSaldo.setRotulo("Saldo");
+		//
 		GridBagConstraints gbc_txtSaldo = new GridBagConstraints();
 		gbc_txtSaldo.weightx = 1.0;
 		gbc_txtSaldo.insets = new Insets(5, 5, 5, 5);
@@ -57,16 +72,8 @@ public class FrmConta extends Formulario {
 		gbc_txtSaldo.gridy = 3;
 		getConteudo().add(txtSaldo, gbc_txtSaldo);
 		
-		
-		btSalvar.setText("Salvar");
-		getRodape().add(btSalvar);
-		
-		
-		btCancelar.setText("Fechar");
-		getRodape().add(btCancelar);
-		init();
-	}
-	private void init() {
-		
+		//rodape
+		getRodape().add(cmdSalvar);
+		getRodape().add(cmdCancelar);
 	}
 }

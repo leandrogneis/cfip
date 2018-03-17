@@ -3,6 +3,7 @@ package edu.cfip.core.model;
 import java.io.Serializable;
 
 import javax.persistence.Column;
+import javax.persistence.Embeddable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -29,8 +30,12 @@ public class Conta implements Serializable {
 	@Column(name="usuario_id", nullable=false, length=9)
 	private Integer usuario;
 	
+	@Column(name="saldo_inicial",nullable=false,length=9,precision=2)
+	private Double saldoInicial;
+	
 	public Conta() {
 		saldo=0.0d;
+		saldoInicial=0.0d;
 	}
 	
 	public void setExcluido(boolean excluido) {
@@ -71,6 +76,14 @@ public class Conta implements Serializable {
 	public void setUsuario(Integer usuario) {
 		this.usuario = usuario;
 	}
+	public Double getSaldoInicial() {
+		return saldoInicial;
+	}
+
+	public void setSaldoInicial(Double saldoInicial) {
+		this.saldoInicial = saldoInicial;
+	}
+
 	@Override
 	public String toString() {
 		return "Conta [nome=" + nome + "]";

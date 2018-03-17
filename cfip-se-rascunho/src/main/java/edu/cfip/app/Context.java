@@ -11,7 +11,7 @@ public class Context {
 		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(PersistenceConfig.class);
 		Repositorio dao = context.getBean(Repositorio.class);
 		Conta conta = new Conta();
-		conta.setNome("SALARIO");
+		conta.setNome("SALARIO 2");
 		conta.setSigla("SAL");
 		conta.setUsuario(1);
 		dao.incluir(conta);
