@@ -31,8 +31,8 @@ public class Formulario extends JPanel {
 		this.conteudo.setLayout(new GridBagLayout());
 		this.setLayout(new BorderLayout());
 		this.conteudo.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
-		this.setTitulo("Informe um titulo");
-		this.setDescricao("Informe uma descriÃ§Ã£o");
+		this.setTitulo("Informe um título");
+		this.setDescricao("Informe uma descrição");
 		
 		this.add(cabecalho, BorderLayout.NORTH);
 		this.add(conteudo, BorderLayout.CENTER);
