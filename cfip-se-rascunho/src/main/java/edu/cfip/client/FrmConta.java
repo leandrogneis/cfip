@@ -5,11 +5,15 @@ import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JOptionPane;
+
+import edu.cfip.core.model.Conta;
 import edu.porgamdor.util.desktop.Formato;
 import edu.porgamdor.util.desktop.Formulario;
 import edu.porgamdor.util.desktop.ss.SSBotao;
 import edu.porgamdor.util.desktop.ss.SSCampoNumero;
 import edu.porgamdor.util.desktop.ss.SSCampoTexto;
+import edu.porgamdor.util.desktop.ss.SSMensagem;
 
 public class FrmConta extends Formulario {
 	// inputs
@@ -21,15 +25,17 @@ public class FrmConta extends Formulario {
 	// bototes
 	private SSBotao cmdFechar = new SSBotao();
 	private SSBotao cmdSalvar = new SSBotao();
-
+	
+	private Conta entidade;
 	public FrmConta() {
 		init();
 	}
-
+	
 	private void init() {
 		// CABECALHO
 		setTitulo("Formulario Conta");
 		setDescricao("Cadastro das contas do sistema");
+		txtId.setEditavel(false);
 
 		// PROPRIEDADES
 		txtId.setRotulo("Código");
@@ -84,8 +90,58 @@ public class FrmConta extends Formulario {
 				sair();
 			}
 		});
+		cmdSalvar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				salvar();
+			}
+		});
+	}
+	@Override
+	public void setEntidade(Object conta) {
+		entidade=(Conta) conta;
+		if(entidade==null) 
+			novo();
+		else
+			atribuir();
+	}
+	private void atribuir() {
+		try {
+			txtNome.requestFocus();
+			txtNome.setValue(entidade.getNome());
+			txtSigla.setText(entidade.getSigla());
+			txtSaldo.setValue(entidade.getSaldo());
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	private void novo() {
+		entidade = new Conta();
+		atribuir();
 	}
 	private void sair() {
 		super.cancelar();
+	}
+	private void salvar() {
+		try {
+			if (entidade == null) {
+				entidade = new Conta();
+			}
+			entidade.setNome(txtNome.getText());
+			entidade.setSigla(txtSigla.getText());
+			entidade.setSaldo(123.4d);
+			entidade.setSaldoInicial(0.0d);
+			entidade.setUsuario(1);
+
+			if (entidade.getNome() == null || entidade.getNome().isEmpty() || entidade.getSigla() == null
+					|| entidade.getSigla().isEmpty()) {
+				SSMensagem.avisa("Dados incompletos");
+				return;
+			}
+			SSMensagem.informa("Conta registrado com sucesso!!");
+			novo();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }

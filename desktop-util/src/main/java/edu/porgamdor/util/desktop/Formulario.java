@@ -19,7 +19,7 @@ import edu.porgamdor.util.desktop.ss.SSRodape;
 import edu.porgamdor.util.desktop.ss.util.Imagem;
 //WindowBuilder
 //http://download.eclipse.org/windowbuilder/WB/integration/4.7/
-public class Formulario extends JPanel {
+public abstract class Formulario extends JPanel {
 	private SSCabecalho cabecalho = new SSCabecalho();
 	private JPanel conteudo = new JPanel();
 	private SSRodape rodape = new SSRodape();
@@ -66,6 +66,9 @@ public class Formulario extends JPanel {
 		this.exibir(this);
 	}
 	public void exibir(Formulario frm) {
+		if (frm != this) {
+			frm.setMdi(this.getMdi());
+		}
 		JInternalFrame internal = new JInternalFrame("CFIP - Formulário");
 		internal.setVisible(true);
 		internal.setResizable(true);
@@ -101,5 +104,8 @@ public class Formulario extends JPanel {
 		y = y - 50; //opcional
 		componente.setLocation(x, y);
 		componente.setVisible(true);
+	}
+	public void setEntidade(Object entidade) {
+		
 	}
 }

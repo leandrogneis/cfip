@@ -140,8 +140,8 @@ public class FrmConsultaModelo extends Formulario {
 	}
 	private void exibirCadastro(Conta entidade) {
 		FrmConta frm = new FrmConta();
-		frm.setMdi(this.getMdi());
-		frm.exibir();
+		frm.setEntidade(entidade);
+		this.exibir(frm);
 	}
 	
 }
