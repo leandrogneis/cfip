@@ -1,4 +1,4 @@
-package edu.cfip.exemplo;
+package edu.cfip.app.desktop;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
@@ -13,7 +13,6 @@ import java.util.List;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
-import edu.cfip.client.FrmConta;
 import edu.cfip.core.model.Conta;
 import edu.porgamdor.util.desktop.Formato;
 import edu.porgamdor.util.desktop.Formulario;
@@ -22,7 +21,8 @@ import edu.porgamdor.util.desktop.ss.SSCampoTexto;
 import edu.porgamdor.util.desktop.ss.SSGrade;
 import edu.porgamdor.util.desktop.ss.SSMensagem;
 
-public class FrmConsultaModelo extends Formulario {
+public class FrmContas extends Formulario {
+	//JA PODERIA VIR DE FormularioConsulta
 	private JPanel filtro = new JPanel();
 	private JScrollPane scroll = new JScrollPane();
 	private SSGrade tabela = new SSGrade();
@@ -34,12 +34,12 @@ public class FrmConsultaModelo extends Formulario {
 	private SSBotao cmdAlterar = new SSBotao();
 	private SSBotao cmdFechar = new SSBotao();
 	
-	public FrmConsultaModelo() {
-		//propriedades
+	public FrmContas() {
+		//JA PODERIA VIR DE FormularioConsulta
 		setConteudoLayout(new BorderLayout());
 		setAlinhamentoRodape(FlowLayout.LEFT);
-		
 		filtro.setLayout(new GridBagLayout());
+		
 		txtFiltro.setRotulo("Nome");
 		txtFiltro.setColunas(30);
 		cmdBuscar.setText("Buscar");
@@ -125,9 +125,9 @@ public class FrmConsultaModelo extends Formulario {
 	private void listar() {
 		tabela.removeAll();
 		List<Conta> lista = new ArrayList<Conta>();
-		lista.add(new edu.cfip.core.model.Conta("CARTEIRA", "CRT", 800.0));
-		lista.add(new edu.cfip.core.model.Conta("CONTA CORRENTE", "CCR", 123.0));
-		lista.add(new edu.cfip.core.model.Conta("POUPANCA", "PUP", 123.45));
+		lista.add(new Conta("CARTEIRA", "CRT", 800.0));
+		lista.add(new Conta("CONTA CORRENTE", "CCR", 123.0));
+		lista.add(new Conta("POUPANCA", "PUP", 123.45));
 		tabela.setValue(lista);
 	}
 	private void incluir() {

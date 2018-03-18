@@ -9,7 +9,6 @@
 		<springframework.version>4.3.9.RELEASE</springframework.version>
 		<hibernate.version>4.3.6.Final</hibernate.version>
 		<hsqldb.version>2.3.2</hsqldb.version>
-		<postgre.version>8.4-702.jdbc4</postgre.version>
 	</properties>
 	<dependencies>
 		<dependency>

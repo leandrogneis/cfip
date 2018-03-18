@@ -8,6 +8,8 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 import edu.porgamdor.util.desktop.ss.SSGrade;
+import edu.porgamdor.util.desktop.ss.SSBotao;
+import java.awt.GridBagConstraints;
 
 public class FormularioConsulta extends Formulario {
 	private JPanel filtro = new JPanel();
@@ -19,6 +21,7 @@ public class FormularioConsulta extends Formulario {
 		filtro.setLayout(new GridBagLayout());
 		scroll.setViewportView(tabela);
 		getConteudo().add(filtro,BorderLayout.NORTH);
+		
 		getConteudo().add(scroll,BorderLayout.CENTER);
 		setAlinhamentoRodape(FlowLayout.LEFT);
 	}
