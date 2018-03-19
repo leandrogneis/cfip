@@ -19,8 +19,8 @@ import edu.porgamdor.util.desktop.ss.SSMensagem;
 
 @Component
 public class FrmConta extends Formulario {
-	@Autowired
-	private Repositorio dao;
+	/*@Autowired
+	private Repositorio dao;*/
 	// inputs
 	private SSCampoNumero txtId = new SSCampoNumero();
 	private SSCampoTexto txtNome = new SSCampoTexto();

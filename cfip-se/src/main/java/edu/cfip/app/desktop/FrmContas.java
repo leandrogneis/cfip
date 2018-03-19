@@ -28,8 +28,8 @@ import edu.porgamdor.util.desktop.ss.SSMensagem;
 
 @Component
 public class FrmContas extends Formulario {
-	@Autowired
-	private Repositorio dao; 
+	/*@Autowired
+	private Repositorio dao; */
 	
 	//JA PODERIA VIR DE FormularioConsulta
 	private JPanel filtro = new JPanel();

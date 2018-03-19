@@ -18,14 +18,6 @@ public class Repositorio {
 	private static Logger LOG = Logger.getLogger(Repositorio.class.getName());
 	@PersistenceContext(unitName = "PU_CFIP")
 	private EntityManager manager;
-	
-	@Transactional
-	public void gravar(TipoOperacao operacao, Object entidade) {
-		if (TipoOperacao.INCLUSAO == operacao)
-			manager.persist(entidade);
-		else
-			manager.merge(entidade);
-	}
 	@Transactional
 	public void incluir(Object entidade) {
 		manager.persist(entidade);
@@ -35,6 +27,15 @@ public class Repositorio {
 	public Object alterar(Object entidade) {
 		return manager.merge(entidade);
 	}
+	
+	@Transactional
+	public void gravar(TipoOperacao operacao, Object entidade) {
+		if (TipoOperacao.INCLUSAO == operacao)
+			manager.persist(entidade);
+		else
+			manager.merge(entidade);
+	}
+	
 	public List<Conta> listarContas() {
 		Query query = manager.createQuery("SELECT e FROM Conta e ORDER BY e.nome");
 		return query.getResultList();
