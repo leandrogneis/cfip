@@ -21,6 +21,7 @@ import edu.porgamdor.util.desktop.ss.SSCampoTexto;
 import edu.porgamdor.util.desktop.ss.SSGrade;
 import edu.porgamdor.util.desktop.ss.SSMensagem;
 
+//@Component
 public class FrmContas extends Formulario {
 	//JA PODERIA VIR DE FormularioConsulta
 	private JPanel filtro = new JPanel();

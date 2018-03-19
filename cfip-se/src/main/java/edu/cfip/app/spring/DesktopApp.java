@@ -14,6 +14,7 @@ public class DesktopApp {
 		try {
 			//UIManager.setLookAndFeel(lf);
 			MDICfip mdi = context.getBean(MDICfip.class);
+			mdi.setContext(context);
 			mdi.setVisible(true);
 		} catch (Exception e) {
 			e.printStackTrace();
