@@ -32,8 +32,6 @@ public class Conta implements Serializable{
 	@Column(name="saldo_inicial",nullable=false,length=9,precision=2)
 	private Double saldoInicial;
 	
-	
-	
 	public Conta(String nome, String sigla, Double saldo) {
 		super();
 		this.nome = nome;

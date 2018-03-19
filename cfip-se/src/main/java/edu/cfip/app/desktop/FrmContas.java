@@ -13,6 +13,11 @@ import java.util.List;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import edu.cfip.app.spring.DesktopApp;
+import edu.cfip.core.dao.Repositorio;
 import edu.cfip.core.model.Conta;
 import edu.porgamdor.util.desktop.Formato;
 import edu.porgamdor.util.desktop.Formulario;
@@ -21,8 +26,11 @@ import edu.porgamdor.util.desktop.ss.SSCampoTexto;
 import edu.porgamdor.util.desktop.ss.SSGrade;
 import edu.porgamdor.util.desktop.ss.SSMensagem;
 
-//@Component
+@Component
 public class FrmContas extends Formulario {
+	@Autowired
+	private Repositorio dao; 
+	
 	//JA PODERIA VIR DE FormularioConsulta
 	private JPanel filtro = new JPanel();
 	private JScrollPane scroll = new JScrollPane();
@@ -130,6 +138,9 @@ public class FrmContas extends Formulario {
 		lista.add(new Conta("CONTA CORRENTE", "CCR", 123.0));
 		lista.add(new Conta("POUPANCA", "PUP", 123.45));
 		tabela.setValue(lista);
+		
+		//lista = dao.listarContas();
+		System.out.println("CONSULTANDO AS CONTAS EM NOSSO BANCO DE DADOS");
 	}
 	private void incluir() {
 		exibirCadastro(null);
@@ -143,7 +154,8 @@ public class FrmContas extends Formulario {
 		exibirCadastro(entidade);
 	}
 	private void exibirCadastro(Conta entidade) {
-		FrmConta frm = new FrmConta();
+		//FrmConta frm = new FrmConta();
+		Formulario frm = DesktopApp.getBean(FrmConta.class);
 		frm.setEntidade(entidade);
 		this.exibir(frm);
 	}

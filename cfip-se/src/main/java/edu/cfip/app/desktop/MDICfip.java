@@ -10,13 +10,14 @@ import javax.swing.JSeparator;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.stereotype.Component;
 
+import edu.cfip.app.spring.DesktopApp;
 import edu.porgamdor.util.desktop.Formulario;
 import edu.porgamdor.util.desktop.MDI;
 import edu.porgamdor.util.desktop.ss.util.Imagem;
 
 @Component
 public class MDICfip extends MDI {
-	private AnnotationConfigApplicationContext context;
+	//private AnnotationConfigApplicationContext context;
 	public MDICfip() {
 		setTitle("CFIP - Controle Financeiro Pessoal");
 		JMenu mnCadastros = new JMenu("Cadastros");
@@ -25,8 +26,8 @@ public class MDICfip extends MDI {
 		mnConta.setIcon(Imagem.png("cfip", "conta"));
 		mnConta.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ev) {
-				exibirConta();
-				//exibirBean("frmContas");
+				//exibirConta();
+				exibirBean("frmContas");
 			}
 		});
 		mnCadastros.add(mnConta);
@@ -269,18 +270,16 @@ public class MDICfip extends MDI {
 	private void exibirConta() {
 		//Formulario form = context.getBean(FrmContas.class);
 		//exibir(form);
-		exibir(context.getBean(FrmContas.class));
+		exibir((Formulario)DesktopApp.getBean(FrmContas.class));
 	}
 	private void exibir(Formulario formulario) {
 		formulario.setMdi(this);
 		formulario.exibir();
 	}
 	private void exibirBean(String bean) {
-		Formulario form = (Formulario) context.getBean(bean);
+		Formulario form = (Formulario) DesktopApp.getBean(bean);
 		form.setMdi(this);
 		form.exibir();
 	}
-	public void setContext(AnnotationConfigApplicationContext context) {
-		this.context = context;
-	}
+	
 }

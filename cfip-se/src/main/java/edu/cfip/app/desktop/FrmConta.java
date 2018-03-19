@@ -5,8 +5,10 @@ import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import edu.cfip.core.dao.Repositorio;
 import edu.cfip.core.model.Conta;
 import edu.porgamdor.util.desktop.Formato;
 import edu.porgamdor.util.desktop.Formulario;
@@ -15,8 +17,10 @@ import edu.porgamdor.util.desktop.ss.SSCampoNumero;
 import edu.porgamdor.util.desktop.ss.SSCampoTexto;
 import edu.porgamdor.util.desktop.ss.SSMensagem;
 
-//@Component
+@Component
 public class FrmConta extends Formulario {
+	@Autowired
+	private Repositorio dao;
 	// inputs
 	private SSCampoNumero txtId = new SSCampoNumero();
 	private SSCampoTexto txtNome = new SSCampoTexto();
@@ -130,8 +134,6 @@ public class FrmConta extends Formulario {
 			}
 			entidade.setNome(txtNome.getText());
 			entidade.setSigla(txtSigla.getText());
-			entidade.setSaldo(123.4d);
-			entidade.setSaldoInicial(0.0d);
 			entidade.setUsuario(1);
 
 			if (entidade.getNome() == null || entidade.getNome().isEmpty() || entidade.getSigla() == null
@@ -139,6 +141,12 @@ public class FrmConta extends Formulario {
 				SSMensagem.avisa("Dados incompletos");
 				return;
 			}
+			
+			/*if(entidade.getId()==null)
+				dao.incluir(entidade);
+			else
+				dao.alterar(entidade);*/
+			
 			SSMensagem.informa("Conta registrado com sucesso!!");
 			novo();
 		} catch (Exception e) {

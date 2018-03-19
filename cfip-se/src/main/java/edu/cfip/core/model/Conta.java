@@ -2,15 +2,35 @@ package edu.cfip.core.model;
 
 import java.io.Serializable;
 
-
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+@Entity
 public class Conta implements Serializable{
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer id;
+	
+	@Column(nullable=false,length=50)
 	private String nome;
+	
+	@Column(nullable=false,length=20)
 	private String sigla;
+	
+	@Column(nullable=false,length=9,precision=2)
 	private Double saldo;
+	
+	@Column(nullable=false)
 	private boolean excluido;
+	
+	@Column(name="usuario_id", nullable=false, length=9)
 	private Integer usuario;
+	
+	@Column(name="saldo_inicial",nullable=false,length=9,precision=2)
 	private Double saldoInicial;
+	
 	public Conta(String nome, String sigla, Double saldo) {
 		super();
 		this.nome = nome;
