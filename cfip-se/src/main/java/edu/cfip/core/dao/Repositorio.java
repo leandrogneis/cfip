@@ -18,6 +18,7 @@ public class Repositorio {
 	private static Logger LOG = Logger.getLogger(Repositorio.class.getName());
 	@PersistenceContext(unitName = "PU_CFIP")
 	private EntityManager manager;
+	
 	@Transactional
 	public void incluir(Object entidade) {
 		manager.persist(entidade);

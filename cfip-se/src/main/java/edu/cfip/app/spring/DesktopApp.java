@@ -6,16 +6,16 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 
 import edu.cfip.app.desktop.MDICfip;
 import edu.cfip.app.spring.config.AppConfig;
+import edu.cfip.core.config.PersistenceConfig;
 
 public class DesktopApp {
 	private static AnnotationConfigApplicationContext context;
 	public static void main(String[] args) {
-		context = new AnnotationConfigApplicationContext(AppConfig.class);
-		String lf = UIManager.getSystemLookAndFeelClassName();
 		try {
-			//UIManager.setLookAndFeel(lf);
+			String lf = UIManager.getSystemLookAndFeelClassName();
+			UIManager.setLookAndFeel(lf);
+			context = new AnnotationConfigApplicationContext(AppConfig.class,PersistenceConfig.class);
 			MDICfip mdi = context.getBean(MDICfip.class);
-			//mdi.setContext(context);
 			mdi.setVisible(true);
 		} catch (Exception e) {
 			e.printStackTrace();

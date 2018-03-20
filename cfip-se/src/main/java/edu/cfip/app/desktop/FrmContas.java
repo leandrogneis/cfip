@@ -28,8 +28,8 @@ import edu.porgamdor.util.desktop.ss.SSMensagem;
 
 @Component
 public class FrmContas extends Formulario {
-	/*@Autowired
-	private Repositorio dao; */
+	@Autowired
+	private Repositorio dao;
 	
 	//JA PODERIA VIR DE FormularioConsulta
 	private JPanel filtro = new JPanel();
@@ -134,12 +134,14 @@ public class FrmContas extends Formulario {
 	private void listar() {
 		tabela.removeAll();
 		List<Conta> lista = new ArrayList<Conta>();
+		/*
 		lista.add(new Conta("CARTEIRA", "CRT", 800.0));
 		lista.add(new Conta("CONTA CORRENTE", "CCR", 123.0));
 		lista.add(new Conta("POUPANCA", "PUP", 123.45));
 		tabela.setValue(lista);
-		
-		//lista = dao.listarContas();
+		*/
+		lista = dao.listarContas();
+		tabela.setValue(lista);
 		System.out.println("CONSULTANDO AS CONTAS EM NOSSO BANCO DE DADOS");
 	}
 	private void incluir() {

@@ -19,8 +19,8 @@ import edu.porgamdor.util.desktop.ss.SSMensagem;
 
 @Component
 public class FrmConta extends Formulario {
-	/*@Autowired
-	private Repositorio dao;*/
+	@Autowired
+	private Repositorio dao;
 	// inputs
 	private SSCampoNumero txtId = new SSCampoNumero();
 	private SSCampoTexto txtNome = new SSCampoTexto();
@@ -142,12 +142,12 @@ public class FrmConta extends Formulario {
 				return;
 			}
 			
-			/*if(entidade.getId()==null)
+			if(entidade.getId()==null)
 				dao.incluir(entidade);
 			else
-				dao.alterar(entidade);*/
+				dao.alterar(entidade);
 			
-			SSMensagem.informa("Conta registrado com sucesso!!");
+			SSMensagem.informa("Conta registrada com sucesso!!");
 			novo();
 		} catch (Exception e) {
 			e.printStackTrace();
