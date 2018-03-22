@@ -18,7 +18,7 @@ import org.springframework.stereotype.Component;
 
 import edu.cfip.app.spring.DesktopApp;
 import edu.cfip.core.dao.Repositorio;
-import edu.cfip.core.model.Conta;
+import edu.cfip.core.model.Natureza;
 import edu.porgamdor.util.desktop.Formato;
 import edu.porgamdor.util.desktop.Formulario;
 import edu.porgamdor.util.desktop.ss.SSBotao;
@@ -28,7 +28,8 @@ import edu.porgamdor.util.desktop.ss.SSMensagem;
 import edu.porgamdor.util.desktop.ss.util.Validacao;
 
 @Component
-public class FrmContas extends Formulario {
+//@Scope(value = ConfigurableBeanFactory.SCOPE_PROTOTYPE)	
+public class FrmNaturezas extends Formulario {
 	@Autowired
 	private Repositorio dao;
 	
@@ -44,7 +45,7 @@ public class FrmContas extends Formulario {
 	private SSBotao cmdAlterar = new SSBotao();
 	private SSBotao cmdFechar = new SSBotao();
 	
-	public FrmContas() {
+	public FrmNaturezas() {
 		//JA PODERIA VIR DE FormularioConsulta
 		setConteudoLayout(new BorderLayout());
 		setAlinhamentoRodape(FlowLayout.LEFT);
@@ -58,22 +59,22 @@ public class FrmContas extends Formulario {
 		cmdIncluir.setIcone("novo");
 		cmdAlterar.setText("Alterar");
 		cmdFechar.setText("Fechar");
+		txtFiltro.setColunas(30);
 		
-		tabela.getModeloTabela().addColumn("Sigla");
+		// campos da tabela
+		//BASICAMENTE O QUE VC TERÁ QUE MUDAR ENTRE FORMULARIOS
 		tabela.getModeloTabela().addColumn("Nome");
-		tabela.getModeloTabela().addColumn("Saldo");
+		tabela.getModeloTabela().addColumn("Tipo Movto");
+		tabela.getModeloTabela().addColumn("Categoria");
 		
-		tabela.getModeloColuna().getColumn(0).setPreferredWidth(90);
-		tabela.getModeloColuna().getColumn(1).setPreferredWidth(180);
-		tabela.getModeloColuna().getColumn(2).setPreferredWidth(70);
+		tabela.getModeloColuna().getColumn(0).setPreferredWidth(130);
+		tabela.getModeloColuna().getColumn(1).setPreferredWidth(100);
+		tabela.getModeloColuna().getColumn(2).setPreferredWidth(110);
 		
-		tabela.getModeloColuna().setCampo(0, "sigla");
-		tabela.getModeloColuna().setCampo(1, "nome");
-		tabela.getModeloColuna().setCampo(2, "saldo");
-		
-		tabela.getModeloColuna().setFormato(2, Formato.MOEDA);
-		//tabela.getModeloColuna().definirPositivoNegativo(2);
-		
+		tabela.getModeloColuna().setCampo(0, "nome");
+		tabela.getModeloColuna().setCampo(1, "tipoMovimento");
+		tabela.getModeloColuna().setCampo(2, "categoria");
+
 		//constraints - grid bag layout
 		GridBagConstraints gbcTxtFiltro = new GridBagConstraints();
 		gbcTxtFiltro.weightx = 1.0;
@@ -91,7 +92,7 @@ public class FrmContas extends Formulario {
 		gbcCmdBuscar.gridy = 0;
 		
 		
-		//adicionando componentes aos seus containers
+		//adicionando componentes aos seus Naturezainers
 		filtro.add(txtFiltro, gbcTxtFiltro);
 		filtro.add(cmdBuscar, gbcCmdBuscar);
 		
@@ -133,14 +134,14 @@ public class FrmContas extends Formulario {
 		super.fechar();
 	}
 	private void listar() {
-		List<Conta> lista = new ArrayList<Conta>();
+		List<Natureza> lista = new ArrayList<Natureza>();
 		try {
 			String nome = txtFiltro.getText();
 			if (Validacao.vazio(nome)) {
-				lista = dao.listarContas(DesktopApp.USUARIO);
+				lista = dao.listarNaturezas(DesktopApp.USUARIO);
 
 			} else {
-				lista = dao.listarContas(DesktopApp.USUARIO, nome);
+				lista = dao.listarNaturezas(DesktopApp.USUARIO, nome);
 			}
 			if(lista.size()==0)
 				SSMensagem.avisa("Nenhum dado encontrado");
@@ -155,16 +156,15 @@ public class FrmContas extends Formulario {
 		exibirCadastro(null);
 	}
 	private void alterar() {
-		Conta entidade= (Conta) tabela.getLinhaSelecionada();
+		Natureza entidade= (Natureza) tabela.getLinhaSelecionada();
 		if(entidade==null) {
 			SSMensagem.avisa("Selecione um item da lista");
 			return;
 		}
 		exibirCadastro(entidade);
 	}
-	private void exibirCadastro(Conta entidade) {
-		//FrmConta frm = new FrmConta();
-		Formulario frm = DesktopApp.getBean(FrmConta.class);
+	private void exibirCadastro(Natureza entidade) {
+		Formulario frm = DesktopApp.getBean(FrmNatureza.class);
 		frm.setEntidade(entidade);
 		this.exibir(frm);
 	}

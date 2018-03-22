@@ -26,8 +26,8 @@ public class MDICfip extends MDI {
 		mnConta.setIcon(Imagem.png("cfip", "conta"));
 		mnConta.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ev) {
-				//exibirConta();
-				exibirBean("frmContas");
+				exibirConta();
+				//exibirBean("frmContas");
 			}
 		});
 		mnCadastros.add(mnConta);
@@ -36,7 +36,7 @@ public class MDICfip extends MDI {
 		mnNatureza.setIcon(Imagem.png("cfip", "natureza"));
 		mnNatureza.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ev) {
-				//exibirNatureza();
+				exibirNatureza();
 			}
 		});
 
@@ -272,14 +272,18 @@ public class MDICfip extends MDI {
 		//exibir(form);
 		exibir((Formulario)DesktopApp.getBean(FrmContas.class));
 	}
+	private void exibirNatureza() {
+		exibir((Formulario)DesktopApp.getBean(FrmNaturezas.class));
+	}
 	private void exibir(Formulario formulario) {
 		formulario.setMdi(this);
 		formulario.exibir();
 	}
-	private void exibirBean(String bean) {
+	
+	/*private void exibirBean(String bean) {
 		Formulario form = (Formulario) DesktopApp.getBean(bean);
 		form.setMdi(this);
 		form.exibir();
-	}
+	}*/
 	
 }

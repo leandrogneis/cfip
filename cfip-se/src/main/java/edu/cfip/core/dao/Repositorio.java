@@ -11,6 +11,8 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import edu.cfip.core.model.Conta;
+import edu.cfip.core.model.Natureza;
+import edu.cfip.core.model.TipoMovimento;
 import edu.porgamdor.util.desktop.TipoOperacao;
 
 @Repository
@@ -36,9 +38,40 @@ public class Repositorio {
 		else
 			manager.merge(entidade);
 	}
+	public <T> T buscar(Class entidade, Integer id) {
+		return (T) manager.find(entidade, id);
+	}
 	
-	public List<Conta> listarContas() {
-		Query query = manager.createQuery("SELECT e FROM Conta e ORDER BY e.nome");
+	public List<Conta> listarContas(Integer usuario) {
+		Query query = manager.createQuery("SELECT e FROM Conta e WHERE e.excluido = false and e.usuario = :usuario ORDER BY e.nome");
+		query.setParameter("usuario", usuario);
+		return query.getResultList();
+	}
+	public List<Conta> listarContas(Integer usuario, String nome) {
+		Query query = manager.createQuery(
+				"SELECT e FROM Conta e WHERE e.excluido = false and e.usuario = :usuario and e.nome like :nome");
+		query.setParameter("usuario", usuario);
+		query.setParameter("nome", "%" + nome + "%");
+		return query.getResultList();
+	}
+	
+	public List<Natureza> listarNaturezas(Integer usuario, String nome) {
+		Query query = manager.createQuery(
+				"SELECT e FROM Natureza e WHERE e.excluido = false and e.usuario = :usuario AND e.nome LIKE :nome ORDER BY e.nome");
+		query.setParameter("usuario", usuario);
+		query.setParameter("nome", "%" + nome + "%");
+		return query.getResultList();
+	}
+
+	public List<Natureza> listarNaturezas(Integer usuario) {
+		Query query = manager.createQuery("SELECT e FROM Natureza e WHERE e.excluido = false and e.usuario = :usuario ORDER BY e.tipoMovimento, e.nome");
+		query.setParameter("usuario", usuario);
+		return query.getResultList();
+	}
+	public List<Natureza> listarNaturezas(Integer usuario,TipoMovimento tipo) {
+		Query query = manager.createQuery("SELECT e FROM Natureza e WHERE e.excluido = false AND e.usuario = :usuario AND e.tipoMovimento=:tipoMovto ORDER BY e.nome");
+		query.setParameter("usuario", usuario);
+		query.setParameter("tipoMovto", tipo);
 		return query.getResultList();
 	}
 }

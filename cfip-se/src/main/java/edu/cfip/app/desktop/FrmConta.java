@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import edu.cfip.app.spring.DesktopApp;
 import edu.cfip.core.dao.Repositorio;
 import edu.cfip.core.model.Conta;
 import edu.porgamdor.util.desktop.Formato;
@@ -134,7 +135,7 @@ public class FrmConta extends Formulario {
 			}
 			entidade.setNome(txtNome.getText());
 			entidade.setSigla(txtSigla.getText());
-			entidade.setUsuario(1);
+			entidade.setUsuario(DesktopApp.USUARIO);
 
 			if (entidade.getNome() == null || entidade.getNome().isEmpty() || entidade.getSigla() == null
 					|| entidade.getSigla().isEmpty()) {

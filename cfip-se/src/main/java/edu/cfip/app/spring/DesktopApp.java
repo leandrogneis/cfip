@@ -9,6 +9,11 @@ import edu.cfip.app.spring.config.AppConfig;
 import edu.cfip.core.config.PersistenceConfig;
 
 public class DesktopApp {
+	/**
+	 * https://www.tutorialspoint.com/pg/jpa/jpa_jpql.htm
+	 * Generics, JPAQL, Mapeamento Enum
+	 */
+	public static int USUARIO=1;
 	private static AnnotationConfigApplicationContext context;
 	public static void main(String[] args) {
 		try {
