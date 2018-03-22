@@ -11,7 +11,9 @@ import edu.cfip.core.config.PersistenceConfig;
 public class DesktopApp {
 	/**
 	 * https://www.tutorialspoint.com/pg/jpa/jpa_jpql.htm
-	 * Generics, JPAQL, Mapeamento Enum
+	 * 1. Generics, JPQL, Mapeamento Enum
+	 * 2. Consulta e Cadastro - CRUD Revisão
+	 * 3. Usuários e Login
 	 */
 	public static int USUARIO=1;
 	private static AnnotationConfigApplicationContext context;
