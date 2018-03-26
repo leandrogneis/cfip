@@ -15,6 +15,6 @@ public interface ContaRepositorio extends JpaRepository<Conta, Integer> {
 	public List<Conta> findByUsuarioAndNome(Integer usuario, String nome);
 	//3
 	@Query(nativeQuery=false, value="SELECT e FROM Conta e WHERE e.excluido = false and e.usuario = :usuario and e.nome like :nome")
-	public List<Conta> customFindByUsuarioAndNome(@Param("usuario") Integer usuario, @Param("nome") String nome);
+	public List<Conta> listar(@Param("usuario") Integer usuario, @Param("nome") String nome);
 	//4 e ... - UsuarioRepositorio
 }

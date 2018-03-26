@@ -23,21 +23,23 @@ public class Context {
 		List<Conta> contas = repositorio.findByUsuarioAndNome(1, "%C%");
 		imprimir(contas);
 
-		contas = repositorio.customFindByUsuarioAndNome(1, "%C%");
+		contas = repositorio.listar(1, "%C%");
 		imprimir(contas);
 
 		UsuarioRepositorio usuRepo = context.getBean(UsuarioRepositorio.class);
 		Usuario usuario = new Usuario();
-		/*
-		 * usuario.setNome("Gleyson"); usuario.setLogin("gso"); usuario.setSenha("123");
-		 * usuario.setEmail("gleyson.s@hotmail.com"); usuRepo.save(usuario);
-		 * 
-		 * //usuario = usuRepo.login("gso", "123"); usuario =
-		 * usuRepo.findFistByLogin("gso");
-		 * 
-		 * if(usuario!=null) System.out.println(usuario.getNome());
-		 * 
-		 */
+
+		usuario.setNome("Gleyson");
+		usuario.setLogin("gso");
+		usuario.setSenha("123");
+		usuario.setEmail("gleyson.s@hotmail.com");
+		usuRepo.save(usuario);
+		System.out.println("FIM");
+		// usuario = usuRepo.login("gso", "123"); usuario =
+		// usuRepo.findFistByLogin("gso");
+
+		// if(usuario!=null) System.out.println(usuario.getNome());
+
 	}
 
 	static void imprimir(List lista) {
