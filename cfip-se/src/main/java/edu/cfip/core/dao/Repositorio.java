@@ -48,8 +48,7 @@ public class Repositorio {
 		return query.getResultList();
 	}
 	public List<Conta> listarContas(Integer usuario, String nome) {
-		Query query = manager.createQuery(
-				"SELECT e FROM Conta e WHERE e.excluido = false and e.usuario = :usuario and e.nome like :nome");
+		Query query = manager.createQuery("SELECT e FROM Conta e WHERE e.excluido = false and e.usuario = :usuario and e.nome like :nome");
 		query.setParameter("usuario", usuario);
 		query.setParameter("nome", "%" + nome + "%");
 		return query.getResultList();

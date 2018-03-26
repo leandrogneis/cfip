@@ -47,6 +47,8 @@ public class FrmNaturezas extends Formulario {
 	
 	public FrmNaturezas() {
 		//JA PODERIA VIR DE FormularioConsulta
+		setTitulo("Consulta de Naturezas");
+		setDescricao("Listagem das Naturezas");
 		setConteudoLayout(new BorderLayout());
 		setAlinhamentoRodape(FlowLayout.LEFT);
 		filtro.setLayout(new GridBagLayout());
