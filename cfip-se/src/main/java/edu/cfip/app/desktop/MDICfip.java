@@ -10,7 +10,7 @@ import javax.swing.JSeparator;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.stereotype.Component;
 
-import edu.cfip.app.spring.DesktopApp;
+import edu.cfip.app.spring.SpringDesktopApp;
 import edu.porgamdor.util.desktop.Formulario;
 import edu.porgamdor.util.desktop.MDI;
 import edu.porgamdor.util.desktop.ss.util.Imagem;
@@ -270,10 +270,10 @@ public class MDICfip extends MDI {
 	private void exibirConta() {
 		//Formulario form = context.getBean(FrmContas.class);
 		//exibir(form);
-		exibir((Formulario)DesktopApp.getBean(FrmContas.class));
+		exibir((Formulario)SpringDesktopApp.getBean(FrmContas.class));
 	}
 	private void exibirNatureza() {
-		exibir((Formulario)DesktopApp.getBean(FrmNaturezas.class));
+		exibir((Formulario)SpringDesktopApp.getBean(FrmNaturezas.class));
 	}
 	private void exibir(Formulario formulario) {
 		formulario.setMdi(this);

@@ -16,7 +16,7 @@ import javax.swing.JScrollPane;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import edu.cfip.app.spring.DesktopApp;
+import edu.cfip.app.spring.SpringDesktopApp;
 import edu.cfip.core.dao.Repositorio;
 import edu.cfip.core.model.Natureza;
 import edu.porgamdor.util.desktop.Formato;
@@ -140,10 +140,10 @@ public class FrmNaturezas extends Formulario {
 		try {
 			String nome = txtFiltro.getText();
 			if (Validacao.vazio(nome)) {
-				lista = dao.listarNaturezas(DesktopApp.USUARIO);
+				lista = dao.listarNaturezas(SpringDesktopApp.USUARIO);
 
 			} else {
-				lista = dao.listarNaturezas(DesktopApp.USUARIO, nome);
+				lista = dao.listarNaturezas(SpringDesktopApp.USUARIO, nome);
 			}
 			if(lista.size()==0)
 				SSMensagem.avisa("Nenhum dado encontrado");
@@ -166,7 +166,7 @@ public class FrmNaturezas extends Formulario {
 		exibirCadastro(entidade);
 	}
 	private void exibirCadastro(Natureza entidade) {
-		Formulario frm = DesktopApp.getBean(FrmNatureza.class);
+		Formulario frm = SpringDesktopApp.getBean(FrmNatureza.class);
 		frm.setEntidade(entidade);
 		this.exibir(frm);
 	}

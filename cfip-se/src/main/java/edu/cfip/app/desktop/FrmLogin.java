@@ -19,7 +19,7 @@ import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-import edu.cfip.app.spring.DesktopApp;
+import edu.cfip.app.spring.SpringDesktopApp;
 import edu.cfip.core.dao.springjpa.UsuarioRepositorio;
 import edu.cfip.core.model.Usuario;
 import edu.porgamdor.util.desktop.ss.SSBotao;
@@ -126,10 +126,10 @@ public class FrmLogin extends JFrame {
 			Usuario usuario =repositorio.login(login, senha);
 			if(usuario!=null) {
 				this.dispose();
-				DesktopApp.iniciarAplicacao(usuario);
+				SpringDesktopApp.atualizarAplicacao(usuario);
 			}else {
 				if( SSMensagem.pergunta("Login ou senha inválida\nDeseja cadastrar ou resgatar sua senha")) {
-					FrmUsuario frm = DesktopApp.getContext().getBean(FrmUsuario.class);
+					FrmUsuario frm = SpringDesktopApp.getContext().getBean(FrmUsuario.class);
 					usuario = new Usuario();
 					usuario.setLogin(login);
 					frm.setUsuario(usuario);

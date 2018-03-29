@@ -14,7 +14,7 @@ import javax.swing.border.EtchedBorder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import edu.cfip.app.spring.DesktopApp;
+import edu.cfip.app.spring.SpringDesktopApp;
 import edu.cfip.core.dao.Repositorio;
 import edu.cfip.core.model.Categoria;
 import edu.cfip.core.model.Natureza;
@@ -140,7 +140,7 @@ public class FrmNatureza extends Formulario {
 			entidade.setNome(txtNome.getText());
 			entidade.setDescricao(txtDescricao.getText());
 			entidade.setTipoMovimento((TipoMovimento) cboTipoMovto.getValue());
-			entidade.setUsuario(DesktopApp.USUARIO);
+			entidade.setUsuario(SpringDesktopApp.USUARIO);
 			entidade.setCategoria((Categoria) cboCategoria.getValue());
 
 			if (entidade.getNome() == null || entidade.getNome().isEmpty() || entidade.getDescricao() == null

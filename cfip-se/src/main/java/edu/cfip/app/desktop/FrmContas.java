@@ -16,7 +16,7 @@ import javax.swing.JScrollPane;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import edu.cfip.app.spring.DesktopApp;
+import edu.cfip.app.spring.SpringDesktopApp;
 import edu.cfip.core.dao.Repositorio;
 import edu.cfip.core.model.Conta;
 import edu.porgamdor.util.desktop.Formato;
@@ -137,10 +137,10 @@ public class FrmContas extends Formulario {
 		try {
 			String nome = txtFiltro.getText();
 			if (Validacao.vazio(nome)) {
-				lista = dao.listarContas(DesktopApp.USUARIO);
+				lista = dao.listarContas(SpringDesktopApp.USUARIO);
 
 			} else {
-				lista = dao.listarContas(DesktopApp.USUARIO, nome);
+				lista = dao.listarContas(SpringDesktopApp.USUARIO, nome);
 			}
 			if(lista.size()==0)
 				SSMensagem.avisa("Nenhum dado encontrado");
@@ -164,7 +164,7 @@ public class FrmContas extends Formulario {
 	}
 	private void exibirCadastro(Conta entidade) {
 		//FrmConta frm = new FrmConta();
-		Formulario frm = DesktopApp.getBean(FrmConta.class);
+		Formulario frm = SpringDesktopApp.getBean(FrmConta.class);
 		frm.setEntidade(entidade);
 		this.exibir(frm);
 	}

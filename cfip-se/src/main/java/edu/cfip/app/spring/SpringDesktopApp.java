@@ -1,7 +1,5 @@
 package edu.cfip.app.spring;
 
-import javax.swing.UIManager;
-
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import edu.cfip.app.desktop.FrmLogin;
@@ -9,8 +7,9 @@ import edu.cfip.app.desktop.MDICfip;
 import edu.cfip.app.spring.config.AppConfig;
 import edu.cfip.core.config.PersistenceConfig;
 import edu.cfip.core.model.Usuario;
+import edu.porgamdor.util.desktop.DesktopApp;
 
-public class DesktopApp {
+public class SpringDesktopApp extends DesktopApp {
 	/**
 	 * https://www.tutorialspoint.com/pg/jpa/jpa_jpql.htm
 	 * 3. Usuários e Login
@@ -19,16 +18,16 @@ public class DesktopApp {
 	private static AnnotationConfigApplicationContext context;
 	public static void main(String[] args) {
 		try {
-			String lf = UIManager.getSystemLookAndFeelClassName();
-			UIManager.setLookAndFeel(lf);
+			configurarAplicacao();
 			context = new AnnotationConfigApplicationContext(AppConfig.class,PersistenceConfig.class);
+			iniciarAplicacao();
 			FrmLogin frm = context.getBean(FrmLogin.class);
 			frm.setVisible(true);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	public static void iniciarAplicacao(Usuario usuario) {
+	public static void atualizarAplicacao(Usuario usuario) {
 		MDICfip mdi = context.getBean(MDICfip.class);
 		//AQUI PODEMOS INICIAR A NOSSA SESSAO ... 
 		mdi.setVisible(true); 
