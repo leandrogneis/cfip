@@ -115,20 +115,30 @@ public class FrmLogin extends JFrame {
 		panel_1.add(btSair);
 		txtUsuario.setTudoMaiusculo(false);
 		txtSenha.setTudoMaiusculo(false);
-		//txtUsuario.setText("login");
-		//txtSenha.setText("1234");	
+		txtUsuario.setText("login");
+		txtSenha.setText("1234");	
 	}
 	private void login(){
 		try{
 			String login=txtUsuario.getText();
-			String senha=txtSenha.getText();
+			//criptogragia
+			String senha=Texto.md5(txtSenha.getText());
 			Usuario usuario =repositorio.login(login, senha);
 			if(usuario!=null) {
 				this.dispose();
 				DesktopApp.iniciarAplicacao(usuario);
-			}else
-				SSMensagem.avisa("Usuário ou Senha Inválida");
+			}else {
+				if( SSMensagem.pergunta("Login ou senha inválida\nDeseja cadastrar ou resgatar sua senha")) {
+					FrmUsuario frm = DesktopApp.getContext().getBean(FrmUsuario.class);
+					usuario = new Usuario();
+					usuario.setLogin(login);
+					frm.setUsuario(usuario);
+					frm.setVisible(true);
+				}
+				return;
+			}
 		}catch (Exception e) {
+			e.printStackTrace();
 			SSMensagem.avisa(e.getMessage());
 		}
 		
