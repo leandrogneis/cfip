@@ -31,7 +31,9 @@ public class FrmCfipLogin extends FrmLogin {
 		try {
 			Usuario perfil = repositorio.login(getLogin(), getSenhaMD5());
 			MDICfip mdi = SpringDesktopApp.getBean(MDICfip.class);
-			iniciarAplicacao(mdi, perfil);
+			FrmUsuario frm = SpringDesktopApp.getBean(FrmUsuario.class);
+			if(!iniciarAplicacao(mdi, perfil))
+				abrirCadastroPerfil(frm, new Usuario());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

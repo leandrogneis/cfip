@@ -29,7 +29,7 @@ public abstract class FrmLogin extends JFrame {
 	private SSBotao btSair = new SSBotao();
 	private SSCampoTexto txtLogin = new SSCampoTexto();
 	private SSCampoSenha txtSenha = new SSCampoSenha();
-	
+
 	public FrmLogin() {
 		// this.setIconImage(Imagem.png("cfip", "janela").getImage());
 		setTitle("CFIP");
@@ -97,44 +97,44 @@ public abstract class FrmLogin extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				fechar();
 			}
-		});	
+		});
 	}
+
 	public void logar(ActionListener listener) {
 		btOk.addActionListener(listener);
 	}
+
 	public void exibir() {
 		this.setVisible(true);
 		DesktopApp.fecharSplash();
 	}
-	public void iniciarAplicacao(MDI mdi, Perfil perfil) {
-		try {
-			if (perfil != null) {
-				this.dispose();
-				DesktopApp.configurarSessao(mdi, perfil);
-			} else {
-				if (SSMensagem.pergunta("Login ou senha inválida\nDeseja cadastrar ou resgatar sua senha")) {
-					/*FrmUsuario frm = SpringDesktopApp.getContext().getBean(FrmUsuario.class);
-					usuario = new Usuario();
-					usuario.setLogin(login);
-					frm.setUsuario(usuario);
-					frm.setVisible(true);*/
-				}
-				return;
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			SSMensagem.avisa(e.getMessage());
-		}
 
+	public boolean iniciarAplicacao(MDI mdi, Perfil perfil) {
+		if (perfil != null) {
+			this.dispose();
+			DesktopApp.configurarSessao(mdi, perfil);
+			return true;
+		} else {
+			return !SSMensagem.pergunta("Login ou senha inválida\nDeseja cadastrar ou resgatar sua senha");
+		}
 	}
+
 	public String getLogin() {
 		return txtLogin.getText();
 	}
+
 	public String getSenha() {
 		return txtSenha.getText();
 	}
-	public String getSenhaMD5() throws Exception{
+
+	public String getSenhaMD5() throws Exception {
 		return Texto.md5(getSenha());
+	}
+
+	public void abrirCadastroPerfil(FrmPerfil frm, Perfil perfil) {
+		perfil.setLogin(getLogin());
+		frm.setPerfil(perfil);
+		frm.setVisible(true);
 	}
 	private void fechar() {
 		System.exit(0);

@@ -29,17 +29,17 @@ public class Usuario implements Perfil {
 	@Column(length=20)
 	private String telefone;
 	
-	@Column(name="cpf_cnpj", length=20)
-	private String cpfCnpj;
+	@Column(name="cpf", length=20)
+	private String cpf;
 	
 	private boolean excluido;
 
 	
-	public String getCpfCnpj() {
-		return cpfCnpj;
+	public String getCpf() {
+		return cpf;
 	}
-	public void setCpfCnpj(String cpfCnpj) {
-		this.cpfCnpj = cpfCnpj;
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
 	}
 	public String getTelefone() {
 		return telefone;
