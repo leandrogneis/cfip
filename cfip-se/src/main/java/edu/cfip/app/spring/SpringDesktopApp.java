@@ -2,7 +2,7 @@ package edu.cfip.app.spring;
 
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import edu.cfip.app.desktop.FrmLogin;
+import edu.cfip.app.desktop.FrmCfipLogin;
 import edu.cfip.app.desktop.MDICfip;
 import edu.cfip.app.spring.config.AppConfig;
 import edu.cfip.core.config.PersistenceConfig;
@@ -21,7 +21,7 @@ public class SpringDesktopApp extends DesktopApp {
 			configurarAplicacao();
 			context = new AnnotationConfigApplicationContext(AppConfig.class,PersistenceConfig.class);
 			iniciarAplicacao();
-			FrmLogin frm = context.getBean(FrmLogin.class);
+			FrmCfipLogin frm = context.getBean(FrmCfipLogin.class);
 			frm.setVisible(true);
 		} catch (Exception e) {
 			e.printStackTrace();

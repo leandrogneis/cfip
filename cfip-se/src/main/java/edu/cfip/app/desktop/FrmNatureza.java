@@ -20,7 +20,7 @@ import edu.cfip.core.model.Categoria;
 import edu.cfip.core.model.Natureza;
 import edu.cfip.core.model.TipoMovimento;
 import edu.porgamdor.util.desktop.Formulario;
-import edu.porgamdor.util.desktop.TipoOperacao;
+import edu.porgamdor.util.desktop.ambiente.TipoOperacao;
 import edu.porgamdor.util.desktop.ss.SSBotao;
 import edu.porgamdor.util.desktop.ss.SSCaixaCombinacao;
 import edu.porgamdor.util.desktop.ss.SSCampoTexto;

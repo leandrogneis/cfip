@@ -10,6 +10,8 @@ import javax.swing.JFrame;
 import javax.swing.JMenuBar;
 import javax.swing.JPanel;
 
+import edu.porgamdor.util.desktop.ambiente.Sessao;
+
 //Multiple Document Interface
 public class MDI extends JFrame {
 	private JDesktopPane areaTrabalho = new JDesktopPane(); 

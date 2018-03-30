@@ -13,7 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import edu.cfip.core.model.Conta;
 import edu.cfip.core.model.Natureza;
 import edu.cfip.core.model.TipoMovimento;
-import edu.porgamdor.util.desktop.TipoOperacao;
+import edu.porgamdor.util.desktop.ambiente.TipoOperacao;
 
 @Repository
 public class Repositorio {

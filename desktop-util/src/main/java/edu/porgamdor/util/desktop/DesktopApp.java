@@ -9,6 +9,9 @@ import java.util.Properties;
 
 import javax.swing.UIManager;
 
+import edu.porgamdor.util.desktop.ambiente.Ambiente;
+import edu.porgamdor.util.desktop.ambiente.Splash;
+
 public class DesktopApp {
 	private static String nomeAmbiente;
 	private static Splash splash;

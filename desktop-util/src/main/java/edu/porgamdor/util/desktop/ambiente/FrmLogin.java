@@ -1,4 +1,4 @@
-package edu.cfip.app.desktop;
+package edu.porgamdor.util.desktop.ambiente;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -14,14 +14,6 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.EtchedBorder;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.config.ConfigurableBeanFactory;
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
-
-import edu.cfip.app.spring.SpringDesktopApp;
-import edu.cfip.core.dao.springjpa.UsuarioRepositorio;
-import edu.cfip.core.model.Usuario;
 import edu.porgamdor.util.desktop.ss.SSBotao;
 import edu.porgamdor.util.desktop.ss.SSCabecalho;
 import edu.porgamdor.util.desktop.ss.SSCampoSenha;
@@ -29,44 +21,39 @@ import edu.porgamdor.util.desktop.ss.SSCampoTexto;
 import edu.porgamdor.util.desktop.ss.SSMensagem;
 import edu.porgamdor.util.desktop.ss.util.Texto;
 
-
-@Component
-@Scope(value = ConfigurableBeanFactory.SCOPE_PROTOTYPE)	
-public class FrmLogin extends JFrame {
-	@Autowired
-	private UsuarioRepositorio repositorio;
-	
-	private JPanel login = new JPanel();
+public abstract class FrmLogin extends JFrame {
+	private JPanel pnlLogin = new JPanel();
 	private SSBotao btOk = new SSBotao();
 	private SSBotao btSair = new SSBotao();
-	private SSCampoTexto txtUsuario = new SSCampoTexto();
+	private SSCampoTexto txtLogin = new SSCampoTexto();
 	private SSCampoSenha txtSenha = new SSCampoSenha();
+	private Perfil perfil;
+
 	public FrmLogin() {
-		//this.setIconImage(Imagem.png("cfip", "janela").getImage());
+		// this.setIconImage(Imagem.png("cfip", "janela").getImage());
 		setTitle("CFIP");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(new Dimension(259, 261));
 		setLocationRelativeTo(null);
-		
-		login.setBorder(new EmptyBorder(5, 5, 5, 5));
-		login.setLayout(new BorderLayout(0, 0));
-		setContentPane(login);
-		
+
+		pnlLogin.setBorder(new EmptyBorder(5, 5, 5, 5));
+		pnlLogin.setLayout(new BorderLayout(0, 0));
+		setContentPane(pnlLogin);
+
 		SSCabecalho cabecalho = new SSCabecalho();
 		cabecalho.setTitulo("GESTOR - LOGIN");
 		cabecalho.setDescricao("Acesse o sistema");
-		
-		login.add(cabecalho, BorderLayout.NORTH);
-		
+
+		pnlLogin.add(cabecalho, BorderLayout.NORTH);
+
 		JPanel conteudo = new JPanel();
 		conteudo.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
-		login.add(conteudo, BorderLayout.CENTER);
+		pnlLogin.add(conteudo, BorderLayout.CENTER);
 		GridBagLayout gbl_conteudo = new GridBagLayout();
 		conteudo.setLayout(gbl_conteudo);
-		txtUsuario.setColunas(10);
-		
-		
-		txtUsuario.setRotulo("Usuário");
+		txtLogin.setColunas(10);
+
+		txtLogin.setRotulo("Usuário");
 		GridBagConstraints gbc_txtUsuario = new GridBagConstraints();
 		gbc_txtUsuario.weightx = 1.0;
 		gbc_txtUsuario.anchor = GridBagConstraints.NORTHWEST;
@@ -74,8 +61,8 @@ public class FrmLogin extends JFrame {
 		gbc_txtUsuario.fill = GridBagConstraints.HORIZONTAL;
 		gbc_txtUsuario.gridx = 0;
 		gbc_txtUsuario.gridy = 0;
-		conteudo.add(txtUsuario, gbc_txtUsuario);
-		
+		conteudo.add(txtLogin, gbc_txtUsuario);
+
 		txtSenha.setRotulo("Senha");
 		GridBagConstraints gbc_txtSenha = new GridBagConstraints();
 		gbc_txtSenha.weighty = 1.0;
@@ -85,65 +72,71 @@ public class FrmLogin extends JFrame {
 		gbc_txtSenha.gridx = 0;
 		gbc_txtSenha.gridy = 1;
 		conteudo.add(txtSenha, gbc_txtSenha);
-		
-		
+
 		JPanel panel_1 = new JPanel();
 		panel_1.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		FlowLayout flowLayout = (FlowLayout) panel_1.getLayout();
 		flowLayout.setAlignment(FlowLayout.RIGHT);
-		login.add(panel_1, BorderLayout.SOUTH);
-		btOk.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				login();
-			}
-		});
-		
-		
+		pnlLogin.add(panel_1, BorderLayout.SOUTH);
+
 		btOk.setText("LOGIN");
 		btOk.setIcone("login");
-		
+
 		panel_1.add(btOk);
-		btSair.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				fechar();
-				
-			}
-		});
-		
+
 		btSair.setText("SAIR");
 		btSair.setIcone("fechar");
 		panel_1.add(btSair);
-		txtUsuario.setTudoMaiusculo(false);
+		txtLogin.setTudoMaiusculo(false);
 		txtSenha.setTudoMaiusculo(false);
-		txtUsuario.setText("login");
-		txtSenha.setText("1234");	
+		txtLogin.setText("login");
+		txtSenha.setText("1234");
+
+		btSair.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				fechar();
+			}
+		});	
 	}
-	private void login(){
-		try{
-			String login=txtUsuario.getText();
-			//criptogragia
-			String senha=Texto.md5(txtSenha.getText());
-			Usuario usuario =repositorio.login(login, senha);
-			if(usuario!=null) {
+	public void logar(ActionListener listener) {
+		btOk.addActionListener(listener);
+	}
+	public void setPerfil(Perfil perfil) {
+		this.perfil = perfil;
+		validarLogin();
+	}
+	private void validarLogin() {
+		try {
+			if (perfil != null) {
 				this.dispose();
-				SpringDesktopApp.atualizarAplicacao(usuario);
-			}else {
-				if( SSMensagem.pergunta("Login ou senha inválida\nDeseja cadastrar ou resgatar sua senha")) {
-					FrmUsuario frm = SpringDesktopApp.getContext().getBean(FrmUsuario.class);
+				SSMensagem.informa("Bem-vindo:: " +  perfil.getLogin());
+				//SpringDesktopApp.atualizarAplicacao(usuario);
+			} else {
+				if (SSMensagem.pergunta("Login ou senha inválida\nDeseja cadastrar ou resgatar sua senha")) {
+					/*FrmUsuario frm = SpringDesktopApp.getContext().getBean(FrmUsuario.class);
 					usuario = new Usuario();
 					usuario.setLogin(login);
 					frm.setUsuario(usuario);
-					frm.setVisible(true);
+					frm.setVisible(true);*/
 				}
 				return;
 			}
-		}catch (Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			SSMensagem.avisa(e.getMessage());
 		}
-		
+
 	}
-	private void fechar(){
+	public String getLogin() {
+		return txtLogin.getText();
+	}
+	public String getSenha() {
+		return txtSenha.getText();
+	}
+	public String getSenhaMD5() throws Exception{
+		return Texto.md5(getSenha());
+	}
+	private void fechar() {
 		System.exit(0);
 	}
 }

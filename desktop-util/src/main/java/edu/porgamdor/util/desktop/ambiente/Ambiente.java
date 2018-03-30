@@ -1,4 +1,4 @@
-package edu.porgamdor.util.desktop;
+package edu.porgamdor.util.desktop.ambiente;
 
 public class Ambiente {
 	public static final String STATUS="status";

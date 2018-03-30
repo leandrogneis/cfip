@@ -1,4 +1,4 @@
-package edu.porgamdor.util.desktop;
+package edu.porgamdor.util.desktop.ambiente;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -18,7 +18,7 @@ public class Splash extends JFrame {
 		logotipo = new JLabel(Imagem.jpg("cfip", "splash"));
 		getContentPane().add(logotipo, BorderLayout.CENTER);
 		logotipo.setBorder(BorderFactory.createEtchedBorder());
-		JLabel lblVersao = new JLabel("CFIP - Versão: 1.0 - 201802.16 - Desenvolvido por: Porgamador");
+		JLabel lblVersao = new JLabel("CFIP - Versï¿½o: 1.0 - 201802.16 - Desenvolvido por: Porgamador");
 		lblVersao.setBorder(BorderFactory.createEtchedBorder());
 		lblVersao.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblVersao.setForeground(Color.BLUE);
