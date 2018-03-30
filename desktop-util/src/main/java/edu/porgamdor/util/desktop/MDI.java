@@ -10,6 +10,7 @@ import javax.swing.JFrame;
 import javax.swing.JMenuBar;
 import javax.swing.JPanel;
 
+import edu.porgamdor.util.desktop.ambiente.Perfil;
 import edu.porgamdor.util.desktop.ambiente.Sessao;
 
 //Multiple Document Interface
@@ -39,8 +40,9 @@ public class MDI extends JFrame {
 	public Sessao getSessao() {
 		return sessao;
 	}
-	public void setSessao(Sessao sessao) {
-		this.sessao = sessao;
+	public void setPerfil(Perfil perfil) {
+		sessao = new Sessao();
+		sessao.setPerfil(perfil);
 	}
 	public JMenuBar getBarraMenu() {
 		return barraMenu;

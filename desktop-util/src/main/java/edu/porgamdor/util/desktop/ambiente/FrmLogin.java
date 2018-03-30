@@ -14,6 +14,8 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.EtchedBorder;
 
+import edu.porgamdor.util.desktop.DesktopApp;
+import edu.porgamdor.util.desktop.MDI;
 import edu.porgamdor.util.desktop.ss.SSBotao;
 import edu.porgamdor.util.desktop.ss.SSCabecalho;
 import edu.porgamdor.util.desktop.ss.SSCampoSenha;
@@ -27,8 +29,7 @@ public abstract class FrmLogin extends JFrame {
 	private SSBotao btSair = new SSBotao();
 	private SSCampoTexto txtLogin = new SSCampoTexto();
 	private SSCampoSenha txtSenha = new SSCampoSenha();
-	private Perfil perfil;
-
+	
 	public FrmLogin() {
 		// this.setIconImage(Imagem.png("cfip", "janela").getImage());
 		setTitle("CFIP");
@@ -101,16 +102,15 @@ public abstract class FrmLogin extends JFrame {
 	public void logar(ActionListener listener) {
 		btOk.addActionListener(listener);
 	}
-	public void setPerfil(Perfil perfil) {
-		this.perfil = perfil;
-		validarLogin();
+	public void exibir() {
+		this.setVisible(true);
+		DesktopApp.fecharSplash();
 	}
-	private void validarLogin() {
+	public void iniciarAplicacao(MDI mdi, Perfil perfil) {
 		try {
 			if (perfil != null) {
 				this.dispose();
-				SSMensagem.informa("Bem-vindo:: " +  perfil.getLogin());
-				//SpringDesktopApp.atualizarAplicacao(usuario);
+				DesktopApp.configurarSessao(mdi, perfil);
 			} else {
 				if (SSMensagem.pergunta("Login ou senha inválida\nDeseja cadastrar ou resgatar sua senha")) {
 					/*FrmUsuario frm = SpringDesktopApp.getContext().getBean(FrmUsuario.class);

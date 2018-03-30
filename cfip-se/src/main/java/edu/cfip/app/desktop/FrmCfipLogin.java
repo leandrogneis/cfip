@@ -8,6 +8,7 @@ import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import edu.cfip.app.spring.SpringDesktopApp;
 import edu.cfip.core.dao.springjpa.UsuarioRepositorio;
 import edu.cfip.core.model.Usuario;
 import edu.porgamdor.util.desktop.ambiente.FrmLogin;
@@ -21,15 +22,16 @@ public class FrmCfipLogin extends FrmLogin {
 	public FrmCfipLogin() {
 		super.logar(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				logarImpl();
+				logarAction();
 			}
 		});
 	}
 
-	private void logarImpl() {
+	private void logarAction() {
 		try {
-			Usuario usuario = repositorio.login(getLogin(), getSenhaMD5());
-			setPerfil(usuario);
+			Usuario perfil = repositorio.login(getLogin(), getSenhaMD5());
+			MDICfip mdi = SpringDesktopApp.getBean(MDICfip.class);
+			iniciarAplicacao(mdi, perfil);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

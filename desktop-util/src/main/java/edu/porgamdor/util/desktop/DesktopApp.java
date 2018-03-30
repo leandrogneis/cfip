@@ -10,6 +10,7 @@ import java.util.Properties;
 import javax.swing.UIManager;
 
 import edu.porgamdor.util.desktop.ambiente.Ambiente;
+import edu.porgamdor.util.desktop.ambiente.Perfil;
 import edu.porgamdor.util.desktop.ambiente.Splash;
 
 public class DesktopApp {
@@ -32,6 +33,10 @@ public class DesktopApp {
 			e.printStackTrace();
 		}
 	}
+	public static void configurarSessao(MDI mdi, Perfil perfil) {
+		mdi.setVisible(true);
+		mdi.setPerfil(perfil);
+	}
 	private static void exibirConfiguracao() {
 		/*FrmConfiguracao frm = context.getBean(FrmConfiguracao.class);
 		try {
@@ -41,7 +46,7 @@ public class DesktopApp {
 		}
 		frm.setVisible(true);*/
 	}
-	public static void iniciarAplicacao() {
+	public static void fecharSplash() {
 		splash.dispose();
 	}
 	public static boolean isBancoLocal(){
