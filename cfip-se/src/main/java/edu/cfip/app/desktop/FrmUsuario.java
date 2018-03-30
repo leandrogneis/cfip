@@ -8,7 +8,8 @@ import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-import edu.cfip.core.dao.Repositorio;
+import edu.cfip.core.dao.springjpa.UsuarioRepositorio;
+import edu.cfip.core.model.Usuario;
 import edu.porgamdor.util.desktop.ambiente.FrmPerfil;
 import edu.porgamdor.util.desktop.ss.SSMensagem;
 
@@ -16,7 +17,8 @@ import edu.porgamdor.util.desktop.ss.SSMensagem;
 @Scope(value = ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 public class FrmUsuario extends FrmPerfil {
 	@Autowired
-	private Repositorio dao;
+	private UsuarioRepositorio dao;
+
 	public FrmUsuario() {
 		super.confirmar(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -24,28 +26,28 @@ public class FrmUsuario extends FrmPerfil {
 			}
 		});
 	}
-	private void confirmarAction() {
-		/*if (perfil.getId() == null) {
-			boolean cadastrar = true;
-			// isso porque estamos usando SpringDataJPA
+
+	public void confirmarAction() {
+		try {
+			super.validarFormulario();
+			boolean existe = false;
 			if (dao.findFistByLogin(perfil.getLogin()) != null) {
-				cadastrar = false;
+				existe = true;
 			}
 			if (dao.findFistByEmail(perfil.getEmail()) != null) {
-				cadastrar = false;
+				existe = true;
 			}
-			if (cadastrar) {
-				dao.save(perfil);
-				SSMensagem.informa("Usuario registrado com sucesso\nAcesse o sistema");
-			} else
+			if (existe)
 				SSMensagem.avisa(
-						"O usuário " + perfil.getLogin() + " ou " + perfil.getEmail() + " Já está cadastrado");
+						"O usuário " + perfil.getLogin() + " ou E-mail " + perfil.getEmail() + " Já está cadastrado");
+			else {
+				Usuario usuario = (Usuario) perfil;
+				dao.save(usuario);
+				prosseguir();
+			}
+		} catch (Exception e) {
+			SSMensagem.avisa(e.getMessage());
+		}
 
-		} else {
-			dao.save(perfil);
-			SSMensagem.informa("Dados alterados com sucesso");
-		}*/
-		dao.incluir(perfil);
-		SSMensagem.informa("Usuario registrado com sucesso\nAcesse o sistema");
 	}
 }

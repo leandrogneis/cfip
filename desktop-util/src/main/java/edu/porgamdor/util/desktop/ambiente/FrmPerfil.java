@@ -173,33 +173,29 @@ public class FrmPerfil extends JFrame {
 	}
 
 	public void confirmar(ActionListener listener) {
-		try {
-			if (perfil != null) {
-				if (txtLogin.getText() == null || txtLogin.getText().trim().isEmpty()) {
-					SSMensagem.avisa("Informe o Login");
-					return;
-				}
-				if (txtSenha.getText() == null || txtSenha.getText().trim().isEmpty()) {
-					SSMensagem.avisa("Informe a senha");
-					return;
-				}
-				if (!txtSenha.getSenha().equals(txtRepeteSenha.getSenha())) {
-					SSMensagem.avisa("Senhas não conferem");
-					return;
-				}
-				perfil.setEmail(txtEmail.getText());
-				perfil.setNome(txtNome.getText());
-				// criptogragia
-				perfil.setSenha(Texto.md5(txtSenha.getText()));
-				perfil.setLogin(txtLogin.getText());
-				perfil.setCpf(txtCpf.getClipText());
-				perfil.setTelefone(txtTelefone.getText());
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 		cmdConfirmar.addActionListener(listener);
 		fechar();
+	}
+
+	public void validarFormulario() throws Exception {
+		if (perfil != null) {
+			if (txtLogin.getText() == null || txtLogin.getText().trim().isEmpty()) {
+				throw new LoginException("Informe o Login");
+			}
+			if (txtSenha.getText() == null || txtSenha.getText().trim().isEmpty()) {
+				throw new LoginException("Informe a senha");
+			}
+			if (!txtSenha.getSenha().equals(txtRepeteSenha.getSenha())) {
+				throw new LoginException("Senhas não conferem");
+			}
+			perfil.setEmail(txtEmail.getText());
+			perfil.setNome(txtNome.getText());
+			// criptogragia
+			perfil.setSenha(Texto.md5(txtSenha.getText()));
+			perfil.setLogin(txtLogin.getText());
+			perfil.setCpf(txtCpf.getClipText());
+			perfil.setTelefone(txtTelefone.getText());
+		}
 	}
 
 	private void exibir() {
@@ -216,5 +212,9 @@ public class FrmPerfil extends JFrame {
 
 	private void fechar() {
 		this.dispose();
+	}
+	public void prosseguir() {
+		SSMensagem.informa("Usuario registrado com sucesso\nAcesse o sistema");
+		fechar();
 	}
 }

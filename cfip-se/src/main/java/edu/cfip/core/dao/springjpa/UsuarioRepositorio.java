@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import edu.cfip.core.model.Usuario;
+import edu.porgamdor.util.desktop.ambiente.Perfil;
 
 public interface UsuarioRepositorio extends JpaRepository<Usuario, Integer> {
 	//4
