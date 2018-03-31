@@ -72,7 +72,7 @@ public class Ambiente {
 	}
 	public String getDbDdl() {
 		if(dbUrl.contains("postgresql"))
-			return "none"; // DEV
+			return "update"; // DEV
 		else
 			return "update";
 	}

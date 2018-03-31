@@ -10,8 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
-import org.springframework.core.env.Environment;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
@@ -21,21 +19,12 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-import edu.porgamdor.util.desktop.ambiente.Ambiente;
-
 @Configuration
 @EnableTransactionManagement
-
-//NOVA CONFIGURAÇÃO
-@PropertySource(value = { "file:/cfip/conf/ambiente.properties" })
-
 @ComponentScan(value = "edu.cfip.core.dao*")
-@EnableJpaRepositories(basePackages="edu.cfip.core.dao.springjpa")
-public class PersistenceConfig {
+@EnableJpaRepositories(basePackages = "edu.cfip.core.dao.springjpa")
+public class PersistenceConfigEstatico {
 	private static final String PERSISTENCE_UNIT = "PU_CFIP";
-	@Autowired
-	private Environment env;
-
 	@Bean
 	public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
 		LocalContainerEntityManagerFactoryBean emf = new LocalContainerEntityManagerFactoryBean();
@@ -46,30 +35,28 @@ public class PersistenceConfig {
 		emf.setPackagesToScan("edu.cfip.core.model");
 		return emf;
 	}
+
 	@Bean
 	public DataSource createDataSource() {
 		DriverManagerDataSource dataSource = null;
-		dataSource = new DriverManagerDataSource();		
-		dataSource.setDriverClassName(getValue(Ambiente.DB_DRIVER));
-		dataSource.setUrl(getValue(Ambiente.DB_URL));
-		dataSource.setUsername(getValue(Ambiente.DB_USER));
-		dataSource.setPassword(getValue(Ambiente.DB_PASS));
+		dataSource = new DriverManagerDataSource();
+		dataSource.setDriverClassName("org.hsqldb.jdbcDriver");
+		dataSource.setUrl("jdbc:hsqldb:file:/porgamador/cfip/implementacao/db/cfipdb");
+		dataSource.setUsername("sa");
+		dataSource.setPassword("");
+
 		return dataSource;
 	}
-	
+
 	private Properties getProperties() {
 		Properties properties = new Properties();
-		properties.put(AvailableSettings.HBM2DDL_AUTO, getValue(Ambiente.DB_DDL));
-		properties.put(AvailableSettings.DIALECT, getValue(Ambiente.DB_DIALECT));
-		properties.put(AvailableSettings.SHOW_SQL, getValue(Ambiente.DB_SHOWSQL));
+		properties.put(AvailableSettings.HBM2DDL_AUTO, "update");
+		properties.put(AvailableSettings.DIALECT, "org.hibernate.dialect.HSQLDialect");
+		properties.put(AvailableSettings.SHOW_SQL, "true");
+
 		return properties;
 	}
-	
-	private String getValue(String properties) {
-		String value = env.getProperty(properties);
-		return value;
-	}
-	
+
 	@Bean
 	public JpaVendorAdapter jpaVendorApapter() {
 		return new HibernateJpaVendorAdapter();
@@ -82,5 +69,5 @@ public class PersistenceConfig {
 		transactionManager.setEntityManagerFactory(entityManager);
 		return transactionManager;
 	}
-	
+
 }
