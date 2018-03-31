@@ -83,7 +83,7 @@ public class Ambiente {
 			return "org.hibernate.dialect.HSQLDialect";
 	}
 
-	public static Ambiente LOCAL = new Ambiente("LOCAL","jdbc:hsqldb:file:/cfip/database/cfipdb","sa","");
+	public static Ambiente LOCAL = new Ambiente("LOCAL","jdbc:hsqldb:file:/cfip/database/cfipdb","sa","sa");
 	public static Ambiente SERVER = new Ambiente("SERVER","datasource:postgresql://localhost:5432/cfip","postgres","postgres");
 	
 	public static Ambiente[] ambientes={LOCAL,SERVER};

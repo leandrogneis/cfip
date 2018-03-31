@@ -10,13 +10,15 @@ import java.util.Properties;
 import javax.swing.UIManager;
 
 import edu.porgamdor.util.desktop.ambiente.Ambiente;
+import edu.porgamdor.util.desktop.ambiente.FrmConfiguracao;
 import edu.porgamdor.util.desktop.ambiente.Perfil;
 import edu.porgamdor.util.desktop.ambiente.Splash;
 
 public class DesktopApp {
-	private static String nomeAmbiente;
+	//private static String nomeAmbiente;
 	private static Splash splash;
-	public static void configurarAplicacao() {
+	public static boolean iniciarAplicacao() {
+		boolean iniciar=false;
 		String lf = UIManager.getSystemLookAndFeelClassName();
 		try {
 			UIManager.setLookAndFeel(lf);
@@ -25,33 +27,28 @@ public class DesktopApp {
 				configurarAmbiente(Ambiente.LOCAL);
 			}
 			if(configurarAmbiente()) {
-				exibirConfiguracao();
+				FrmConfiguracao frm = new FrmConfiguracao();
+				frm.setVisible(true);
+				fecharSplash();
 			}else {
-				nomeAmbiente=getConfiguracao().getProperty(Ambiente.NOME);
+				//nomeAmbiente=getConfiguracao().getProperty(Ambiente.NOME);
+				iniciar=true;
 			}
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
+		return iniciar;
 	}
 	public static void configurarSessao(MDI mdi, Perfil perfil) {
 		mdi.setVisible(true);
 		mdi.setPerfil(perfil);
 	}
-	private static void exibirConfiguracao() {
-		/*FrmConfiguracao frm = context.getBean(FrmConfiguracao.class);
-		try {
-			frm.setParametros(null, "LOCAL");;
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		frm.setVisible(true);*/
-	}
 	public static void fecharSplash() {
 		splash.dispose();
 	}
-	public static boolean isBancoLocal(){
+	/*public static boolean isBancoLocal(){
 		return Ambiente.LOCAL.getNome().equalsIgnoreCase(nomeAmbiente);
-	}
+	}*/
 	private static boolean configurarAmbiente() throws Exception {
 		return getConfiguracao().getProperty(Ambiente.STATUS).equals("NOK");
 	}
