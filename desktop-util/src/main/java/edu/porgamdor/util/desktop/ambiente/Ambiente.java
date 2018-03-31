@@ -15,6 +15,7 @@ public class Ambiente {
 	public static final String DB_SHOWSQL="db.showsql";
 	
 	public static final String NOK="NOK";
+	public static final String OK="OK";
 	
 	private String versao;
 	private String nome;

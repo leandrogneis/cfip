@@ -46,9 +46,6 @@ public class DesktopApp {
 	public static void fecharSplash() {
 		splash.dispose();
 	}
-	/*public static boolean isBancoLocal(){
-		return Ambiente.LOCAL.getNome().equalsIgnoreCase(nomeAmbiente);
-	}*/
 	private static boolean configurarAmbiente() throws Exception {
 		return getConfiguracao().getProperty(Ambiente.STATUS).equals("NOK");
 	}

@@ -48,12 +48,6 @@ public class FrmConfiguracao extends JFrame {
 		txtDbRepeteSenha.setTudoMaiusculo(false);
 		txtUrl.setTudoMaiusculo(false);
 		
-		cboAmbiente.setItens(Ambiente.ambientes, "nome");
-		cboAmbiente.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				definirAmbiente();
-			}
-		});
 		setTitle("CFIP");
 		this.setIconImage(Imagem.png("cfip", "janela").getImage());
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -165,12 +159,19 @@ public class FrmConfiguracao extends JFrame {
 		txtDbRepeteSenha.setRotulo("Confirma Senha");
 		pnlServer.add(txtDbRepeteSenha, gbc_txtDbRepeteSenha);
 		tabbedPane.addTab("BANCO", null, pnlServer, null);
+		
+		cboAmbiente.setItens(Ambiente.ambientes, "nome");
 		cboAmbiente.setValue(Ambiente.LOCAL);
+		cboAmbiente.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				definirAmbiente();
+			}
+		});
+		
 	}
 	private void definirAmbiente() {
 		ambiente = (Ambiente) cboAmbiente.getValue();
 		if (ambiente != null) {
-			tabbedPane.addTab("Server", null, pnlServer, null);
 			txtUrl.setText(ambiente.getDbUrl());
 			txtDbLogin.setText(ambiente.getDbUser());
 			txtDbSenha.setText(ambiente.getDbPass());
@@ -202,7 +203,7 @@ public class FrmConfiguracao extends JFrame {
 			ambiente.setDbUrl(txtUrl.getText());
 			ambiente.setDbUser(txtDbLogin.getText());
 			ambiente.setDbPass(txtDbSenha.getText());
-			ambiente.setStatus("OK");
+			ambiente.setStatus(Ambiente.OK);
 			DesktopApp.configurarAmbiente(ambiente);
 			SSMensagem.informa("Acesse o sistema com as novas configurações");
 			fechar();
