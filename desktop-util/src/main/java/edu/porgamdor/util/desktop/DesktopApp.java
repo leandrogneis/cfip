@@ -27,8 +27,7 @@ public class DesktopApp {
 				configurarAmbiente(Ambiente.LOCAL);
 			}
 			if(configurarAmbiente()) {
-				FrmConfiguracao frm = new FrmConfiguracao();
-				frm.setVisible(true);
+				exibirConfiguracao();
 				fecharSplash();
 			}else {
 				iniciar=true;
@@ -37,6 +36,10 @@ public class DesktopApp {
 			e.printStackTrace();
 		}
 		return iniciar;
+	}
+	public static void exibirConfiguracao() {
+		FrmConfiguracao frm = new FrmConfiguracao();
+		frm.setVisible(true);
 	}
 	public static void configurarSessao(MDI mdi, Perfil perfil) {
 		mdi.setVisible(true);

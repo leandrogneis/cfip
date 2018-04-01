@@ -7,12 +7,15 @@ import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JSeparator;
 
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.hsqldb.util.DatabaseManagerSwing;
 import org.springframework.stereotype.Component;
 
 import edu.cfip.app.spring.SpringDesktopApp;
+import edu.porgamdor.util.desktop.DesktopApp;
 import edu.porgamdor.util.desktop.Formulario;
 import edu.porgamdor.util.desktop.MDI;
+import edu.porgamdor.util.desktop.ambiente.FrmConfiguracao;
+import edu.porgamdor.util.desktop.ss.SSMensagem;
 import edu.porgamdor.util.desktop.ss.util.Imagem;
 
 @Component
@@ -202,7 +205,7 @@ public class MDICfip extends MDI {
 		mntmUsurio.setIcon(Imagem.png("cardeit"));
 		mntmUsurio.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ev) {
-				//exibirUsuario();
+				exibirUsuario();
 			}
 		});
 		mnFerramentas.add(mntmUsurio);
@@ -218,7 +221,7 @@ public class MDICfip extends MDI {
 		mnConexoes.setIcon(Imagem.png("conexao"));
 		mntmConexo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				//exibirConfiguracao();
+				exibirConfiguracao();
 			}
 		});
 		mntmConexo.setIcon(Imagem.png("dbconexao"));
@@ -237,7 +240,7 @@ public class MDICfip extends MDI {
 		JMenuItem mnRestaurar = new JMenuItem("Restore");
 		mnRestaurar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ev) {
-				//exibirRestore();
+				exibirRestore();
 			}
 		});
 		mnBancoDados.add(mnRestaurar);
@@ -250,14 +253,14 @@ public class MDICfip extends MDI {
 		mnSql.setIcon(Imagem.png("executar"));
 		mnSql.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ev) {
-				//sql();
+				sql();
 			}
 		});
 		
 		mnBancoDados.add(mnSql);
 		mnBackup.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ev) {
-				//exibirBackup();
+				exibirBackup();
 			}
 		});
 		getBarraMenu().add(mnCadastros);
@@ -310,6 +313,30 @@ public class MDICfip extends MDI {
 	}
 	private void exibirConsultaPrevisoes() {
 		exibir((Formulario)SpringDesktopApp.getBean(FrmPrevisoes.class));
+	}
+	private void exibirBackup() {
+		exibir((Formulario)SpringDesktopApp.getBean(FrmBackup.class));
+	}
+	private void exibirRestore() {
+		exibir((Formulario)SpringDesktopApp.getBean(FrmRestore.class));
+	}
+	private void exibirUsuario() {
+		exibir((Formulario)SpringDesktopApp.getBean(FrmUsuario.class));
+	}
+	private void exibirConfiguracao() {
+		DesktopApp.exibirConfiguracao();
+	}
+	private void sql() {
+		//http://www.avajava.com/tutorials/lessons/how-do-i-run-another-application-from-java.html
+		try {
+		if(SSMensagem.pergunta("Esta operação encerra a aplicação\nDeseja prosseguir?")) {
+			SpringDesktopApp.closeContext();
+			DatabaseManagerSwing.main(new String[] { "--url", "jdbc:hsqldb:file:/cfip/database/cfipdb", "--user", "sa", "--password", "sa"});
+			this.dispose();
+		}
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	private void exibir(Formulario formulario) {
 		formulario.setMdi(this);

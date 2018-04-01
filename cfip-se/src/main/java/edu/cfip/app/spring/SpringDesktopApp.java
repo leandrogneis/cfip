@@ -1,5 +1,6 @@
 package edu.cfip.app.spring;
 
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import edu.cfip.app.desktop.FrmCfipLogin;
@@ -48,5 +49,8 @@ public class SpringDesktopApp extends DesktopApp {
 
 	public static <T> T getBean(String bean) {
 		return (T) context.getBean(bean);
+	}
+	public static void closeContext() {
+		((ConfigurableApplicationContext)context ).close();
 	}
 }
