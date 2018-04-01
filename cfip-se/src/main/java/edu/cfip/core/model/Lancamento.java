@@ -144,6 +144,7 @@ public class Lancamento implements Serializable {
 		descontoAliquota = 0.0d;
 		descontoValor = 0.0d;
 		parcelas = 1;
+		parcela = 1;
 		parcelaInicial = 1;
 		parcelaFinal = 1;
 		tipoMovimento = TipoMovimento.CREDITO;

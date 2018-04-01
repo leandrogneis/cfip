@@ -205,7 +205,9 @@ public class RepositorioLancamento {
 			lancamento.setQuitacao(quitacao);
 			lancamento.setData(quitacao);
 			lancamento.setPrevisao(false);
-			Conta conta = manager.find(Conta.class, lancamento.getConta());
+			//Conta conta = manager.find(Conta.class, lancamento.getConta());
+			Conta conta = lancamento.getConta();
+			
 			lancamento.setSaldoInicial(conta.getSaldo());
 			conta.setSaldo(conta.getSaldo() + lancamento.getValor());
 			lancamento.setSaldoFinal(conta.getSaldo());
@@ -215,7 +217,8 @@ public class RepositorioLancamento {
 				origem.setQuitacao(quitacao);
 				origem.setData(quitacao);
 				origem.setPrevisao(false);
-				Conta contaOrigem = manager.find(Conta.class, origem.getConta());
+				//Conta contaOrigem = manager.find(Conta.class, origem.getConta());
+				Conta contaOrigem = origem.getConta();
 				origem.setSaldoInicial(contaOrigem.getSaldo());
 				contaOrigem.setSaldo(contaOrigem.getSaldo() + origem.getValor());
 				origem.setSaldoFinal(contaOrigem.getSaldo());
@@ -252,7 +255,9 @@ public class RepositorioLancamento {
 
 		lancamento.setPrevisao(false);
 
-		Conta conta = manager.find(Conta.class, lancamento.getConta());
+		//Conta conta = manager.find(Conta.class, lancamento.getConta());
+		Conta conta = lancamento.getConta();
+		
 		lancamento.setSaldoInicial(conta.getSaldo());
 		lancamento.setValor(amortizado);
 		conta.setSaldo(conta.getSaldo() + amortizado);
@@ -270,6 +275,9 @@ public class RepositorioLancamento {
 			novo.setSaldoInicial(lancamento.getSaldoInicial());
 			novo.setSaldoFinal(lancamento.getSaldoFinal());
 			novo.setValor(diferenca);
+			novo.setValorPrincipal(diferenca);
+			if (novo.getQuitacao() != null)
+				novo.setPeriodoQuitacao(DataHora.pegaPeriodo(novo.getQuitacao()));
 			novo.setTipoMovimento(lancamento.getTipoMovimento());
 			novo.setUsuario(lancamento.getUsuario());
 			manager.persist(novo);

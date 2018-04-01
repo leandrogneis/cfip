@@ -150,9 +150,9 @@ public class FrmPrevisoes extends Formulario {
 		grid.getModeloColuna().setFormato(0, "dd/MM/yy");
 		grid.getModeloColuna().setCampo(1, "quitacao");
 		grid.getModeloColuna().setFormato(1, "dd/MM/yy");
-		grid.getModeloColuna().setCampo(2, "conta");
+		grid.getModeloColuna().setCampo(2, "conta.nome");
 		// grid.getModeloColuna().setCampo(2, "sigla");
-		grid.getModeloColuna().setCampo(3, "natureza");
+		grid.getModeloColuna().setCampo(3, "natureza.nome");
 		grid.getModeloColuna().setCampo(4, "valor");
 		grid.getModeloColuna().setFormato(4, Formato.MOEDA);
 		grid.getModeloColuna().definirPositivoNegativo(4);
@@ -285,9 +285,8 @@ public class FrmPrevisoes extends Formulario {
 	public void load() {
 		cboConta.setItens(dao.listarContas(MDI.getPerfilId()), "nome");
 		cboNatureza.setItens(dao.listarNaturezas(MDI.getPerfilId()), "nome");
-		Date data = new Date();
-		txtDataDe.setDataHora(data);
-		txtDataAte.setDataHora(DataHora.adiciona(Calendar.MONTH, 6, data));
+		txtDataDe.setDataHora(DataHora.primeiroDiaDoMes());
+		txtDataAte.setDataHora(DataHora.ultimoDiaDoMes());
 
 	}
 

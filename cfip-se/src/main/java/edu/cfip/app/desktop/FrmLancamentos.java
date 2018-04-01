@@ -136,8 +136,8 @@ public class FrmLancamentos extends Formulario {
 
 		grid.getModeloColuna().setCampo(0, "data");
 		grid.getModeloColuna().setFormato(0, "dd/MM/yy");
-		grid.getModeloColuna().setCampo(1, "conta");
-		grid.getModeloColuna().setCampo(2, "natureza");
+		grid.getModeloColuna().setCampo(1, "conta.nome");
+		grid.getModeloColuna().setCampo(2, "natureza.nome");
 		grid.getModeloColuna().setCampo(3, "saldoInicial");
 		grid.getModeloColuna().setFormato(3, Formato.MOEDA);
 		grid.getModeloColuna().setCampo(4, "valor");
