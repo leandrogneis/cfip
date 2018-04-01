@@ -31,7 +31,6 @@ public class DesktopApp {
 				frm.setVisible(true);
 				fecharSplash();
 			}else {
-				//nomeAmbiente=getConfiguracao().getProperty(Ambiente.NOME);
 				iniciar=true;
 			}
 		}catch (Exception e) {

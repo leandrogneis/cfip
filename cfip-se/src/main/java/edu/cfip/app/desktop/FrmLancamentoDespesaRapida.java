@@ -18,7 +18,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import edu.cfip.core.dao.Repositorio;
-import edu.cfip.core.dao.springjpa.RepositorioLancamento;
+import edu.cfip.core.dao.RepositorioLancamento;
 import edu.cfip.core.model.DespesaRapida;
 import edu.cfip.core.model.Lancamento;
 import edu.porgamdor.util.desktop.Formulario;

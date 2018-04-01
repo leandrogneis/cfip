@@ -9,19 +9,20 @@ import edu.porgamdor.util.desktop.DesktopApp;
 
 public class SpringDesktopApp extends DesktopApp {
 	/**
+	 * 1 CFIP - Explorando os recursos utilitários (DRY)
 	 * 1 CFIP - Configurção a nível de execução
+	 * 
 	 * 2 CFIP - Conexao Postgre e HSQLDB (Multi Datasource)
 	 * 3 CFIP - Conceito de Perfil e Sessão
 	 * 
 	 * 1 CONFIGURAÇÃO INICIAL DO AMBIENTE
-	 * 1 CADASTRO DE CLIENTE VIA APLICAÇÃO
+	 * 1 CADASTRO DE USUARIO - PERFIL VIA APLICAÇÃO
 	 * 1 CONHECER AS CLASSES UTEIS DO NOSSO AMBIENTE
+	 * 
 	 * 2 CONFIGURAR DATA SOURCE DINAMICAMENTE
 	 * 3 PERFIL E SESSAO
 	 * 3 REGISTRAR O USUARIO LOGADO NA NOSSA SESSÃO
 	 */
-	
-	
 	//3 public static int USUARIO = 1;
 	
 	private static AnnotationConfigApplicationContext context;

@@ -43,6 +43,7 @@ public class FrmContas extends Formulario {
 	
 	private SSBotao cmdIncluir = new SSBotao();
 	private SSBotao cmdAlterar = new SSBotao();
+	private SSBotao cmdExtrato = new SSBotao();
 	private SSBotao cmdFechar = new SSBotao();
 	
 	public FrmContas() {
@@ -59,6 +60,7 @@ public class FrmContas extends Formulario {
 		cmdIncluir.setIcone("novo");
 		cmdAlterar.setText("Alterar");
 		cmdFechar.setText("Fechar");
+		cmdExtrato.setIcone("pastabusca");
 		
 		tabela.getModeloTabela().addColumn("Sigla");
 		tabela.getModeloTabela().addColumn("Nome");
@@ -103,6 +105,7 @@ public class FrmContas extends Formulario {
 		
 		getRodape().add(cmdIncluir);
 		getRodape().add(cmdAlterar);
+		getRodape().add(cmdExtrato);
 		getRodape().add(cmdFechar);
 		
 		//métodos
@@ -124,6 +127,11 @@ public class FrmContas extends Formulario {
 		cmdAlterar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				alterar();
+			}
+		});
+		cmdExtrato.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				extrato();
 			}
 		});
 	}
@@ -152,6 +160,16 @@ public class FrmContas extends Formulario {
 			SSMensagem.erro(e.getMessage());
 		}
 	}
+	private void extrato() {
+		Conta entidade= (Conta) tabela.getLinhaSelecionada();
+		if(entidade==null) {
+			SSMensagem.avisa("Selecione um item da lista");
+			return;
+		}
+		FrmExtrato frm = SpringDesktopApp.getBean(FrmExtrato.class);
+		frm.setConta(entidade);
+		this.exibir(frm);
+	}//////
 	private void incluir() {
 		exibirCadastro(null);
 	}

@@ -6,40 +6,21 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 
 import edu.cfip.core.config.PersistenceConfig;
 import edu.cfip.core.dao.Repositorio;
-import edu.cfip.core.dao.springjpa.ContaRepositorio;
-import edu.cfip.core.dao.springjpa.UsuarioRepositorio;
-import edu.cfip.core.model.Conta;
-import edu.cfip.core.model.Usuario;
+import edu.cfip.core.dao.RepositorioLancamento;
+import edu.cfip.core.model.Lancamento;
+import edu.cfip.core.model.filter.Filtro;
 
 public class Context {
 	public static void main(String[] args) {
 		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(PersistenceConfig.class);
-		Repositorio dao = context.getBean(Repositorio.class);
-		ContaRepositorio repositorio = context.getBean(ContaRepositorio.class);
-		Conta conta = repositorio.findById(4);
-		if (conta != null)
-			System.out.println(conta.getNome());
-
-		List<Conta> contas = repositorio.findByUsuarioAndNome(1, "%C%");
-		imprimir(contas);
-
-		contas = repositorio.listar(1, "%C%");
-		imprimir(contas);
-
-		UsuarioRepositorio usuRepo = context.getBean(UsuarioRepositorio.class);
-		Usuario usuario = new Usuario();
-
-		usuario.setNome("Gleyson");
-		usuario.setLogin("gso");
-		usuario.setSenha("123");
-		usuario.setEmail("gleyson.s@hotmail.com");
-		usuRepo.save(usuario);
-		System.out.println("FIM");
-		// usuario = usuRepo.login("gso", "123"); usuario =
-		// usuRepo.findFistByLogin("gso");
-
-		// if(usuario!=null) System.out.println(usuario.getNome());
-
+		RepositorioLancamento dao = context.getBean(RepositorioLancamento.class);
+		
+		Filtro filtro = new Filtro();
+		filtro.setUsuario(1);
+		filtro.setPrevisao(true);
+		
+		List<Lancamento> lista = dao.listarLancamentos(filtro);
+		imprimir(lista);
 	}
 
 	static void imprimir(List lista) {

@@ -120,6 +120,7 @@ public class Repositorio {
 		query.setParameter("conta", conta);
 		return query.getResultList();
 	}
+	
 
 	@Transactional
 	public Usuario incluirUsuario(Usuario usuario) {
@@ -129,20 +130,29 @@ public class Repositorio {
 		conta.setNome("CARTEIRA");
 		conta.setSigla("CTR");
 		conta.setUsuario(usuario.getId());
-		manager.persist(conta);
-
+		conta = manager.merge(conta);
+		Saldo saldo = new Saldo();
+		saldo.setConta(conta);
+		manager.persist(saldo);
+		
 		conta = new Conta();
 		conta.setNome("CONTA CORRENTE");
 		conta.setSigla("CCR");
 		conta.setUsuario(usuario.getId());
-		manager.persist(conta);
-
+		conta = manager.merge(conta);
+		saldo = new Saldo();
+		saldo.setConta(conta);
+		manager.persist(saldo);
+		
 		conta = new Conta();
 		conta.setNome("CONTA POUPANCA");
 		conta.setSigla("CPA");
 		conta.setUsuario(usuario.getId());
-		manager.persist(conta);
-
+		conta = manager.merge(conta);
+		saldo = new Saldo();
+		saldo.setConta(conta);
+		manager.persist(saldo);
+		
 		// INCLUSAO DAS NATUREZAS
 		Natureza natureza = new Natureza();
 		natureza.setDescricao("SALDO INICIAL");

@@ -472,6 +472,22 @@ public class Lancamento implements Serializable {
 	public void setDestinoLancamento(Integer destinoLancamento) {
 		this.destinoLancamento = destinoLancamento;
 	}
+
+	@Override
+	public String toString() {
+		return "Lancamento [id=" + id + ", excluido=" + excluido + ", usuario=" + usuario + ", descricao=" + descricao
+				+ ", data=" + data + ", periodo=" + periodo + ", conta=" + conta + ", destino=" + destino
+				+ ", natureza=" + natureza + ", tipoMovimento=" + tipoMovimento + ", saldoInicial=" + saldoInicial
+				+ ", valor=" + valor + ", saldoFinal=" + saldoFinal + ", previsao=" + previsao + ", quitacao="
+				+ quitacao + ", contato=" + contato + ", transferencia=" + transferencia + ", valorPrincipal="
+				+ valorPrincipal + ", jurosAliquota=" + jurosAliquota + ", multaAliquota=" + multaAliquota
+				+ ", jurosValor=" + jurosValor + ", multaValor=" + multaValor + ", descontoAliquota=" + descontoAliquota
+				+ ", descontoValor=" + descontoValor + ", atualizacaoAliquota=" + atualizacaoAliquota
+				+ ", atualizacaoValor=" + atualizacaoValor + ", parcelaInicial=" + parcelaInicial + ", parcelaFinal="
+				+ parcelaFinal + ", parcelas=" + parcelas + ", parcela=" + parcela + ", periodoQuitacao="
+				+ periodoQuitacao + ", origemLancamento=" + origemLancamento + ", destinoLancamento="
+				+ destinoLancamento + "]";
+	}
 	
 	/*
 	 * public void setFatura(Integer fatura) { this.fatura = fatura; } public
