@@ -144,7 +144,7 @@ public class MDICfip extends MDI {
 		mnConsultaLancamentos.setIcon(Imagem.png("dinheiro"));
 		mnConsultaLancamentos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ev) {
-				//exibirConsultaLancamentos();
+				exibirConsultaLancamentos();
 			}
 		});
 		mnConsultas.add(mnConsultaLancamentos);
@@ -153,7 +153,7 @@ public class MDICfip extends MDI {
 		mnConsultaPrevisoes.setIcon(Imagem.png("calendario10"));
 		mnConsultaPrevisoes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ev) {
-				//exibirConsultaPrevisoes();
+				exibirConsultaPrevisoes();
 			}
 		});
 
@@ -304,6 +304,12 @@ public class MDICfip extends MDI {
 	}
 	private void exibirLanctoPrevisao() {
 		exibir((Formulario)SpringDesktopApp.getBean(FrmLancamentoPrevisao.class));
+	}
+	private void exibirConsultaLancamentos() {
+		exibir((Formulario)SpringDesktopApp.getBean(FrmLancamentos.class));
+	}
+	private void exibirConsultaPrevisoes() {
+		exibir((Formulario)SpringDesktopApp.getBean(FrmPrevisoes.class));
 	}
 	private void exibir(Formulario formulario) {
 		formulario.setMdi(this);
