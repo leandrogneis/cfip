@@ -9,9 +9,10 @@ import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
-import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import edu.cfip.core.model.Conta;
 import edu.cfip.core.model.Lancamento;
@@ -19,6 +20,7 @@ import edu.cfip.core.model.TipoMovimento;
 import edu.cfip.core.model.filter.Filtro;
 import edu.porgamdor.util.desktop.ambiente.Total;
 import edu.porgamdor.util.desktop.ss.util.DataHora;
+import edu.porgamdor.util.desktop.ss.util.Formatador;
 
 @Repository
 public class RepositorioLancamento {
@@ -192,11 +194,63 @@ public class RepositorioLancamento {
 				quitacao = DataHora.adiciona(Calendar.MONTH, 1, quitacao);
 		}
 	}
+	@Transactional(propagation=Propagation.REQUIRES_NEW)
+	public void compensarLancamento(Integer id, Date quitacao ) {
+		compensarLancamento(quitacao, null, id);
+	}
+	@Transactional(propagation=Propagation.NESTED)
+	public void compensarLancamento(Date quitacao,Integer fatura, Integer ... ids) {
+		
+		
+		/*for(Integer id:ids) {
+			Lancamento lancamento = buscar(Lancamento.class, id);
+			lancamento.setDescricao(lancamento.getDescricao() + " - DE: " + Formatador.formatarData(lancamento.getData()));
+			lancamento.setQuitacao(quitacao);
+			lancamento.setData(quitacao);
+			lancamento.setPrevisao(false);
+			Conta conta = manager.find(Conta.class, lancamento.getConta());
+			lancamento.setSaldoInicial(conta.getSaldo());
+			conta.setSaldo(conta.getSaldo() + lancamento.getValor());
+			lancamento.setSaldoFinal(conta.getSaldo());
+			// depois tentar salvar em dois metodos um única transacao
+			if (lancamento.isTransferencia()) {
+				Lancamento origem = buscar(Lancamento.class, lancamento.getOrigemCredito());
+				origem.setQuitacao(quitacao);
+				origem.setData(quitacao);
+				origem.setPrevisao(false);
+				Conta contaOrigem = manager.find(Conta.class, origem.getConta());
+				origem.setSaldoInicial(contaOrigem.getSaldo());
+				contaOrigem.setSaldo(contaOrigem.getSaldo() + origem.getValor());
+				origem.setSaldoFinal(contaOrigem.getSaldo());
+				manager.merge(contaOrigem);
+				manager.persist(origem);
+			}
+
+			manager.merge(conta);
+			manager.merge(lancamento);
+			LOG.info("Compensando lançamento:: " + lancamento.getId() + " " + lancamento.getDescricao());
+		}
+*/		
+		
+		
+		/*if(fatura!=null) {
+			Fatura fat = buscar(Fatura.class, fatura);
+			fat.setFechada(true);
+			manager.merge(fat);
+			LOG.info("Fechando fatura:: " + fat.getSigla() + " " + fat.getId());
+		}*/
+	}
+	public <T> T buscar(Class entidade, Integer id) {
+		return (T) manager.find(entidade, id);
+	}
 	/*
 	 * SELECT L.ID,l.TIPO_MOV_ID, l.SALDO_INICIAL, l.VALOR_PRINCIPAL, l.VALOR,
 	 * L.SALDO_FINAL, l.ORIGEM_LANCTO_ID, l.TRANSFERENCIA, l.DESTINO_ID FROM
 	 * LANCAMENTO l;
 	 * 
+	 * 
+	 * SELECT L.ID,l.TIPO_MOV_ID, l.SALDO_INICIAL, l.VALOR_PRINCIPAL, l.VALOR, L.SALDO_FINAL, 
+l.LANCTO_ID_ORIGEM, l.TRANSFERENCIA, l.DESTINO_ID  FROM LANCAMENTO l;
 	 * 
 	 */
 }

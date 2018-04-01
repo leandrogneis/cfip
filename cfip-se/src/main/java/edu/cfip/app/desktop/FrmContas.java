@@ -14,6 +14,8 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.config.ConfigurableBeanFactory;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import edu.cfip.app.spring.SpringDesktopApp;
@@ -29,6 +31,7 @@ import edu.porgamdor.util.desktop.ss.SSMensagem;
 import edu.porgamdor.util.desktop.ss.util.Validacao;
 
 @Component
+@Scope(value = ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 public class FrmContas extends Formulario {
 	@Autowired
 	private Repositorio dao;

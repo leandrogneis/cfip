@@ -70,6 +70,18 @@ public class Repositorio {
 		return query.getResultList();
 	}
 
+	public List<Conta> listarContas(Integer usuario,Integer id) {
+		StringBuilder sql = new StringBuilder("SELECT e FROM Conta e WHERE e.excluido = false AND saldo >0 AND  e.usuario = :usuario");
+		if(id!=null)
+			sql.append(" AND e.id = :id");
+		sql.append(" ORDER BY e.nome");
+		Query query = manager.createQuery(sql.toString());
+		query.setParameter("usuario", usuario);
+		if(id!=null)
+			query.setParameter("id", id);
+		
+		return query.getResultList();
+	}
 	public List<Natureza> listarNaturezas(Integer usuario, String nome) {
 		Query query = manager.createQuery(
 				"SELECT e FROM Natureza e WHERE e.excluido = false and e.usuario = :usuario AND e.nome LIKE :nome ORDER BY e.nome");

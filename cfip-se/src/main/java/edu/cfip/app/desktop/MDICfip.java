@@ -163,7 +163,7 @@ public class MDICfip extends MDI {
 		mnProjecoes.setIcon(Imagem.png("cfip", "projecao"));
 		mnProjecoes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ev) {
-				//exibirProjecoes();
+				exibirProjecoes();
 			}
 		});
 		mnConsultas.add(mnProjecoes);
@@ -172,7 +172,7 @@ public class MDICfip extends MDI {
 		mnMovimentacoes.setIcon(Imagem.png("cfip", "resumo"));
 		mnMovimentacoes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ev) {
-				//exibirMovimentacoes();
+				exibirMovimentacoes();
 			}
 		});
 		mnConsultas.add(mnMovimentacoes);
@@ -286,6 +286,12 @@ public class MDICfip extends MDI {
 	}
 	private void exibirTransferencia() {
 		exibir((Formulario)SpringDesktopApp.getBean(FrmLancamentoTransferencia.class));
+	}
+	private void exibirProjecoes() {
+		exibir((Formulario)SpringDesktopApp.getBean(FrmProjecoes.class));
+	}
+	private void exibirMovimentacoes() {
+		exibir((Formulario)SpringDesktopApp.getBean(FrmMovimentacoes.class));
 	}
 	private void exibirLactoDespesaRapida() {
 		exibir((Formulario)SpringDesktopApp.getBean(FrmLancamentoDespesaRapida.class));
