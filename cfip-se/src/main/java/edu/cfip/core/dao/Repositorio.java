@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import edu.cfip.core.model.Categoria;
 import edu.cfip.core.model.Conta;
 import edu.cfip.core.model.Contato;
+import edu.cfip.core.model.DespesaRapida;
 import edu.cfip.core.model.Natureza;
 import edu.cfip.core.model.TipoMovimento;
 import edu.cfip.core.model.Usuario;
@@ -95,6 +96,11 @@ public class Repositorio {
 	public List<Contato> listarContatos(Integer usuario) {
 		Query query = manager.createQuery(
 				"SELECT e FROM Contato e WHERE e.excluido = false and e.usuario = :usuario ORDER BY e.nome");
+		query.setParameter("usuario", usuario);
+		return query.getResultList();
+	}
+	public List<DespesaRapida> listarDespesasRapidas(Integer usuario) {
+		Query query = manager.createQuery("SELECT e FROM DespesaRapida e WHERE e.excluido = false AND e.usuario = :usuario ORDER BY e.ordem");
 		query.setParameter("usuario", usuario);
 		return query.getResultList();
 	}

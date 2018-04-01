@@ -46,7 +46,7 @@ public class MDICfip extends MDI {
 		mnDespesasRapidas.setIcon(Imagem.png("cfip", "despesarapida"));
 		mnDespesasRapidas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ev) {
-				//exibirDespesasRapidas();
+				exibirDespesasRapidas();
 			}
 		});
 		mnCadastros.add(mnDespesasRapidas);
@@ -267,6 +267,9 @@ public class MDICfip extends MDI {
 		getBarraMenu().add(mnFerramentas);
 		getBarraMenu().add(mnAjuda);
 	}
+	private void exibirDespesasRapidas() {
+		exibir((Formulario)SpringDesktopApp.getBean(FrmDespesasRapidas.class));
+	}
 	private void exibirConta() {
 		//Formulario form = context.getBean(FrmContas.class);
 		//exibir(form);
@@ -280,6 +283,7 @@ public class MDICfip extends MDI {
 	}
 	private void exibir(Formulario formulario) {
 		formulario.setMdi(this);
+		formulario.load();
 		formulario.exibir();
 	}
 	

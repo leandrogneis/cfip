@@ -33,7 +33,6 @@ public abstract class Formulario extends JPanel {
 		this.conteudo.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		this.setTitulo("Informe um título");
 		this.setDescricao("Informe uma descrição");
-		
 		this.add(cabecalho, BorderLayout.NORTH);
 		this.add(conteudo, BorderLayout.CENTER);
 		this.add(rodape, BorderLayout.SOUTH);
@@ -106,6 +105,9 @@ public abstract class Formulario extends JPanel {
 		componente.setVisible(true);
 	}
 	public void setEntidade(Object entidade) {
+		
+	}
+	public void load() {
 		
 	}
 }
