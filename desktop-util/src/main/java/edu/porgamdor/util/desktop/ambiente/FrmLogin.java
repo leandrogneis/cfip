@@ -110,12 +110,16 @@ public abstract class FrmLogin extends JFrame {
 	}
 
 	public boolean iniciarAplicacao(MDI mdi, Perfil perfil) {
-		if (perfil != null) {
-			this.dispose();
-			DesktopApp.configurarSessao(mdi, perfil);
-			return true;
-		} else {
-			return !SSMensagem.pergunta("Login ou senha inválida\nDeseja cadastrar ou resgatar sua senha");
+		try {
+			if (perfil != null) {
+				this.dispose();
+				DesktopApp.configurarSessao(mdi, perfil);
+				return true;
+			} else {
+				return !SSMensagem.pergunta("Login ou senha inválida\nDeseja cadastrar ou resgatar sua senha");
+			}
+		} catch (Exception e) {
+			throw new RuntimeException(e.getMessage());
 		}
 	}
 
@@ -136,6 +140,7 @@ public abstract class FrmLogin extends JFrame {
 		frm.setPerfil(perfil);
 		frm.setVisible(true);
 	}
+
 	private void fechar() {
 		System.exit(0);
 	}

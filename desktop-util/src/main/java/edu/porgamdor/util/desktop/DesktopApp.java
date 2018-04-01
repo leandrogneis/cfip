@@ -41,9 +41,9 @@ public class DesktopApp {
 		FrmConfiguracao frm = new FrmConfiguracao();
 		frm.setVisible(true);
 	}
-	public static void configurarSessao(MDI mdi, Perfil perfil) {
+	public static void configurarSessao(MDI mdi, Perfil perfil) throws Exception  {
 		mdi.setVisible(true);
-		mdi.setPerfil(perfil);
+		mdi.setSessao(perfil, getConfiguracao().getProperty(Ambiente.NOME));
 	}
 	public static void fecharSplash() {
 		splash.dispose();

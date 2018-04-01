@@ -40,9 +40,10 @@ public class MDI extends JFrame {
 	public Sessao getSessao() {
 		return sessao;
 	}
-	public void setPerfil(Perfil perfil) {
+	public void setSessao(Perfil perfil,String ambiente) {
 		sessao = new Sessao();
 		sessao.setPerfil(perfil);
+		sessao.setAmbiente(ambiente);
 	}
 	public JMenuBar getBarraMenu() {
 		return barraMenu;
