@@ -18,6 +18,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import edu.cfip.core.dao.Repositorio;
+import edu.cfip.core.dao.springjpa.RepositorioLancamento;
 import edu.cfip.core.model.DespesaRapida;
 import edu.cfip.core.model.Lancamento;
 import edu.porgamdor.util.desktop.Formulario;
@@ -32,6 +33,8 @@ public class FrmLancamentoDespesaRapida extends Formulario {
 	private List<DespesaRapida> lista;
 	@Autowired
 	private Repositorio dao;
+	@Autowired
+	private RepositorioLancamento lanctoDao;
 	private JPanel panelCampos;
 
 	public FrmLancamentoDespesaRapida() {
@@ -51,26 +54,26 @@ public class FrmLancamentoDespesaRapida extends Formulario {
 	}
 
 	private void salvar(String id) {
-		/*try {
+		try {
 			if (id != null) {
 				if (SSMensagem.pergunta("Lançar Despesa Rápida")) {
 					DespesaRapida item = lista.get(Integer.valueOf(id));
 					Lancamento entidade = new Lancamento();
 					entidade.setValor(item.getValor());
 					entidade.setDescricao("QUICK :: " + item.getNatureza().getNome());
-					entidade.setConta(item.getConta().getId());
+					entidade.setConta(item.getConta());
 					entidade.setData(new Date());
-					entidade.setNatureza(item.getNatureza().getId());
+					entidade.setNatureza(item.getNatureza());
 					entidade.setTipoMovimento(item.getNatureza().getTipoMovimento());
 					entidade.setUsuario(MDI.getPerfilId());
-					dao.incluirLancamento(entidade);
+					lanctoDao.incluirLancamento(entidade);
 					SSMensagem.informa("Despesa rápida registrada com sucesso!!");
 					super.fechar();
 				}
 			}
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
-		}*/
+		}
 	}
 	private void sair() {
 		super.cancelar();

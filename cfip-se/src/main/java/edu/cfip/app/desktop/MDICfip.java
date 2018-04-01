@@ -78,7 +78,7 @@ public class MDICfip extends MDI {
 		mnDespesaRapida.setIcon(Imagem.png("cfip", "despesarapida"));
 		mnDespesaRapida.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ev) {
-				//exibirLactoDespesaRapida();
+				exibirLactoDespesaRapida();
 			}
 		});
 		mnLancamentos.add(mnDespesaRapida);
@@ -88,7 +88,7 @@ public class MDICfip extends MDI {
 		mnLancamentos.add(mnReceitas);
 		mnReceitas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ev) {
-				//exibirReceita();
+				exibirLactoReceita();
 			}
 		});
 
@@ -96,7 +96,7 @@ public class MDICfip extends MDI {
 		mnPrevisoes.setIcon(Imagem.png("cfip", "previsao"));
 		mnPrevisoes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ev) {
-				//exibirPrevisao();
+				exibirLanctoPrevisao();
 			}
 		});
 
@@ -105,7 +105,7 @@ public class MDICfip extends MDI {
 		mnLancamentos.add(mnDespesas);
 		mnDespesas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ev) {
-				//exibirDespesa();
+				exibirLanctoDespesa();
 			}
 		});
 		JMenuItem mnTranferencias = new JMenuItem("Transferências");
@@ -286,6 +286,18 @@ public class MDICfip extends MDI {
 	}
 	private void exibirTransferencia() {
 		exibir((Formulario)SpringDesktopApp.getBean(FrmLancamentoTransferencia.class));
+	}
+	private void exibirLactoDespesaRapida() {
+		exibir((Formulario)SpringDesktopApp.getBean(FrmLancamentoDespesaRapida.class));
+	}
+	private void exibirLactoReceita() {
+		exibir((Formulario)SpringDesktopApp.getBean(FrmLancamentoCredito.class));
+	}
+	private void exibirLanctoDespesa() {
+		exibir((Formulario)SpringDesktopApp.getBean(FrmLancamentoDebito.class));
+	}
+	private void exibirLanctoPrevisao() {
+		exibir((Formulario)SpringDesktopApp.getBean(FrmLancamentoPrevisao.class));
 	}
 	private void exibir(Formulario formulario) {
 		formulario.setMdi(this);
