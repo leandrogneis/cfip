@@ -117,9 +117,9 @@ public class Lancamento implements Serializable {
 	@Column(name = "lancto_origem_id", length = 9)
 	private Integer origemLancamento;
 
-	@Column(name = "lancto_destino_id", length = 9)
+	/*@Column(name = "lancto_destino_id", length = 9)
 	private Integer destinoLancamento;
-
+*/
 	public void setExcluido(boolean excluido) {
 		this.excluido = excluido;
 	}
@@ -465,14 +465,6 @@ public class Lancamento implements Serializable {
 		this.origemLancamento = origemLancamento;
 	}
 
-	public Integer getDestinoLancamento() {
-		return destinoLancamento;
-	}
-
-	public void setDestinoLancamento(Integer destinoLancamento) {
-		this.destinoLancamento = destinoLancamento;
-	}
-
 	@Override
 	public String toString() {
 		return "Lancamento [id=" + id + ", excluido=" + excluido + ", usuario=" + usuario + ", descricao=" + descricao
@@ -486,7 +478,7 @@ public class Lancamento implements Serializable {
 				+ ", atualizacaoValor=" + atualizacaoValor + ", parcelaInicial=" + parcelaInicial + ", parcelaFinal="
 				+ parcelaFinal + ", parcelas=" + parcelas + ", parcela=" + parcela + ", periodoQuitacao="
 				+ periodoQuitacao + ", origemLancamento=" + origemLancamento + ", destinoLancamento="
-				+ destinoLancamento + "]";
+				+ "" + "]";
 	}
 	
 	/*

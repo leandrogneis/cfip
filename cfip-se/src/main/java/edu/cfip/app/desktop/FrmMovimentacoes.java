@@ -44,6 +44,7 @@ import edu.porgamdor.util.desktop.ss.SSCampoDataHora;
 import edu.porgamdor.util.desktop.ss.SSCampoNumero;
 import edu.porgamdor.util.desktop.ss.SSGrade;
 import edu.porgamdor.util.desktop.ss.SSMensagem;
+import edu.porgamdor.util.desktop.ss.util.DataHora;
 
 @Component
 @Scope(value = ConfigurableBeanFactory.SCOPE_PROTOTYPE)
@@ -320,8 +321,8 @@ public class FrmMovimentacoes extends Formulario {
 	public void load() {
 		cboConta.setItens(dao.listarContas(MDI.getPerfilId()), "nome");
 		cboNatureza.setItens(dao.listarNaturezas(MDI.getPerfilId()), "nome");
-		txtDataDe.setDataHora(new Date());
-		txtDataAte.setDataHora(new Date());
+		txtDataDe.setDataHora(DataHora.primeiroDiaDoMes());
+		txtDataAte.setDataHora(DataHora.ultimoDiaDoMes());
 
 	}
 
@@ -347,8 +348,6 @@ public class FrmMovimentacoes extends Formulario {
 
 			lanctos = lactoDao.listarLancamentos(MDI.getPerfilId(), txtDataDe.getDataHora(), txtDataAte.getDataHora(), cId,
 					nId);
-			if(lanctos.size()==0)
-				SSMensagem.avisa("Nenhum lançamento encontrado");
 			
 			gridLancamento.setValue(lanctos);
 			totalLancto = lactoDao.totais(lanctos);
@@ -356,8 +355,8 @@ public class FrmMovimentacoes extends Formulario {
 			previsoes = lactoDao.listarPrevisoes(MDI.getPerfilId(), txtDataDe.getDataHora(), txtDataAte.getDataHora(), cId,
 					nId);
 			
-			if(previsoes.size()==0)
-				SSMensagem.avisa("Nenhuma previsão encontrada");
+			if(lanctos.size()==0 &&  previsoes.size()==0)
+				SSMensagem.avisa("Nenhum dado encontrado");
 			
 			gridPrevisao.setValue(previsoes);
 			totalPrevisao = lactoDao.totais(previsoes);

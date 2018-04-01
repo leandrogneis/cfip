@@ -179,17 +179,16 @@ public class RepositorioLancamento {
 
 				if (lancamento.getQuitacao() != null)
 					transferencia.setPeriodoQuitacao(DataHora.pegaPeriodo(lancamento.getQuitacao()));
-
-				// FIXME:Validar persistencia
-				transferencia.setOrigemLancamento(lancamento.getId());
-
-				transferencia = manager.merge(transferencia);
 				manager.merge(destino);
 			}
 
 			manager.merge(conta);
-			lancamento.setDestinoLancamento(transferencia.getId());
+			//lancamento.setDestinoLancamento(transferencia.getId());
 			lancamento = manager.merge(lancamento);
+			if (TipoMovimento.TRANSFERENCIA == tipoMovimento) {
+				transferencia.setOrigemLancamento(lancamento.getId());
+				transferencia = manager.merge(transferencia);
+			}
 			if (quitacao != null)
 				quitacao = DataHora.adiciona(Calendar.MONTH, 1, quitacao);
 		}

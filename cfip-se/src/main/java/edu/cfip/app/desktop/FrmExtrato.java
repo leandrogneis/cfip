@@ -211,7 +211,7 @@ public class FrmExtrato extends Formulario {
 		
 		GridBagConstraints gbc_txtDataAte = new GridBagConstraints();
 		gbc_txtDataAte.anchor = GridBagConstraints.NORTHWEST;
-		gbc_txtDataAte.insets = new Insets(5, 5, 5, 0);
+		gbc_txtDataAte.insets = new Insets(5, 5, 5, 5);
 		gbc_txtDataAte.fill = GridBagConstraints.HORIZONTAL;
 		gbc_txtDataAte.gridx = 3;
 		gbc_txtDataAte.gridy = 0;

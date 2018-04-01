@@ -302,7 +302,7 @@ public class FrmProjecoes extends Formulario {
 			gridContas.setValue(contas);
 			gridLancamentos.setValue(lista);
 			totalLancamentos = lactoDao.totais(lista);
-			if(lista.size()==0)
+			if(contas.size()==0 &&  lista.size()==0)
 				SSMensagem.avisa("Nenhum dado encontrado");
 			
 			
