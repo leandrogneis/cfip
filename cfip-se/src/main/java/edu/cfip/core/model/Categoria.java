@@ -12,14 +12,15 @@ public enum Categoria {
 	ESPORTE("Esporte"),
 	LAZER("Lazer"),
 	VIAGEM("Viagem"),
-	COMUNICACAO("COMUNICACAO"),
+	COMUNICACAO("Comunicação"),
 	TRANSPORTE("Transporte"),
 	PATRIMONIO("Patrimônio"),
 	INVESTIMENTO("Investimento"),
 	CUSTO_FIXO("Custo Fixo"),
 	CUSTO_OPERACIONAL("Custo Operacional"),
 	OBRIGACOES("Obrigações"),
-	TRIBUTOS("Tributos")
+	TRIBUTOS("Tributos"),
+	TRANSACOES("Transações")
 	;
 	
 	private String nome;

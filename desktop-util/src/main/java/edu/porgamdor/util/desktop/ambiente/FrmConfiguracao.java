@@ -167,7 +167,7 @@ public class FrmConfiguracao extends JFrame {
 				definirAmbiente();
 			}
 		});
-		
+		definirAmbiente();
 	}
 	private void definirAmbiente() {
 		ambiente = (Ambiente) cboAmbiente.getValue();

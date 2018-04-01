@@ -8,6 +8,7 @@ import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import edu.cfip.core.dao.Repositorio;
 import edu.cfip.core.dao.springjpa.UsuarioRepositorio;
 import edu.cfip.core.model.Usuario;
 import edu.porgamdor.util.desktop.ambiente.FrmPerfil;
@@ -17,7 +18,10 @@ import edu.porgamdor.util.desktop.ss.SSMensagem;
 @Scope(value = ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 public class FrmUsuario extends FrmPerfil {
 	@Autowired
-	private UsuarioRepositorio dao;
+	private UsuarioRepositorio usuarioDao;
+	
+	@Autowired
+	private Repositorio dao;
 
 	public FrmUsuario() {
 		super.confirmar(new ActionListener() {
@@ -31,10 +35,10 @@ public class FrmUsuario extends FrmPerfil {
 		try {
 			super.validarFormulario();
 			boolean existe = false;
-			if (dao.findFistByLogin(perfil.getLogin()) != null) {
+			if (usuarioDao.findFistByLogin(perfil.getLogin()) != null) {
 				existe = true;
 			}
-			if (dao.findFistByEmail(perfil.getEmail()) != null) {
+			if (usuarioDao.findFistByEmail(perfil.getEmail()) != null) {
 				existe = true;
 			}
 			if (existe)
@@ -42,7 +46,7 @@ public class FrmUsuario extends FrmPerfil {
 						"O usuário " + perfil.getLogin() + " ou E-mail " + perfil.getEmail() + " Já está cadastrado");
 			else {
 				Usuario usuario = (Usuario) perfil;
-				dao.save(usuario);
+				dao.incluirUsuario(usuario);
 				prosseguir();
 			}
 		} catch (Exception e) {

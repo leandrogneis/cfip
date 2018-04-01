@@ -47,4 +47,10 @@ public class MDI extends JFrame {
 	public JMenuBar getBarraMenu() {
 		return barraMenu;
 	}
+	public Perfil getPerfil() {
+		return sessao.getPerfil();
+	}
+	public Integer getPerfilId() {
+		return getPerfil().getId();
+	}
 }

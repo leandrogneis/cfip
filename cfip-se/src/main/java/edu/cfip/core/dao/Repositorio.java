@@ -10,9 +10,11 @@ import javax.persistence.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import edu.cfip.core.model.Categoria;
 import edu.cfip.core.model.Conta;
 import edu.cfip.core.model.Natureza;
 import edu.cfip.core.model.TipoMovimento;
+import edu.cfip.core.model.Usuario;
 import edu.porgamdor.util.desktop.ambiente.TipoOperacao;
 
 @Repository
@@ -72,5 +74,69 @@ public class Repositorio {
 		query.setParameter("usuario", usuario);
 		query.setParameter("tipoMovto", tipo);
 		return query.getResultList();
+	}
+	@Transactional
+	public Usuario incluirUsuario(Usuario usuario) {
+		manager.persist(usuario);
+		//INCLUSAO DAS CONTAS
+		Conta conta = new Conta();
+		conta.setNome("CARTEIRA");
+		conta.setSigla("CTR");
+		conta.setUsuario(usuario.getId());
+		manager.persist(conta);
+
+		conta = new Conta();
+		conta.setNome("CONTA CORRENTE");
+		conta.setSigla("CCR");
+		conta.setUsuario(usuario.getId());
+		manager.persist(conta);
+
+		conta = new Conta();
+		conta.setNome("CONTA POUPANCA");
+		conta.setSigla("CPA");
+		conta.setUsuario(usuario.getId());
+		manager.persist(conta);
+
+		//INCLUSAO DAS NATUREZAS
+		Natureza natureza = new Natureza();
+		natureza.setDescricao("SALDO INICIAL");
+		natureza.setNome("SALDO INICIAL");
+		natureza.setUsuario(usuario.getId());
+		natureza.setTipoMovimento(TipoMovimento.CREDITO);
+		natureza.setCategoria(Categoria.REMUNERACAO);
+		manager.persist(natureza);
+
+		natureza = new Natureza();
+		natureza.setDescricao("SALARIO");
+		natureza.setNome("SALARIO");
+		natureza.setUsuario(usuario.getId());
+		natureza.setTipoMovimento(TipoMovimento.CREDITO);
+		natureza.setCategoria(Categoria.REMUNERACAO);
+		manager.persist(natureza);
+
+		natureza = new Natureza();
+		natureza.setDescricao("DESPEAS");
+		natureza.setNome("DESPESAS");
+		natureza.setUsuario(usuario.getId());
+		natureza.setTipoMovimento(TipoMovimento.DEBITO);
+		natureza.setCategoria(Categoria.DESPESA);	
+		manager.persist(natureza);
+
+		natureza = new Natureza();
+		natureza.setDescricao("TRANSFERENCIA");
+		natureza.setNome("TRANSFERENCIA");
+		natureza.setUsuario(usuario.getId());
+		natureza.setTipoMovimento(TipoMovimento.TRANSFERENCIA);
+		natureza.setCategoria(Categoria.TRANSACOES);	
+		manager.persist(natureza);
+
+		natureza = new Natureza();
+		natureza.setDescricao("ESTORNO DA TRANSFERENCIA");
+		natureza.setNome("ESTORNO");
+		natureza.setUsuario(usuario.getId());
+		natureza.setTipoMovimento(TipoMovimento.TRANSFERENCIA);
+		manager.persist(natureza);
+		
+		return usuario;
 	}
 }

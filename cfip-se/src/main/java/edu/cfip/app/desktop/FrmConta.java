@@ -22,8 +22,6 @@ import edu.porgamdor.util.desktop.ss.SSMensagem;
 public class FrmConta extends Formulario {
 	@Autowired
 	private Repositorio dao;
-	// inputs
-	private SSCampoNumero txtId = new SSCampoNumero();
 	private SSCampoTexto txtNome = new SSCampoTexto();
 	private SSCampoTexto txtSigla = new SSCampoTexto();
 	private SSCampoNumero txtSaldo = new SSCampoNumero();
@@ -41,33 +39,21 @@ public class FrmConta extends Formulario {
 		// CABECALHO
 		setTitulo("Formulario Conta");
 		setDescricao("Cadastro das contas do sistema");
-		txtId.setEditavel(false);
-
-		// PROPRIEDADES
-		txtId.setRotulo("Código");
-		txtNome.setRotulo("Nome");
+				txtNome.setRotulo("Nome");
 		txtSigla.setRotulo("Sigla");
 		txtSaldo.setRotulo("Saldo");
 
 		cmdSalvar.setText("Salvar");
 		cmdFechar.setText("Fechar");
 		txtSaldo.setFormato(Formato.MOEDA);
-
-		//
-		GridBagConstraints gbc_txtId = new GridBagConstraints();
-		gbc_txtId.anchor = GridBagConstraints.NORTHWEST;
-		gbc_txtId.insets = new Insets(5, 5, 0, 5);
-		gbc_txtId.fill = GridBagConstraints.HORIZONTAL;
-		gbc_txtId.gridx = 0;
-		gbc_txtId.gridy = 0;
-		getConteudo().add(txtId, gbc_txtId);
+		txtSaldo.setEditavel(false);
 
 		//
 		GridBagConstraints gbc_txtNome = new GridBagConstraints();
 		gbc_txtNome.insets = new Insets(5, 5, 0, 5);
 		gbc_txtNome.fill = GridBagConstraints.BOTH;
 		gbc_txtNome.gridx = 0;
-		gbc_txtNome.gridy = 1;
+		gbc_txtNome.gridy = 0;
 		getConteudo().add(txtNome, gbc_txtNome);
 
 		//
@@ -75,7 +61,7 @@ public class FrmConta extends Formulario {
 		gbc_txtSigla.insets = new Insets(5, 5, 0, 5);
 		gbc_txtSigla.fill = GridBagConstraints.BOTH;
 		gbc_txtSigla.gridx = 0;
-		gbc_txtSigla.gridy = 2;
+		gbc_txtSigla.gridy = 1;
 		getConteudo().add(txtSigla, gbc_txtSigla);
 
 		//
@@ -84,7 +70,7 @@ public class FrmConta extends Formulario {
 		gbc_txtSaldo.insets = new Insets(5, 5, 5, 5);
 		gbc_txtSaldo.fill = GridBagConstraints.BOTH;
 		gbc_txtSaldo.gridx = 0;
-		gbc_txtSaldo.gridy = 3;
+		gbc_txtSaldo.gridy = 2;
 		getConteudo().add(txtSaldo, gbc_txtSaldo);
 
 		// rodape
