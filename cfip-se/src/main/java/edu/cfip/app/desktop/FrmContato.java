@@ -17,7 +17,7 @@ import org.springframework.stereotype.Component;
 import edu.cfip.core.dao.Repositorio;
 import edu.cfip.core.model.Contato;
 import edu.porgamdor.util.desktop.Formulario;
-import edu.porgamdor.util.desktop.ambiente.TipoOperacao;
+import edu.porgamdor.util.desktop.MDI;
 import edu.porgamdor.util.desktop.ss.SSBotao;
 import edu.porgamdor.util.desktop.ss.SSCampoTexto;
 import edu.porgamdor.util.desktop.ss.SSMensagem;
@@ -32,7 +32,6 @@ public class FrmContato extends Formulario {
 	private SSBotao cmdSalvar = new SSBotao();
 	private SSBotao cmdSair = new SSBotao();
 	private Contato entidade;
-	private TipoOperacao operacao;
 	@Autowired
 	private Repositorio dao;
 	private JCheckBox chkNovo = new JCheckBox("Novo?");
@@ -104,14 +103,12 @@ public class FrmContato extends Formulario {
 		});
 		
 	}
-	public void setEntidade(Contato entidade) {
-		this.entidade = entidade;
-		if (entidade != null)
-			operacao = TipoOperacao.ALTERACAO;
+	public void setEntidade(Object contato) {
+		this.entidade=(Contato) contato;
+		if(entidade==null) 
+			novo();
 		else
-			criar();
-		
-		atribuir();
+			atribuir();
 	}
 	private void atribuir() {
 		try {
@@ -123,11 +120,6 @@ public class FrmContato extends Formulario {
 			JOptionPane.showMessageDialog(null, e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
 		}
 	}
-	private void criar() {
-		operacao = TipoOperacao.INCLUSAO;
-		entidade = new Contato();
-		atribuir();
-	}
 	private void salvar() {
 		try {
 			if (entidade == null) {
@@ -135,14 +127,17 @@ public class FrmContato extends Formulario {
 			}
 			entidade.setNome(txtNome.getText());
 			entidade.setTelefone(txtTelefone.getText());
-			entidade.setUsuario(getUsuarioId());
+			entidade.setUsuario(MDI.getPerfilId());
 			
 			if (entidade.getNome() == null || entidade.getNome().isEmpty() || entidade.getTelefone() == null
 					|| entidade.getTelefone().isEmpty()) {
 				SSMensagem.avisa("Dados incompletos");
 				return;
 			}
-			dao.gravar(operacao, entidade);
+			if(entidade.getId()==null)
+				dao.incluir(entidade);
+			else
+				dao.alterar(entidade);
 			SSMensagem.informa("Contato registrado com sucesso!!");
 			novo();
 		} catch (Exception e) {
@@ -151,14 +146,11 @@ public class FrmContato extends Formulario {
 		}
 	}
 	private void novo() {
-		if(chkNovo.isSelected()) {
-			criar();
-		}else
-			super.fechar();
+		entidade = new Contato();
+		atribuir();
 	}
 	private void sair() {
-		super.fechar();
+		super.cancelar();
 	}
-	public void load(Object param) {}
 }
 	

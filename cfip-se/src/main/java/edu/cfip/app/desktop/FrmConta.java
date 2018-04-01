@@ -13,6 +13,7 @@ import edu.cfip.core.dao.Repositorio;
 import edu.cfip.core.model.Conta;
 import edu.porgamdor.util.desktop.Formato;
 import edu.porgamdor.util.desktop.Formulario;
+import edu.porgamdor.util.desktop.MDI;
 import edu.porgamdor.util.desktop.ss.SSBotao;
 import edu.porgamdor.util.desktop.ss.SSCampoNumero;
 import edu.porgamdor.util.desktop.ss.SSCampoTexto;
@@ -90,7 +91,7 @@ public class FrmConta extends Formulario {
 	}
 	@Override
 	public void setEntidade(Object conta) {
-		entidade=(Conta) conta;
+		this.entidade=(Conta) conta;
 		if(entidade==null) 
 			novo();
 		else
@@ -121,7 +122,7 @@ public class FrmConta extends Formulario {
 			}
 			entidade.setNome(txtNome.getText());
 			entidade.setSigla(txtSigla.getText());
-			entidade.setUsuario(SpringDesktopApp.USUARIO);
+			entidade.setUsuario(MDI.getPerfilId());
 
 			if (entidade.getNome() == null || entidade.getNome().isEmpty() || entidade.getSigla() == null
 					|| entidade.getSigla().isEmpty()) {

@@ -14,13 +14,15 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.config.ConfigurableBeanFactory;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import edu.cfip.app.spring.SpringDesktopApp;
 import edu.cfip.core.dao.Repositorio;
 import edu.cfip.core.model.Natureza;
-import edu.porgamdor.util.desktop.Formato;
 import edu.porgamdor.util.desktop.Formulario;
+import edu.porgamdor.util.desktop.MDI;
 import edu.porgamdor.util.desktop.ss.SSBotao;
 import edu.porgamdor.util.desktop.ss.SSCampoTexto;
 import edu.porgamdor.util.desktop.ss.SSGrade;
@@ -28,7 +30,7 @@ import edu.porgamdor.util.desktop.ss.SSMensagem;
 import edu.porgamdor.util.desktop.ss.util.Validacao;
 
 @Component
-//@Scope(value = ConfigurableBeanFactory.SCOPE_PROTOTYPE)	
+@Scope(value = ConfigurableBeanFactory.SCOPE_PROTOTYPE)	
 public class FrmNaturezas extends Formulario {
 	@Autowired
 	private Repositorio dao;
@@ -140,10 +142,10 @@ public class FrmNaturezas extends Formulario {
 		try {
 			String nome = txtFiltro.getText();
 			if (Validacao.vazio(nome)) {
-				lista = dao.listarNaturezas(SpringDesktopApp.USUARIO);
+				lista = dao.listarNaturezas(MDI.getPerfilId());
 
 			} else {
-				lista = dao.listarNaturezas(SpringDesktopApp.USUARIO, nome);
+				lista = dao.listarNaturezas(MDI.getPerfilId(), nome);
 			}
 			if(lista.size()==0)
 				SSMensagem.avisa("Nenhum dado encontrado");

@@ -20,6 +20,7 @@ import edu.cfip.core.model.Categoria;
 import edu.cfip.core.model.Natureza;
 import edu.cfip.core.model.TipoMovimento;
 import edu.porgamdor.util.desktop.Formulario;
+import edu.porgamdor.util.desktop.MDI;
 import edu.porgamdor.util.desktop.ambiente.TipoOperacao;
 import edu.porgamdor.util.desktop.ss.SSBotao;
 import edu.porgamdor.util.desktop.ss.SSCaixaCombinacao;
@@ -140,7 +141,7 @@ public class FrmNatureza extends Formulario {
 			entidade.setNome(txtNome.getText());
 			entidade.setDescricao(txtDescricao.getText());
 			entidade.setTipoMovimento((TipoMovimento) cboTipoMovto.getValue());
-			entidade.setUsuario(SpringDesktopApp.USUARIO);
+			entidade.setUsuario(MDI.getPerfilId());
 			entidade.setCategoria((Categoria) cboCategoria.getValue());
 
 			if (entidade.getNome() == null || entidade.getNome().isEmpty() || entidade.getDescricao() == null

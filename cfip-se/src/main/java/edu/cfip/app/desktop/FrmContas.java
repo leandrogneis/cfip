@@ -21,6 +21,7 @@ import edu.cfip.core.dao.Repositorio;
 import edu.cfip.core.model.Conta;
 import edu.porgamdor.util.desktop.Formato;
 import edu.porgamdor.util.desktop.Formulario;
+import edu.porgamdor.util.desktop.MDI;
 import edu.porgamdor.util.desktop.ss.SSBotao;
 import edu.porgamdor.util.desktop.ss.SSCampoTexto;
 import edu.porgamdor.util.desktop.ss.SSGrade;
@@ -137,10 +138,10 @@ public class FrmContas extends Formulario {
 		try {
 			String nome = txtFiltro.getText();
 			if (Validacao.vazio(nome)) {
-				lista = dao.listarContas(SpringDesktopApp.USUARIO);
+				lista = dao.listarContas(MDI.getPerfilId());
 
 			} else {
-				lista = dao.listarContas(SpringDesktopApp.USUARIO, nome);
+				lista = dao.listarContas(MDI.getPerfilId(), nome);
 			}
 			if(lista.size()==0)
 				SSMensagem.avisa("Nenhum dado encontrado");

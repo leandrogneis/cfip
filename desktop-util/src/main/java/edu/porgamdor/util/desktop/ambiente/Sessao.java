@@ -8,4 +8,5 @@ public class Sessao {
 	public Perfil getPerfil() {
 		return perfil;
 	}
+	
 }

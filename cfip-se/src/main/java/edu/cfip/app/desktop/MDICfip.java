@@ -55,7 +55,7 @@ public class MDICfip extends MDI {
 		mntmContato.setIcon(Imagem.png("cfip", "contato"));
 		mntmContato.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ev) {
-				//exibirContatos();
+				exibirContatos();
 			}
 		});
 		
@@ -274,6 +274,9 @@ public class MDICfip extends MDI {
 	}
 	private void exibirNatureza() {
 		exibir((Formulario)SpringDesktopApp.getBean(FrmNaturezas.class));
+	}
+	private void exibirContatos() {
+		exibir((Formulario)SpringDesktopApp.getBean(FrmContatos.class));
 	}
 	private void exibir(Formulario formulario) {
 		formulario.setMdi(this);

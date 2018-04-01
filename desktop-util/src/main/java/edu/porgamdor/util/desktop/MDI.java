@@ -16,7 +16,7 @@ import edu.porgamdor.util.desktop.ambiente.Sessao;
 //Multiple Document Interface
 public class MDI extends JFrame {
 	private JDesktopPane areaTrabalho = new JDesktopPane(); 
-	private Sessao sessao;
+	private static Sessao sessao;
 	private JPanel barraSessao = new JPanel();
 	private JMenuBar barraMenu = new JMenuBar();
 	public MDI() {
@@ -47,10 +47,10 @@ public class MDI extends JFrame {
 	public JMenuBar getBarraMenu() {
 		return barraMenu;
 	}
-	public Perfil getPerfil() {
+	public static Perfil getPerfil() {
 		return sessao.getPerfil();
 	}
-	public Integer getPerfilId() {
+	public static Integer getPerfilId() {
 		return getPerfil().getId();
 	}
 }

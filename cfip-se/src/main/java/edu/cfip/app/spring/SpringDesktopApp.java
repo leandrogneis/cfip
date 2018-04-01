@@ -22,7 +22,8 @@ public class SpringDesktopApp extends DesktopApp {
 	 */
 	
 	
-	public static int USUARIO = 1;
+	//3 public static int USUARIO = 1;
+	
 	private static AnnotationConfigApplicationContext context;
 	public static void main(String[] args) {
 		try {
