@@ -59,18 +59,20 @@ public class RepositorioLancamento {
 				conta.setSaldo(conta.getSaldo() + lancamento.getValor());
 				lancamento.setSaldoFinal(conta.getSaldo());
 			}
-			
+			Lancamento transferencia = lancamento.copia();
 			if (TipoMovimento.TRANSFERENCIA == tipoMovimento) {
-				Lancamento transferencia = lancamento.copia();
-				transferencia.setTipoMovimento(TipoMovimento.CREDITO);
-				transferencia.setOrigemLancamento(lancamento.getId());
+				transferencia.setValor(valor);
+				transferencia.setValorPrincipal(valor);
 				transferencia.setTransferencia(true);
+				transferencia.setTipoMovimento(TipoMovimento.CREDITO);
 				
 				lancamento.setTransferencia(true);
+				lancamento.setTipoMovimento(TipoMovimento.DEBITO);
 				
 				Conta destino = lancamento.getDestino();			
 				transferencia.setSaldoInicial(destino.getSaldo());
 				transferencia.setSaldoFinal(destino.getSaldo());
+				transferencia.setDestino(null);
 				
 				if (!lancamento.isPrevisao()) {
 					destino.setSaldo(destino.getSaldo() + valor);
@@ -78,17 +80,20 @@ public class RepositorioLancamento {
 				}
 				transferencia.setDescricao("TRANSF.DE: " + conta.getNome() + " - " + lancamento.getDescricao());
 				
-				transferencia.setValor(valor);
 				transferencia.setConta(destino);
 				
 				if (lancamento.getQuitacao() != null)
 					transferencia.setPeriodoQuitacao(DataHora.pegaPeriodo(lancamento.getQuitacao()));
 				
-				manager.persist(transferencia);
+				//FIXME:Validar persistencia
+				transferencia.setOrigemLancamento(lancamento.getId());
+				
+				transferencia= manager.merge(transferencia);
 				manager.merge(destino);
 			}
 			
 			manager.merge(conta);
+			lancamento.setDestinoLancamento(transferencia.getId());
 			lancamento = manager.merge(lancamento);
 			if (quitacao != null)
 				quitacao = DataHora.adiciona(Calendar.MONTH, 1, quitacao);
@@ -162,4 +167,10 @@ public class RepositorioLancamento {
 		}	
 */
 	}
+	/*
+	 * SELECT L.ID,l.TIPO_MOV_ID, l.SALDO_INICIAL, l.VALOR_PRINCIPAL, l.VALOR, L.SALDO_FINAL, 
+l.ORIGEM_LANCTO_ID, l.TRANSFERENCIA, l.DESTINO_ID  FROM LANCAMENTO l;
+	 * 
+	 * 
+	 */
 }

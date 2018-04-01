@@ -41,7 +41,7 @@ public class Lancamento implements Serializable {
 	private Conta conta;
 
 	@ManyToOne
-	@JoinColumn(name = "destino_id")
+	@JoinColumn(name = "conta_destino_id")
 	private Conta destino;
 
 	@ManyToOne
@@ -113,9 +113,12 @@ public class Lancamento implements Serializable {
 
 	@Column(name = "periodo_quitacao", length = 6)
 	private Integer periodoQuitacao;
-
-	@Column(name = "lancto_id_origem", length = 9)
+	
+	@Column(name = "lancto_origem_id", length = 9)
 	private Integer origemLancamento;
+
+	@Column(name = "lancto_destino_id", length = 9)
+	private Integer destinoLancamento;
 
 	public void setExcluido(boolean excluido) {
 		this.excluido = excluido;
@@ -461,6 +464,15 @@ public class Lancamento implements Serializable {
 	public void setOrigemLancamento(Integer origemLancamento) {
 		this.origemLancamento = origemLancamento;
 	}
+
+	public Integer getDestinoLancamento() {
+		return destinoLancamento;
+	}
+
+	public void setDestinoLancamento(Integer destinoLancamento) {
+		this.destinoLancamento = destinoLancamento;
+	}
+	
 	/*
 	 * public void setFatura(Integer fatura) { this.fatura = fatura; } public
 	 * Integer getFatura() { return fatura; }
