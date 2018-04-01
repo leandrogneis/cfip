@@ -51,7 +51,7 @@ public class FrmLancamentoDespesaRapida extends Formulario {
 	}
 
 	private void salvar(String id) {
-		try {
+		/*try {
 			if (id != null) {
 				if (SSMensagem.pergunta("Lançar Despesa Rápida")) {
 					DespesaRapida item = lista.get(Integer.valueOf(id));
@@ -70,7 +70,7 @@ public class FrmLancamentoDespesaRapida extends Formulario {
 			}
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
-		}
+		}*/
 	}
 	private void sair() {
 		super.cancelar();

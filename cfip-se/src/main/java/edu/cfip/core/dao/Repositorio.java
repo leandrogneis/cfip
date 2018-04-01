@@ -15,6 +15,7 @@ import edu.cfip.core.model.Conta;
 import edu.cfip.core.model.Contato;
 import edu.cfip.core.model.DespesaRapida;
 import edu.cfip.core.model.Natureza;
+import edu.cfip.core.model.Saldo;
 import edu.cfip.core.model.TipoMovimento;
 import edu.cfip.core.model.Usuario;
 import edu.porgamdor.util.desktop.ambiente.TipoOperacao;
@@ -33,6 +34,13 @@ public class Repositorio {
 	@Transactional
 	public Object alterar(Object entidade) {
 		return manager.merge(entidade);
+	}
+	@Transactional
+	public Object incluirSaldo(Saldo saldo, Conta conta) {
+		manager.persist(saldo);
+		conta.setSiValor(saldo.getValor());
+		conta.setSiData(saldo.getData());
+		return manager.merge(conta);
 	}
 
 	@Transactional
@@ -99,9 +107,17 @@ public class Repositorio {
 		query.setParameter("usuario", usuario);
 		return query.getResultList();
 	}
+
 	public List<DespesaRapida> listarDespesasRapidas(Integer usuario) {
-		Query query = manager.createQuery("SELECT e FROM DespesaRapida e WHERE e.excluido = false AND e.usuario = :usuario ORDER BY e.ordem");
+		Query query = manager.createQuery(
+				"SELECT e FROM DespesaRapida e WHERE e.excluido = false AND e.usuario = :usuario ORDER BY e.ordem");
 		query.setParameter("usuario", usuario);
+		return query.getResultList();
+	}
+
+	public List<Saldo> listarSaldos(Integer conta) {
+		Query query = manager.createQuery("SELECT e FROM Saldo e WHERE e.conta.id = :conta ORDER BY e.data DESC");
+		query.setParameter("conta", conta);
 		return query.getResultList();
 	}
 

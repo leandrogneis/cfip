@@ -118,11 +118,11 @@ public class MDICfip extends MDI {
 		mnLancamentos.add(mnTranferencias);
 		mnLancamentos.add(mnPrevisoes);
 
-		JMenuItem mnSaldos = new JMenuItem("Conta Ciclo");
+		JMenuItem mnSaldos = new JMenuItem("Saldos");
 		mnSaldos.setIcon(Imagem.png("cfip", "novociclo"));
 		mnSaldos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ev) {
-				//exibirSaldo();
+				exibirSaldo();
 			}
 		});
 		mnLancamentos.add(mnSaldos);
@@ -266,6 +266,9 @@ public class MDICfip extends MDI {
 		getBarraMenu().add(mnRelatorios);
 		getBarraMenu().add(mnFerramentas);
 		getBarraMenu().add(mnAjuda);
+	}
+	private void exibirSaldo() {
+		exibir((Formulario)SpringDesktopApp.getBean(FrmSaldos.class));
 	}
 	private void exibirDespesasRapidas() {
 		exibir((Formulario)SpringDesktopApp.getBean(FrmDespesasRapidas.class));

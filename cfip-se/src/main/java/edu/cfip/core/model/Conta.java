@@ -1,6 +1,7 @@
 package edu.cfip.core.model;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,6 +9,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 @Entity
 @Table(name="conta")
 public class Conta implements Serializable{
@@ -30,19 +33,25 @@ public class Conta implements Serializable{
 	@Column(name="usuario_id", nullable=false, length=9)
 	private Integer usuario;
 	
-	@Column(name="saldo_inicial",nullable=false,length=9,precision=2)
-	private Double saldoInicial;
+	@Column(name="si_valor",nullable=false,length=9,precision=2)
+	private Double siValor;
 	
-	public Conta(String nome, String sigla, Double saldo) {
+	@Temporal(TemporalType.DATE)
+	private Date siData;
+	
+	
+	/*public Conta(String nome, String sigla, Double saldo) {
 		super();
 		this.nome = nome;
 		this.sigla = sigla;
 		this.saldo = saldo;
-	}
+		this.sa
+	}*/
 
 	public Conta() {
 		saldo=0.0d;
-		saldoInicial=0.0d;
+		siValor=0.0d;
+		siData=new Date();
 	}
 	
 	public void setExcluido(boolean excluido) {
@@ -83,14 +92,6 @@ public class Conta implements Serializable{
 	public void setUsuario(Integer usuario) {
 		this.usuario = usuario;
 	}
-	public Double getSaldoInicial() {
-		return saldoInicial;
-	}
-
-	public void setSaldoInicial(Double saldoInicial) {
-		this.saldoInicial = saldoInicial;
-	}
-
 	@Override
 	public String toString() {
 		return "Conta [nome=" + nome + "]";
@@ -117,5 +118,22 @@ public class Conta implements Serializable{
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
-	}	
+	}
+
+	public Double getSiValor() {
+		return siValor;
+	}
+
+	public void setSiValor(Double siValor) {
+		this.siValor = siValor;
+	}
+
+	public Date getSiData() {
+		return siData;
+	}
+
+	public void setSiData(Date siData) {
+		this.siData = siData;
+	}
+	
 }

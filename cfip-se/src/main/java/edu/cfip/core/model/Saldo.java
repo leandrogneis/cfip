@@ -21,14 +21,18 @@ public class Saldo implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer id;
+	
 	@OneToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="conta_id", nullable=false)
 	private Conta conta;
+	
 	@Column(length=9,precision=2,nullable=false)
 	private Double valor;
+	
 	@Temporal(TemporalType.DATE)
 	@Column(nullable=false)
 	private Date data;
+	
 	public Saldo() {
 		this.data=new Date();
 		this.valor=0.0d;
@@ -86,7 +90,4 @@ public class Saldo implements Serializable {
 			return false;
 		return true;
 	}
-	
-	
-	
 }
