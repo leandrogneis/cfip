@@ -60,8 +60,8 @@ public class FrmContas extends Formulario {
 		cmdIncluir.setIcone("novo");
 		cmdAlterar.setText("Alterar");
 		cmdFechar.setText("Fechar");
+		cmdExtrato.setText("Extrato");
 		cmdExtrato.setIcone("pastabusca");
-		
 		tabela.getModeloTabela().addColumn("Sigla");
 		tabela.getModeloTabela().addColumn("Nome");
 		tabela.getModeloTabela().addColumn("Saldo");
@@ -168,6 +168,7 @@ public class FrmContas extends Formulario {
 		}
 		FrmExtrato frm = SpringDesktopApp.getBean(FrmExtrato.class);
 		frm.setConta(entidade);
+		frm.load();
 		this.exibir(frm);
 	}//////
 	private void incluir() {

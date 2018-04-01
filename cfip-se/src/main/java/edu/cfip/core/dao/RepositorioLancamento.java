@@ -33,7 +33,7 @@ public class RepositorioLancamento {
 		if(previsao)
 			sql.append(" l.quitacao BETWEEN :inicio AND :fim ");
 		else
-			sql.append("l.data BETWEEN :inicio AND :fim ");
+			sql.append(" l.data BETWEEN :inicio AND :fim ");
 		if (natureza != null) {
 			sql.append(" AND l.natureza.id=:natureza ");
 		}

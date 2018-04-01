@@ -166,7 +166,7 @@ public class FrmExtrato extends Formulario {
 		
 		grid.getModeloColuna().setCampo(0, "data");
 		grid.getModeloColuna().setFormato(0, "dd/MM/yy");
-		grid.getModeloColuna().setCampo(1, "natureza");
+		grid.getModeloColuna().setCampo(1, "natureza.nome");
 		grid.getModeloColuna().setCampo(2, "saldoInicial");
 		grid.getModeloColuna().setFormato(2, Formato.MOEDA);
 		grid.getModeloColuna().setCampo(3, "valor");
@@ -291,8 +291,8 @@ public class FrmExtrato extends Formulario {
 				if(saldo!=null)
 					ini = saldo.getData();
 				lista = lactoDao.listarContaLancamentos(MDI.getPerfilId(), ini, fim,conta.getId());
-				if(lista.size()==0)
-					SSMensagem.avisa("Nenhum dado encontrado");
+				//if(lista.size()==0)
+					//SSMensagem.avisa("Nenhum dado encontrado");
 				
 				total = lactoDao.totais(lista,true);
 				txtSaldoAtual.setValue(total.getSaldo());
