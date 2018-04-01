@@ -20,6 +20,9 @@ import edu.porgamdor.util.desktop.ss.util.Imagem;
 //WindowBuilder
 //http://download.eclipse.org/windowbuilder/WB/integration/4.7/
 public abstract class Formulario extends JPanel {
+	private Object respostaDialogo;
+	private Formulario dono;
+	
 	private SSCabecalho cabecalho = new SSCabecalho();
 	private JPanel conteudo = new JPanel();
 	private SSRodape rodape = new SSRodape();
@@ -82,6 +85,14 @@ public abstract class Formulario extends JPanel {
 		mdi.getAreaTrabalho().add(internal);
 		mdi.getAreaTrabalho().getDesktopManager().activateFrame(internal);
 	}
+	public void fechar(Object resposta) {
+		if(resposta!=null){
+			dono.respostaDialogo = resposta;
+			fechar();
+		}else{
+			SSMensagem.avisa("Selecione um item da lista");
+		}
+	}
 	public void cancelar() {
 		boolean resposta = SSMensagem.pergunta("Deseja cancelar esta operação");
 		if (resposta) {
@@ -89,7 +100,10 @@ public abstract class Formulario extends JPanel {
 		}
 	}
 	public void fechar() {
-		removerFormulario();
+		if(isDialogo(this))
+			removerDialogo();
+		else
+			removerFormulario();
 	}
 	private void removerFormulario() {
 		JInternalFrame iframe = (JInternalFrame) SwingUtilities.getAncestorOfClass(JInternalFrame.class, this);
@@ -103,6 +117,30 @@ public abstract class Formulario extends JPanel {
 		y = y - 50; //opcional
 		componente.setLocation(x, y);
 		componente.setVisible(true);
+	}
+	public Object dialogo(Formulario form){
+		form.dono=this;
+		form.load();
+		this.respostaDialogo=null;
+		JDialog dialog = new JDialog(mdi);
+		dialog.setIconImage(Imagem.png("cfip", "janela").getImage());
+		dialog.setResizable(false);
+		dialog.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+		dialog.setModal(true);
+        dialog.setContentPane(form);
+        dialog.pack();
+        dialog.setLocationRelativeTo(this);
+        dialog.setVisible(true);        
+        dialog.dispose();
+        return  respostaDialogo;
+	}
+	private void removerDialogo() {
+		JDialog dialog = (JDialog) SwingUtilities.getAncestorOfClass(JDialog.class, this);
+		dialog.dispose();
+		dialog.setVisible(false);
+	}
+	public boolean isDialogo(Formulario form){
+		return SwingUtilities.getAncestorOfClass(JDialog.class, form) !=null;
 	}
 	public void setEntidade(Object entidade) {
 		

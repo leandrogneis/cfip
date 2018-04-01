@@ -199,9 +199,7 @@ public class RepositorioLancamento {
 	}
 	@Transactional(propagation=Propagation.NESTED)
 	public void compensarLancamento(Date quitacao,Integer fatura, Integer ... ids) {
-		
-		
-		/*for(Integer id:ids) {
+		for(Integer id:ids) {
 			Lancamento lancamento = buscar(Lancamento.class, id);
 			lancamento.setDescricao(lancamento.getDescricao() + " - DE: " + Formatador.formatarData(lancamento.getData()));
 			lancamento.setQuitacao(quitacao);
@@ -213,7 +211,7 @@ public class RepositorioLancamento {
 			lancamento.setSaldoFinal(conta.getSaldo());
 			// depois tentar salvar em dois metodos um única transacao
 			if (lancamento.isTransferencia()) {
-				Lancamento origem = buscar(Lancamento.class, lancamento.getOrigemCredito());
+				Lancamento origem = buscar(Lancamento.class, lancamento.getOrigemLancamento());
 				origem.setQuitacao(quitacao);
 				origem.setData(quitacao);
 				origem.setPrevisao(false);
@@ -229,7 +227,7 @@ public class RepositorioLancamento {
 			manager.merge(lancamento);
 			LOG.info("Compensando lançamento:: " + lancamento.getId() + " " + lancamento.getDescricao());
 		}
-*/		
+	
 		
 		
 		/*if(fatura!=null) {
@@ -242,14 +240,41 @@ public class RepositorioLancamento {
 	public <T> T buscar(Class entidade, Integer id) {
 		return (T) manager.find(entidade, id);
 	}
-	/*
-	 * SELECT L.ID,l.TIPO_MOV_ID, l.SALDO_INICIAL, l.VALOR_PRINCIPAL, l.VALOR,
-	 * L.SALDO_FINAL, l.ORIGEM_LANCTO_ID, l.TRANSFERENCIA, l.DESTINO_ID FROM
-	 * LANCAMENTO l;
-	 * 
-	 * 
-	 * SELECT L.ID,l.TIPO_MOV_ID, l.SALDO_INICIAL, l.VALOR_PRINCIPAL, l.VALOR, L.SALDO_FINAL, 
-l.LANCTO_ID_ORIGEM, l.TRANSFERENCIA, l.DESTINO_ID  FROM LANCAMENTO l;
-	 * 
-	 */
+	
+	@Transactional
+	public void amortizarLancamento(Integer id, Date quitacao, Double amortizado) {
+		Lancamento lancamento = buscar(Lancamento.class, id);
+		Double valor = lancamento.getValor();
+		if (lancamento.getTipoMovimento() == TipoMovimento.DEBITO) {
+			amortizado = amortizado * -1;
+		}
+		Double diferenca = valor - amortizado;
+
+		lancamento.setPrevisao(false);
+
+		Conta conta = manager.find(Conta.class, lancamento.getConta());
+		lancamento.setSaldoInicial(conta.getSaldo());
+		lancamento.setValor(amortizado);
+		conta.setSaldo(conta.getSaldo() + amortizado);
+		lancamento.setSaldoFinal(conta.getSaldo());
+		if (diferenca != 0.0d) {
+			Lancamento novo = new Lancamento();
+			novo.setOrigemLancamento(lancamento.getId());
+			novo.setPrevisao(true);
+			novo.setData(new Date());
+			novo.setQuitacao(quitacao);
+			novo.setDescricao("AMORT LANCTO: " + lancamento.getId() + "-" + lancamento.getDescricao());
+			novo.setConta(lancamento.getConta());
+			novo.setNatureza(lancamento.getNatureza());
+			novo.setPeriodo(DataHora.pegaPeriodo(quitacao));
+			novo.setSaldoInicial(lancamento.getSaldoInicial());
+			novo.setSaldoFinal(lancamento.getSaldoFinal());
+			novo.setValor(diferenca);
+			novo.setTipoMovimento(lancamento.getTipoMovimento());
+			novo.setUsuario(lancamento.getUsuario());
+			manager.persist(novo);
+		}
+		manager.merge(conta);
+		manager.merge(lancamento);
+	}
 }
