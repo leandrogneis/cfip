@@ -37,6 +37,7 @@ public class Conta implements Serializable{
 	private Double siValor;
 	
 	@Temporal(TemporalType.DATE)
+	@Column(name="si_data")
 	private Date siData;
 	
 	

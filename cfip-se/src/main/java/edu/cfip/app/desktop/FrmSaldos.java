@@ -142,6 +142,7 @@ public class FrmSaldos extends Formulario {
 	
 	private void abrirCadastro() {
 		Formulario frm = SpringDesktopApp.getBean(FrmSaldo.class);
+		frm.load();
 		this.exibir(frm);
 	}
 
@@ -151,11 +152,10 @@ public class FrmSaldos extends Formulario {
 			Conta conta = (Conta) cboConta.getValue();
 			if(conta!=null) {
 				lista = dao.listarSaldos(conta.getId());
+				if(lista.size()==0)
+					SSMensagem.avisa("Nenhum dado encontrado");
 			}else
 				SSMensagem.avisa("Selecione uma Conta");
-			if(lista.size()==0)
-				SSMensagem.avisa("Nenhum dado encontrado");
-			
 			grid.setValue(lista);
 		} catch (Exception e) {
 			e.printStackTrace();

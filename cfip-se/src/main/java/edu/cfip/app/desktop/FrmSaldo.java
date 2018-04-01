@@ -19,6 +19,7 @@ import org.springframework.stereotype.Component;
 import edu.cfip.core.dao.Repositorio;
 import edu.cfip.core.model.Conta;
 import edu.cfip.core.model.Saldo;
+import edu.porgamdor.util.desktop.Formato;
 import edu.porgamdor.util.desktop.Formulario;
 import edu.porgamdor.util.desktop.MDI;
 import edu.porgamdor.util.desktop.ss.SSBotao;
@@ -26,6 +27,7 @@ import edu.porgamdor.util.desktop.ss.SSCaixaCombinacao;
 import edu.porgamdor.util.desktop.ss.SSCampoDataHora;
 import edu.porgamdor.util.desktop.ss.SSCampoNumero;
 import edu.porgamdor.util.desktop.ss.SSMensagem;
+import edu.porgamdor.util.desktop.ss.util.Formatador;
 
 @Component
 @Scope(value = ConfigurableBeanFactory.SCOPE_PROTOTYPE)
@@ -84,7 +86,7 @@ public class FrmSaldo extends Formulario {
 		txtData.setRotulo("Data");
 		txtValor.setColunas(30);
 		txtValor.setRotulo("Valor");
-
+		txtValor.setFormato(Formato.MOEDA);
 		cmdSair.setText("Fechar");
 		cmdSalvar.setText("Salvar");
 
