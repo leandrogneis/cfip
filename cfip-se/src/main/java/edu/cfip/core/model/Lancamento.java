@@ -111,7 +111,7 @@ public class Lancamento implements Serializable {
 	@Column(name = "parcela", nullable = false, length = 3)
 	private Integer parcela;
 
-	@Column(name = "periodo_quitacao", nullable = false, length = 6)
+	@Column(name = "periodo_quitacao", length = 6)
 	private Integer periodoQuitacao;
 
 	@Column(name = "lancto_id_origem", length = 9)

@@ -112,7 +112,7 @@ public class MDICfip extends MDI {
 		mnTranferencias.setIcon(Imagem.png("cfip", "transferencia"));
 		mnTranferencias.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ev) {
-				//exibirTransferencia();
+				exibirTransferencia();
 			}
 		});
 		mnLancamentos.add(mnTranferencias);
@@ -283,6 +283,9 @@ public class MDICfip extends MDI {
 	}
 	private void exibirContatos() {
 		exibir((Formulario)SpringDesktopApp.getBean(FrmContatos.class));
+	}
+	private void exibirTransferencia() {
+		exibir((Formulario)SpringDesktopApp.getBean(FrmLancamentoTransferencia.class));
 	}
 	private void exibir(Formulario formulario) {
 		formulario.setMdi(this);
