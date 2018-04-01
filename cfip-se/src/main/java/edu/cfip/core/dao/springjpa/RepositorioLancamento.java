@@ -28,7 +28,7 @@ public class RepositorioLancamento {
 		int parcelaInicial=entidade.getParcelaInicial();
 		int parcelaFinal=entidade.getParcelaFinal();
 		int parcelas = (parcelaFinal + 1) - parcelaInicial;
-		for (int parcela = parcelaInicial; parcela <= parcelas; parcela++) {
+		for (int parcela = parcelaInicial; parcela <= parcelaFinal; parcela++) {
 			entidade.setParcelas(parcelas);
 			entidade.setParcela(parcela);
 			
@@ -36,7 +36,7 @@ public class RepositorioLancamento {
 			
 			lancamento.setQuitacao(quitacao);
 			if (parcelas > 1)
-				lancamento.setDescricao(lancamento.getDescricao() + " PARC.: " + parcela + "/" + parcelas);
+				lancamento.setDescricao(lancamento.getDescricao() + " PARC.: " + parcela + "/" + parcelaFinal);
 			
 			Conta conta = lancamento.getConta();
 			

@@ -285,7 +285,7 @@ public class FrmLancamentoPrevisao extends Formulario {
 				return;
 			}
 			if(txtParcelas.getText()!= null) {
-				String[] iniFim = txtParcelas.getText().split("/");
+				String[] iniFim = txtParcelas.getText().split("-");
 				entidade.setParcelaInicial(Integer.valueOf(iniFim[0].trim()));
 				entidade.setParcelaFinal(Integer.valueOf(iniFim[1].trim()));
 			}else {
